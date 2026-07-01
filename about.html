@@ -6,7 +6,6 @@
     <title>About Us | CNEI</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        /* REUSED DESIGN SYSTEM STYLES */
         :root {
             --bg-pure: #FFFFFF;
             --bg-dark: #0B1B3D;
@@ -28,7 +27,6 @@
 
         a:focus { outline: 3px solid var(--accent-green); outline-offset: 2px; }
 
-        /* HEADER */
         header { background-color: var(--bg-pure); border-bottom: 1px solid var(--border-light); position: sticky; top: 0; z-index: 1000; }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
         .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 0.75rem; }
@@ -38,82 +36,25 @@
         nav a { color: var(--bg-dark); text-decoration: none; font-weight: 500; font-size: 1rem; padding: 0.75rem 0.5rem; display: inline-block; transition: color 0.2s ease; }
         nav a:hover, nav a.active { color: var(--accent-green); border-bottom: 2px solid var(--accent-green); }
 
-        /* SPLIT MISSION BLOCK */
-        .mission-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 550px;
-        }
+        .mission-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; }
+        .mission-text-panel { background-color: var(--bg-dark); color: var(--text-light); padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+        .mission-text-panel h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; line-height: 1.2; }
+        .mission-text-panel p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 540px; }
+        .mission-image-panel { background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover; }
 
-        .mission-text-panel {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            padding: 5rem 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .quote-section { padding: 7rem 2rem; background-color: var(--bg-pure); text-align: center; }
+        blockquote { max-width: 850px; margin: 0 auto; position: relative; }
+        blockquote p { font-size: 1.75rem; font-weight: 400; color: var(--bg-dark); line-height: 1.5; font-style: italic; }
+        blockquote::before { content: "“"; font-size: 5rem; color: var(--accent-green); position: absolute; top: -3.5rem; left: 50%; transform: translateX(-50%); opacity: 0.3; }
 
-        .mission-text-panel h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            line-height: 1.2;
-        }
-
-        .mission-text-panel p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            max-width: 540px;
-        }
-
-        .mission-image-panel {
-            background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-        }
-
-        /* QUOTE BLOCK */
-        .quote-section {
-            padding: 7rem 2rem;
-            background-color: var(--bg-pure);
-            text-align: center;
-        }
-
-        blockquote {
-            max-width: 850px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        blockquote p {
-            font-size: 1.75rem;
-            font-weight: 400;
-            color: var(--bg-dark);
-            line-height: 1.5;
-            font-style: italic;
-        }
-
-        blockquote::before {
-            content: "“";
-            font-size: 5rem;
-            color: var(--accent-green);
-            position: absolute;
-            top: -3.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0.3;
-        }
-
-        /* FOOTER */
         footer { background-color: var(--bg-dark); color: var(--text-light); padding: 4rem 2rem 2rem; text-align: center; }
         .footer-content { max-width: 800px; margin: 0 auto; }
         .footer-links { margin: 1.5rem 0; }
         .footer-links a { color: #10B981; text-decoration: underline; padding: 0.5rem; display: inline-block; }
         .footer-links a:hover { color: #34D399; }
         .footer-divider { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem 0; }
-        .compliance-notice { font-size: 0.85rem; color: var(--text-muted); }
+        .compliance-notice { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* RESPONSIVE DESIGN */
         @media (max-width: 992px) {
             .mission-split { grid-template-columns: 1fr; }
             .mission-image-panel { min-height: 300px; }
@@ -167,8 +108,10 @@
                 WhatsApp: <a href="https://wa.me/447879150075" target="_blank" rel="noopener noreferrer">+44 7879 150075</a>
             </div>
             <hr class="footer-divider" aria-hidden="true">
-            <p>&copy; 2026 Coalition of Nuclear Energy Initiatives (CNEI). All rights reserved.</p>
-            <p class="compliance-notice" style="margin-top: 1rem;">Data Notice: This platform operates under architectural Data Minimization. We do not use cookies, log IP addresses, or manage user accounts.</p>
+            <p>&copy; 2026 Coalition of Nuclear Energy Initiatives (CNEI). All rights reserved. <a href="compliance.html" style="color: #10B981; text-decoration: underline; margin-left: 5px;">Legal &amp; Compliance Summary</a></p>
+            <p class="compliance-notice" style="margin-top: 1rem;">
+                Data Notice: This platform operates under architectural Data Minimization. We do not use cookies, manage user accounts, or store user data. Standard security server logs (including visitor IP addresses) are processed strictly by our hosting infrastructure provider, GitHub, to maintain network integrity.
+            </p>
         </div>
     </footer>
 
