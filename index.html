@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNEI | Coalition of Nuclear Energy Initiatives</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* GLOBAL DESIGN SYSTEM */
+        :root {
+            --bg-pure: #FFFFFF;
+            --bg-dark: #0B1B3D;
+            --text-main: #222222;
+            --text-light: #FFFFFF;
+            --text-muted: #D1D5DB;
+            --accent-green: #008542;
+            --border-light: #E5E7EB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, "Helvetica Neue", system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-pure);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ACCESSIBILITY FOCUS STATES */
+        a:focus, button:focus {
+            outline: 3px solid var(--accent-green);
+            outline-offset: 2px;
+        }
+
+        /* HEADER NAVIGATION */
+        header {
+            background-color: var(--bg-pure);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.75rem;
+        }
+
+        .brand-logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.75rem 0.5rem; /* Ensures large touch target */
+            display: inline-block;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+            border-bottom: 2px solid var(--accent-green);
+        }
+
+        /* HERO BLOCK */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(11, 27, 61, 0.75), rgba(11, 27, 61, 0.85)), 
+                        url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 8rem 2rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* PILLARS SECTION */
+        .pillars {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .pillar-card {
+            border-top: 3px solid var(--accent-green);
+            padding-top: 1.5rem;
+        }
+
+        .pillar-card h3 {
+            color: var(--bg-dark);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .pillar-card p {
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #10B981; /* High contrast green over dark background */
+            text-decoration: underline;
+            padding: 0.5rem;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: #34D399;
+        }
+
+        .footer-divider {
+            border: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .compliance-notice {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-logo" aria-label="CNEI Home">
+                <img src="logo.jpeg" alt="CNEI Campaign Circular Logo">
+                <span class="brand-name">CNEI</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-label="Introduction Banner">
+            <div class="hero-content">
+                <h1>NUCLEAR SCIENCE FOR A STABLE FUTURE</h1>
+                <p>The Coalition of Nuclear Energy Initiatives is an independent, student-led campaign analyzing the practical engineering realities of the UK's zero-carbon transition.</p>
+            </div>
+        </section>
+
+        <section class="pillars" aria-label="Core Belief Pillars">
+            <div class="pillars-grid">
+                <article class="pillar-card">
+                    <h3>Scientific Literacy</h3>
+                    <p>We believe public policy should be driven by rigorous, peer-reviewed data and engineering realities, moving past sensationalized historical myths.</p>
+                </article>
+                <article class="pillar-card">
+                    <h3>Grid Reliability</h3>
+                    <p>We believe a truly green UK power grid requires a stable, dependable baseline layer of nuclear power to support intermittent renewable infrastructure.</p>
+                </article>
+                <article class="pillar-card">
+                    <h3>Environmental Stewardship</h3>
+                    <p>We believe in achieving deep, long-term carbon reduction without sacrificing economic stability or energy security.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p><strong>Contact the Initiative:</strong></p>
+            <div class="footer-links">
+                Email: <a href="mailto:info@cnei.org.uk">info@cnei.org.uk</a> &nbsp;|&nbsp; 
+                WhatsApp: <a href="https://wa.me/447879150075" target="_blank" rel="noopener noreferrer">+44 7879 150075</a>
+            </div>
+            <hr class="footer-divider" aria-hidden="true">
+            <p>&copy; 2026 Coalition of Nuclear Energy Initiatives (CNEI). All rights reserved.</p>
+            <p class="compliance-notice" style="margin-top: 1rem;">Data Notice: This platform operates under architectural Data Minimization. We do not use cookies, log IP addresses, or manage user accounts.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
