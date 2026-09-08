@@ -1,148 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNEI | Coalition of Nuclear Energy Initiatives</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <style>
-        :root {
-            --bg-pure: #FFFFFF;
-            --bg-dark: #0B1B3D;
-            --text-main: #222222;
-            --text-light: #FFFFFF;
-            --text-muted: #D1D5DB;
-            --accent-green: #008542;
-            --border-light: #E5E7EB;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: Inter, "Helvetica Neue", system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-pure);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a:focus { outline: 3px solid var(--accent-green); outline-offset: 2px; }
-
-        header {
-            background-color: var(--bg-pure);
-            border-bottom: 1px solid var(--border-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand-logo { display: flex; align-items: center; text-decoration: none; gap: 0.75rem; }
-        .brand-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
-        .brand-name { color: var(--bg-dark); font-weight: 700; font-size: 1.25rem; letter-spacing: 0.05em; }
-
-        nav ul { list-style: none; display: flex; gap: 2rem; }
-        nav a {
-            color: var(--bg-dark);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.75rem 0.5rem;
-            display: inline-block;
-            transition: color 0.2s ease;
-        }
-        nav a:hover, nav a.active { color: var(--accent-green); border-bottom: 2px solid var(--accent-green); }
-
-        .hero {
-            position: relative;
-            background: linear-gradient(rgba(11, 27, 61, 0.75), rgba(11, 27, 61, 0.85)), 
-                        url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            padding: 8rem 2rem;
-            text-align: center;
-            color: var(--text-light);
-        }
-
-        .hero-content { max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin-bottom: 1.5rem; line-height: 1.2; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); font-weight: 300; max-width: 700px; margin: 0 auto; }
-
-        .pillars { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 2rem; }
-        .pillar-card { border-top: 3px solid var(--accent-green); padding-top: 1.5rem; }
-        .pillar-card h3 { color: var(--bg-dark); font-size: 1.5rem; margin-bottom: 1rem; font-weight: 700; }
-        .pillar-card p { color: var(--text-main); font-size: 1.05rem; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1.1rem; }
-            .nav-container { flex-direction: column; gap: 1rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNEI | Centre of National and External Intelligence</title>
+  <style>
+    :root {
+      --bg-dark: #12161A;
+      --card-bg: #1E242B;
+      --text-main: #F8F9FA;
+      --text-muted: #A0AEC0;
+      --accent: #38BDF8;
+      --accent-hover: #0284C7;
+      --border-color: #2D3748;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(18, 22, 26, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .brand { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--text-main); font-size: 0.95rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .hero .subtitle { color: var(--accent); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .hero p { max-width: 800px; margin: 0 auto 2rem; color: var(--text-muted); font-size: 1.1rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+    .btn-primary { background-color: var(--accent); color: var(--bg-dark); }
+    .btn-primary:hover { background-color: var(--accent-hover); text-decoration: none; }
+    .btn-secondary { border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-secondary:hover { background-color: var(--card-bg); text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+    .section-title { font-size: 1.75rem; margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--accent); }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+    .tag {
+      display: inline-block;
+      background-color: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    footer {
+      background-color: #0B0E11;
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .footer-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .footer-disclaimer { margin-bottom: 1.5rem; max-width: 900px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; list-style: none; margin-top: 1rem; }
+    .footer-links a { color: var(--text-muted); }
+    .staff-login-link { color: #4A5568 !important; }
+    .staff-login-link:hover { color: var(--text-muted) !important; }
+    
+    /* Staff Workspace Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 400px;
+    }
+    .modal-content h3 { margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.875rem; }
+    .form-group input {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="brand-logo" aria-label="CNEI Home">
-                <img src="logo.jpeg" alt="CNEI Campaign Circular Logo">
-                <span class="brand-name">CNEI</span>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                </ul>
-            </nav>
+  <header>
+    <div class="nav-container">
+      <div class="brand">CNEI | Centre of National and External Intelligence</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About & Ethics</a></li>
+        <li><a href="reports.html">Research</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>CENTRE OF NATIONAL AND EXTERNAL INTELLIGENCE</h1>
+    <div class="subtitle">Empirical Open-Source Intelligence & Geopolitical Research</div>
+    <p>A non-partisan, student-led research collective dedicated to rigorous analysis of global security, defense, and international affairs using strictly unclassified and publicly accessible data.</p>
+    <div class="cta-buttons">
+      <a href="reports.html" class="btn btn-primary">Read Latest Reports</a>
+      <a href="about.html" class="btn btn-secondary">Our Ethics & Standards</a>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title">Core Pillars</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Empirical Analysis</h3>
+        <p>Grounded strictly in verifiable, publicly accessible data. Free from speculation, ideological bias, or partisan narrative.</p>
+      </div>
+      <div class="card">
+        <h3>Unclassified & Lawful</h3>
+        <p>Operating strictly within UK legal frameworks (Computer Misuse Act 1990, DPA 2018) and platform terms of service.</p>
+      </div>
+      <div class="card">
+        <h3>Independent Research</h3>
+        <p>Operated autonomously by student researchers committed to academic standards, open-source verification, and transparent methodology.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="margin-top: 4rem;">Latest Analytical Reports</h2>
+    <div class="grid-3">
+      <div class="card">
+        <span class="tag">Security Briefing</span>
+        <h3>[Draft / Placeholder] Maritime Logistics & Chokepoint Security Overview</h3>
+        <p>Preliminary open-source assessment of commercial maritime shipping flows and operational security indicators.</p>
+        <a href="reports.html" style="display:inline-block; margin-top:1rem;">Read Full Brief →</a>
+      </div>
+      <div class="card">
+        <span class="tag">OSINT Methodology</span>
+        <h3>Standard Verification Protocols for Public Satellite Imagery</h3>
+        <p>Technical overview of geolocation and verification frameworks applied to publicly accessible geospatial data.</p>
+        <a href="reports.html" style="display:inline-block; margin-top:1rem;">Read Methodology →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p><strong>Centre of National and External Intelligence (CNEI)</strong><br>Unincorporated Student Research Collective | United Kingdom</p>
+      <p class="footer-disclaimer">Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service. All work is derived from unclassified, publicly available sources.</p>
+      <p>© 2026 Centre of National and External Intelligence. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="reports.html">Research</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#" class="staff-login-link" onclick="openLoginModal(event)">Staff Login</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Staff Workspace Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h3>Staff Workspace Login</h3>
+      <div id="loginForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="staffUsername" placeholder="Enter username">
         </div>
-    </header>
-
-    <main>
-        <section class="hero" aria-label="Introduction Banner">
-            <div class="hero-content">
-                <h1>NUCLEAR SCIENCE FOR A STABLE FUTURE</h1>
-                <p>The Coalition of Nuclear Energy Initiatives is an independent, student-led campaign analyzing the practical engineering realities of the UK's zero-carbon transition.</p>
-            </div>
-        </section>
-
-        <section class="pillars" aria-label="Core Belief Pillars">
-            <div class="pillars-grid">
-                <article class="pillar-card">
-                    <h3>Scientific Literacy</h3>
-                    <p>We believe public policy should be driven by rigorous, peer-reviewed data and engineering realities, moving past sensationalized historical myths.</p>
-                </article>
-                <article class="pillar-card">
-                    <h3>Grid Reliability</h3>
-                    <p>We believe a truly green UK power grid requires a stable, dependable baseline layer of nuclear power to support intermittent renewable infrastructure.</p>
-                </article>
-                <article class="pillar-card">
-                    <h3>Environmental Stewardship</h3>
-                    <p>We believe in achieving deep, long-term carbon reduction without sacrificing economic stability or energy security.</p>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer style="background-color: #0B1B3D; color: #FFFFFF; padding: 4rem 2rem 2rem; text-align: center;">
-        <div class="footer-content" style="max-width: 800px; margin: 0 auto;">
-            <p style="color: #FFFFFF; margin-bottom: 0.5rem;"><strong>Contact the Initiative:</strong></p>
-            <div class="footer-links" style="margin: 1.5rem 0; color: #FFFFFF;">
-                Email: <a href="mailto:info@cnei.org.uk" style="color: #10B981; text-decoration: underline; padding: 0.5rem; display: inline-block;">info@cnei.org.uk</a> &nbsp;|&nbsp; 
-                WhatsApp: <a href="https://wa.me/447879150075" target="_blank" rel="noopener noreferrer" style="color: #10B981; text-decoration: underline; padding: 0.5rem; display: inline-block;">+44 7879 150075</a>
-            </div>
-            <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem 0;" aria-hidden="true">
-            <p style="color: #FFFFFF; margin-bottom: 0.5rem;">&copy; 2026 Coalition of Nuclear Energy Initiatives (CNEI). All rights reserved. <a href="compliance.html" style="color: #10B981; text-decoration: underline; margin-left: 5px;">Legal &amp; Compliance Summary</a></p>
-            <p style="margin-top: 1rem; font-size: 0.85rem; color: #D1D5DB; line-height: 1.5;">
-                Data Notice: This platform operates under architectural Data Minimization. We do not use cookies, manage user accounts, or store user data. Standard security server logs (including visitor IP addresses) are processed strictly by our hosting infrastructure provider, GitHub, to maintain network integrity.
-            </p>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="staffPassword" placeholder="Enter password">
         </div>
-    </footer>
+        <button class="btn btn-primary" style="width:100%;" onclick="attemptLogin()">Unlock Workspace</button>
+        <button class="btn btn-secondary" style="width:100%; margin-top:0.5rem;" onclick="closeLoginModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
 
+  <script>
+    function openLoginModal(e) {
+      e.preventDefault();
+      document.getElementById('loginModal').style.display = 'flex';
+    }
+    function closeLoginModal() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+    function attemptLogin() {
+      const u = document.getElementById('staffUsername').value;
+      const p = document.getElementById('staffPassword').value;
+      if (u === 'admin' && p === 'Admin.CNEI.org.uk@website') {
+        alert('Workspace Unlocked. Redirecting to CNEI Internal Workspace...');
+        closeLoginModal();
+      } else {
+        alert('Invalid Staff Credentials.');
+      }
+    }
+  </script>
 </body>
 </html>
