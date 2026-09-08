@@ -3,93 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Verification | CNEI</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css">
+  <title>CNEI — Contact</title>
+  <style>
+    :root {
+      --bg-color: #FFFFFF;
+      --text-main: #000000;
+      --border-color: #E5E7EB;
+      --muted: #4B5563;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header, footer {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer { border-bottom: none; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--muted); }
+    .brand { font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--text-main); }
+    nav a { margin-left: 1.5rem; text-decoration: none; color: var(--text-main); font-size: 0.9rem; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    main { flex: 1; max-width: 800px; margin: 0 auto; width: 100%; padding: 4rem 2rem; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; }
+    p { font-size: 1rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .contact-box {
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      background-color: #F9FAFB;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="brand">
-        <img src="logo.png" alt="CNEI Emblem" class="brand-logo" onerror="this.style.display='none'">
-        <span class="status-led"></span>
-        <span>CNEI | Centre of National & External Intelligence</span>
-      </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About & Ethics</a></li>
-          <li><a href="reports.html">Research</a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<header>
+  <a href="index.html" class="brand">CNEI</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero" style="background-image: linear-gradient(180deg, rgba(18, 22, 26, 0.85) 0%, rgba(18, 22, 26, 0.98) 100%), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
-      <h1>CONTACT & ADMINISTRATIVE VERIFICATION</h1>
-      <div class="subtitle">Inquiries, Attribution Requests, and Official Communications</div>
-    </section>
-
-    <div class="grid-2">
-      <div class="content-block">
-        <h2>Official Contact Channel</h2>
-        <p><strong>Primary Address:</strong> info@cnei.org.uk</p>
-        <p>All official inquiries regarding research attribution, ethical standards, or administrative verification should be directed to our official mailbox.</p>
-      </div>
-
-      <div class="content-block">
-        <h2>Send a Message</h2>
-        <form onsubmit="event.preventDefault(); alert('Message logged under UK GDPR Legitimate Interests administrative framework.');">
-          <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="org">Organization / Affiliation</label>
-            <input type="text" id="org" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" class="form-control" rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Inquiries</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="notice-box">
-      Notice: Communications sent through this portal are processed in accordance with our UK GDPR Legitimate Interests administrative framework.
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div>&copy; 2026 Centre of National and External Intelligence. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="reports.html">Research</a> | <a href="contact.html">Contact</a> | <a href="login.html" class="staff-link">Staff Login</a>
-      </div>
-    </div>
-  </footer>
-
-  <div id="lockdown-overlay" role="alert">
-    <div class="lockdown-box">
-      <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
-      <div id="lockdown-custom-msg" class="lockdown-msg">CONDITION RED: All public operations suspended by Director mandate.</div>
-      <div style="margin-top: 1.5rem;"><a href="login.html" class="btn btn-secondary">Staff Terminal Access</a></div>
-    </div>
+<main>
+  <h1>Inquiries & Correspondence</h1>
+  <p>For research verifications, institutional inquiries, or security disclosures, reach out via standard channels:</p>
+  
+  <div class="contact-box">
+    ORG: Centre of National and External Intelligence<br>
+    REGION: United Kingdom / North Wales<br>
+    DISCLOSURES: encrypted-inquiries@cnei-research.org
   </div>
+</main>
 
-  <script src="app.js"></script>
+<footer>
+  <div>© CNEI Collective. Zero Cookies. WCAG 2.2 AA Compliant.</div>
+  <div><a href="login.html" style="color: var(--muted); text-decoration: none;">Staff Workspace</a></div>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
