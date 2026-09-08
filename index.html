@@ -4,22 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CNEI | Centre of National and External Intelligence</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <div class="nav-container">
-      <a href="index.html" class="brand">
-        <span id="telemetry-led" class="status-led" title="Telemetry Live"></span>
-        CNEI | Centre of National & External Intelligence
+      <a href="index.html" class="brand" aria-label="CNEI Homepage">
+        <img src="logo.png" alt="CNEI Emblem" class="brand-logo" onerror="this.style.display='none'">
+        <span id="telemetry-led" class="status-led" title="Telemetry Operational"></span>
+        <span>CNEI | Centre of National & External Intelligence</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About & Ethics</a></li>
-        <li><a href="reports.html">Research</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+          <li><a href="about.html">About & Ethics</a></li>
+          <li><a href="reports.html">Research</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
@@ -36,44 +40,48 @@
 
     <h2 class="section-title">Core Operational Pillars</h2>
     <div class="grid-3">
-      <div class="card">
+      <article class="card">
+        <span class="tag">Standard 01</span>
         <h3>Empirical Analysis</h3>
         <p>Grounded strictly in verifiable, publicly accessible data. Free from speculation, ideological bias, or partisan narrative.</p>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
+        <span class="tag">Standard 02</span>
         <h3>Unclassified & Lawful</h3>
         <p>Operating strictly within UK legal frameworks (Computer Misuse Act 1990, DPA 2018) and platform terms of service.</p>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
+        <span class="tag">Standard 03</span>
         <h3>Independent Research</h3>
         <p>Operated autonomously by student researchers committed to academic standards, open-source verification, and transparent methodology.</p>
-      </div>
+      </article>
     </div>
 
     <h2 class="section-title">Latest Analytical Reports</h2>
     <div class="grid-2">
-      <div class="card">
+      <article class="card">
         <span class="tag">Security Briefing</span>
         <h3>Maritime Logistics & Chokepoint Security Overview</h3>
         <p>Preliminary open-source assessment of commercial maritime shipping flows and operational security indicators.</p>
         <a href="reports.html" class="link">Read Full Brief →</a>
-      </div>
-      <div class="card">
+      </article>
+      <article class="card">
         <span class="tag">OSINT Methodology</span>
         <h3>Standard Verification Protocols for Public Satellite Imagery</h3>
         <p>Technical overview of geolocation and verification frameworks applied to publicly accessible geospatial data.</p>
         <a href="reports.html" class="link">Read Methodology →</a>
-      </div>
+      </article>
     </div>
   </main>
 
   <footer>
     <div class="footer-container">
-      <div>
-        <strong>Centre of National and External Intelligence (CNEI)</strong><br>
-        Unincorporated Student Research Collective | United Kingdom
+      <div class="footer-brand">
+        <img src="logo.png" alt="" class="brand-logo" onerror="this.style.display='none'">
+        <span>Centre of National and External Intelligence (CNEI)</span>
       </div>
-      <p>Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service. All work is derived from unclassified, publicly available sources.</p>
+      <p>Unincorporated Student Research Collective | United Kingdom<br>
+      Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service. All work is derived from unclassified, publicly available sources.</p>
       <div class="footer-links">
         <a href="index.html">Home</a> | 
         <a href="about.html">About</a> | 
@@ -85,9 +93,13 @@
     </div>
   </footer>
 
-  <div id="lockdown-overlay">
-    <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
-    <p>Public portal suspended under Condition Red protocol.</p>
+  <div id="lockdown-overlay" role="alert" aria-live="assertive">
+    <div class="lockdown-box">
+      <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
+      <div id="lockdown-custom-msg" class="lockdown-msg">CONDITION RED: All public operations suspended by Director mandate.</div>
+      <p style="font-size: 0.85rem; color: #A0AEC0;">Authorized directors may authenticate via the staff portal.</p>
+      <div style="margin-top: 1.5rem;"><a href="login.html" class="btn btn-secondary">Staff Terminal Access</a></div>
+    </div>
   </div>
 
   <script src="app.js"></script>
