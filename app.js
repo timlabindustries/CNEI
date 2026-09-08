@@ -1,4 +1,4 @@
-// Load Firebase Libraries dynamically into the page
+// Dynamically load Firebase SDKs for plain static pages
 const script1 = document.createElement('script');
 script1.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js";
 document.head.appendChild(script1);
@@ -8,7 +8,7 @@ script2.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compa
 document.head.appendChild(script2);
 
 script2.onload = function() {
-  // CNEI Firebase Configuration
+  // Your CNEI Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
     authDomain: "cnei-system.firebaseapp.com",
@@ -22,7 +22,7 @@ script2.onload = function() {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // Listen for worldwide lockdown state in real time
+  // Real-time listener for global lockdown signal
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const isLockdown = data && data.active;
