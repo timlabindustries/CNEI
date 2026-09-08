@@ -1,4 +1,4 @@
-// Dynamically load Firebase SDKs for plain static pages
+// Load Firebase SDKs dynamically for zero-build static hosting
 const script1 = document.createElement('script');
 script1.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js";
 document.head.appendChild(script1);
@@ -8,7 +8,6 @@ script2.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compa
 document.head.appendChild(script2);
 
 script2.onload = function() {
-  // Your CNEI Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
     authDomain: "cnei-system.firebaseapp.com",
@@ -22,7 +21,7 @@ script2.onload = function() {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // Real-time listener for global lockdown signal
+  // Real-time listener for global lockdown condition
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const isLockdown = data && data.active;
@@ -39,12 +38,13 @@ script2.onload = function() {
           z-index: 9999999; display: flex; flex-direction: column;
           justify-content: center; align-items: center; text-align: center;
           padding: 2rem; font-family: system-ui, -apple-system, sans-serif;
+          animation: fadeIn 0.3s ease-out forwards;
         `;
         document.body.appendChild(publicOverlay);
       }
       publicOverlay.innerHTML = `
-        <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem;">System Maintenance</h1>
-        <p style="font-size: 1.1rem; color: #4B5563; max-width: 600px;">${message}</p>
+        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em;">SYSTEM LOCKDOWN</h1>
+        <p style="font-size: 1.15rem; color: #4B5563; max-width: 600px; line-height: 1.6;">${message}</p>
       `;
       document.body.style.overflow = 'hidden';
     } else if (publicOverlay) {
