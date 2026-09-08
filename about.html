@@ -3,64 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us & Ethics Protocol | CNEI</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>CNEI — Centre of National and External Intelligence</title>
+  <style>
+    :root {
+      --bg-color: #FFFFFF;
+      --text-main: #000000;
+      --border-color: #E5E7EB;
+      --muted: #4B5563;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header, footer {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer { border-bottom: none; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--muted); }
+    .brand { font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--text-main); }
+    nav a { margin-left: 1.5rem; text-decoration: none; color: var(--text-main); font-size: 0.9rem; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    main { flex: 1; max-width: 800px; margin: 0 auto; width: 100%; padding: 4rem 2rem; }
+    h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    p { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; }
+    .cta-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #000000;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="brand">
-        <span id="telemetry-led" class="status-led"></span>
-        CNEI | Centre of National & External Intelligence
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About & Ethics</a></li>
-        <li><a href="reports.html">Research</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </header>
+<header>
+  <a href="index.html" class="brand">CNEI</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero">
-      <h1>ABOUT CNEI & OPERATIONAL CODE</h1>
-      <div class="subtitle">Structure, Methodology, and Legal Boundaries</div>
-    </section>
+<main>
+  <h1>Centre of National and External Intelligence</h1>
+  <p>A non-partisan open-source intelligence research collective dedicated to transparent analytical methodologies, verification, and digital security research.</p>
+  <a href="research.html" class="cta-btn">View Research Publications</a>
+</main>
 
-    <div class="content-block">
-      <h2>Who We Are</h2>
-      <p>The Centre of National and External Intelligence (CNEI) is an unincorporated, non-monetary, student-led open-source intelligence (OSINT) research collective based in the United Kingdom. CNEI functions as a platform for secondary school students and young analysts to develop analytical rigor, geospatial verification skills, and empirical research frameworks.</p>
-    </div>
+<footer>
+  <div>© CNEI Collective. Zero Cookies. WCAG 2.2 AA Compliant.</div>
+  <div><a href="login.html" style="color: var(--muted); text-decoration: none;">Staff Workspace</a></div>
+</footer>
 
-    <div class="content-block">
-      <h2>Analytical Standards & Non-Partisanship</h2>
-      <p><strong>Empirical Objectivity:</strong> CNEI outputs are strictly factual. Personal political opinions, partisan bias, and ideological stances are explicitly barred from influencing research outputs.</p>
-      <p><strong>Anti-Corruption & Integrity:</strong> CNEI members operate strictly on a voluntary basis and do not solicit, accept, or offer payments or favors intended to influence or alter research findings.</p>
-      <p><strong>Interpersonal Conduct:</strong> CNEI maintains strict professional standards within all internal communication channels.</p>
-    </div>
-
-    <div class="content-block">
-      <h2>Compliance & OSINT Boundaries</h2>
-      <p><strong>Public Sources Only:</strong> All data gathered and published by CNEI is sourced exclusively from unclassified, publicly available, and lawfully accessible open sources.</p>
-      <p><strong>Strict Prohibitions:</strong> CNEI members do not procure, handle, store, or distribute hacked material, leaked classified government documents, or non-consensual personal identifying information (PII).</p>
-      <p><strong>Statutory Compliance:</strong> All research activities strictly comply with applicable UK legislation, including the Computer Misuse Act 1990, Data Protection Act 2018 / UK GDPR, and Copyright, Designs and Patents Act 1988 (CDPA).</p>
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div>&copy; 2026 Centre of National and External Intelligence. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="reports.html">Research</a> | <a href="contact.html">Contact</a> | <a href="login.html" class="staff-link">Staff Login</a>
-      </div>
-    </div>
-  </footer>
-
-  <div id="lockdown-overlay">
-    <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
-  </div>
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
