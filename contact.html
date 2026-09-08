@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Administrative Verification | CNEI</title>
+  <title>Contact & Verification | CNEI</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,20 +12,23 @@
   <header>
     <div class="nav-container">
       <a href="index.html" class="brand">
-        <span id="telemetry-led" class="status-led"></span>
-        CNEI | Centre of National & External Intelligence
+        <img src="logo.png" alt="CNEI Emblem" class="brand-logo" onerror="this.style.display='none'">
+        <span class="status-led"></span>
+        <span>CNEI | Centre of National & External Intelligence</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About & Ethics</a></li>
-        <li><a href="reports.html">Research</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About & Ethics</a></li>
+          <li><a href="reports.html">Research</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero" style="background-image: linear-gradient(180deg, rgba(18, 22, 26, 0.85) 0%, rgba(18, 22, 26, 0.98) 100%), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
       <h1>CONTACT & ADMINISTRATIVE VERIFICATION</h1>
       <div class="subtitle">Inquiries, Attribution Requests, and Official Communications</div>
     </section>
@@ -38,26 +42,26 @@
 
       <div class="content-block">
         <h2>Send a Message</h2>
-        <form onsubmit="event.preventDefault(); alert('Message logged under UK GDPR Legitimate Interests framework.');">
+        <form onsubmit="event.preventDefault(); alert('Message logged under UK GDPR Legitimate Interests administrative framework.');">
           <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-control" required>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Organization / Affiliation</label>
-            <input type="text" class="form-control">
+            <label for="org">Organization / Affiliation</label>
+            <input type="text" id="org" class="form-control">
           </div>
           <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" class="form-control" required>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Subject</label>
-            <input type="text" class="form-control" required>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" required>
           </div>
           <div class="form-group">
-            <label>Message</label>
-            <textarea class="form-control" rows="4" required></textarea>
+            <label for="message">Message</label>
+            <textarea id="message" class="form-control" rows="4" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit Inquiries</button>
         </form>
@@ -78,9 +82,14 @@
     </div>
   </footer>
 
-  <div id="lockdown-overlay">
-    <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
+  <div id="lockdown-overlay" role="alert">
+    <div class="lockdown-box">
+      <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
+      <div id="lockdown-custom-msg" class="lockdown-msg">CONDITION RED: All public operations suspended by Director mandate.</div>
+      <div style="margin-top: 1.5rem;"><a href="login.html" class="btn btn-secondary">Staff Terminal Access</a></div>
+    </div>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
