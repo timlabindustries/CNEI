@@ -3,90 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CNEI | Authorized Personnel Gateway</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css">
+  <title>CNEI — Staff Authentication</title>
   <style>
+    :root {
+      --bg-color: #FFFFFF;
+      --text-main: #000000;
+      --border-color: #E5E7EB;
+      --input-bg: #F9FAFB;
+      --accent: #111827;
+      --red-alert: #DC2626;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: #0B0E11;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
       padding: 1.5rem;
     }
-    .auth-card {
-      background: #12161A;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      padding: 2.5rem;
+    .login-card {
       width: 100%;
-      max-width: 440px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      max-width: 380px;
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: 6px;
     }
-    .auth-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-weight: bold;
-      color: #F8F9FA;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid #334155;
-      padding-bottom: 1rem;
+    .header-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
     }
-    .warning-banner {
-      background-color: rgba(220, 38, 38, 0.08);
-      border: 1px solid rgba(220, 38, 38, 0.3);
-      border-radius: 4px;
-      padding: 0.85rem;
+    .header-sub {
       font-size: 0.8rem;
-      color: #FCA5A5;
-      margin-bottom: 1.5rem;
-      line-height: 1.4;
+      color: #6B7280;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    .form-group-dark {
+    .form-group {
       margin-bottom: 1.25rem;
     }
-    .form-group-dark label {
+    label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      color: #CBD5E1;
-      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: #374151;
     }
-    .form-control-dark {
+    input {
       width: 100%;
       padding: 0.75rem;
-      background: #0B0E11;
-      border: 1px solid #334155;
+      font-size: 0.9rem;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
       border-radius: 4px;
-      color: #F8F9FA;
-      font-size: 0.95rem;
+      outline: none;
+      font-family: inherit;
     }
-    .form-control-dark:focus {
-      outline: 3px solid #38BDF8;
+    input:focus {
+      border-color: var(--accent);
+      background-color: #FFFFFF;
     }
-    .btn-auth {
+    button {
       width: 100%;
-      padding: 0.85rem;
-      background-color: #0284C7;
+      padding: 0.75rem;
+      background-color: var(--accent);
       color: #FFFFFF;
       border: none;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-    .btn-auth:hover {
-      background-color: #0369A1;
-    }
-    .error-box {
-      color: #EF4444;
       font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    button:hover { opacity: 0.9; }
+    .error-message {
       margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--red-alert);
       display: none;
       text-align: center;
     }
@@ -94,47 +97,42 @@
 </head>
 <body>
 
-  <main class="auth-card">
-    <div class="auth-brand">
-      <img src="logo.png" alt="CNEI Emblem" class="brand-logo" onerror="this.style.display='none'">
-      <span>CNEI Gateway Authentication</span>
+<div class="login-card">
+  <div class="header-logo">CNEI Portal</div>
+  <div class="header-sub">Director Access Terminal</div>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label for="operator">Operator ID</label>
+      <input type="text" id="operator" placeholder="e.g. cnei-admin" required autocomplete="off">
     </div>
-
-    <div class="warning-banner" role="alert">
-      <strong>OFFICIAL NOTICE:</strong> This system is restricted exclusively to authorized CNEI Directors and Analysts. Unauthorized access attempts are monitored, logged, and subject to action under the UK Computer Misuse Act 1990.
+    <div class="form-group">
+      <label for="passcode">Clearance Key</label>
+      <input type="password" id="passcode" placeholder="••••••••••••" required>
     </div>
+    <button type="submit">Authenticate</button>
+  </form>
 
-    <form id="loginForm">
-      <div class="form-group-dark">
-        <label for="username">Operator Identity / ID</label>
-        <input type="text" id="username" class="form-control-dark" required autocomplete="off">
-      </div>
-      
-      <div class="form-group-dark">
-        <label for="password">Security Clearance Credentials</label>
-        <input type="password" id="password" class="form-control-dark" required>
-      </div>
-      
-      <button type="submit" class="btn-auth">Authenticate Session</button>
-      <div id="errorMsg" class="error-box" role="alert">Authentication Failed: Invalid Credentials</div>
-    </form>
-  </main>
+  <div id="error" class="error-message">Invalid Operator ID or Clearance Key.</div>
+</div>
 
-  <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const user = document.getElementById('username').value;
-      const pass = document.getElementById('password').value;
+<script>
+  function handleLogin(e) {
+    e.preventDefault();
+    const op = document.getElementById('operator').value.trim();
+    const key = document.getElementById('passcode').value.trim();
+    const errEl = document.getElementById('error');
 
-      // Default Director Clearance Credentials
-      if (user === 'cnei-admin' && pass === 'cnei-clearance-1') {
-        sessionStorage.setItem('cnei_authenticated', 'true');
-        window.location.href = 'workspace.html';
-      } else {
-        document.getElementById('errorMsg').style.display = 'block';
-      }
-    });
-  </script>
+    // Valid passcodes: CNEI-DIRECTOR-2026 or cnei-admin
+    if ((key === 'CNEI-DIRECTOR-2026' || key === 'cnei-admin') && op.length > 0) {
+      sessionStorage.setItem('cnei_authenticated', 'true');
+      sessionStorage.setItem('cnei_operator_id', op);
+      window.location.href = 'workspace.html';
+    } else {
+      errEl.style.display = 'block';
+    }
+  }
+</script>
 
 </body>
 </html>
