@@ -4,79 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research & Intelligence Repository | CNEI</title>
-  <style>
-    :root {
-      --bg-dark: #12161A;
-      --card-bg: #1E242B;
-      --text-main: #F8F9FA;
-      --text-muted: #A0AEC0;
-      --accent: #38BDF8;
-      --border-color: #2D3748;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
-    header { position: sticky; top: 0; background-color: rgba(18, 22, 26, 0.95); border-bottom: 1px solid var(--border-color); z-index: 1000; }
-    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-    .brand { font-weight: 700; font-size: 1.1rem; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: var(--text-main); font-size: 0.95rem; font-weight: 500; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-    .page-title { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .page-subtitle { color: var(--accent); font-size: 1.1rem; margin-bottom: 2rem; }
-    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .filter-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 0.875rem; }
-    .filter-btn.active { background: var(--accent); color: var(--bg-dark); font-weight: 600; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
-    .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; }
-    .tag { display: inline-block; background-color: rgba(56, 189, 248, 0.1); color: var(--accent); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.75rem; }
-    .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-main); }
-    .card .meta { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
-    .notice-box { background-color: var(--card-bg); border-left: 4px solid var(--accent); padding: 1.25rem; margin-top: 3rem; border-radius: 0 8px 8px 0; font-size: 0.875rem; color: var(--text-muted); }
-    footer { background-color: #0B0E11; border-top: 1px solid var(--border-color); padding: 3rem 2rem 2rem; margin-top: 4rem; font-size: 0.875rem; color: var(--text-muted); text-align: center; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <div class="nav-container">
-      <div class="brand">CNEI | Centre of National and External Intelligence</div>
+      <a href="index.html" class="brand">
+        <span id="telemetry-led" class="status-led"></span>
+        CNEI | Centre of National & External Intelligence
+      </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About & Ethics</a></li>
-        <li><a href="reports.html">Research</a></li>
+        <li><a href="reports.html" class="active">Research</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="page-title">Research & Intelligence Repository</h1>
-    <div class="page-subtitle">Archive of CNEI Analytical Briefings, Geospatial Studies, and OSINT Papers</div>
-
-    <div class="filter-bar">
-      <button class="filter-btn active">All</button>
-      <button class="filter-btn">Geopolitical Security</button>
-      <button class="filter-btn">Maritime & Logistics</button>
-      <button class="filter-btn">OSINT Methodologies</button>
-      <button class="filter-btn">Technical Papers</button>
-    </div>
+  <main>
+    <section class="hero">
+      <h1>RESEARCH & INTELLIGENCE REPOSITORY</h1>
+      <div class="subtitle">Archive of CNEI Analytical Briefings, Geospatial Studies, and OSINT Papers</div>
+    </section>
 
     <div class="grid-2">
       <div class="card">
         <span class="tag">Maritime & Logistics</span>
-        <h3>[Draft / Placeholder] Maritime Logistics & Chokepoint Security Overview</h3>
-        <div class="meta">Published: September 2026 | Author: CNEI Maritime Desk</div>
-        <p>Preliminary open-source assessment of commercial maritime shipping flows, AIS tracking anomalies, and operational security indicators.</p>
-        <a href="#">Download PDF Brief →</a>
+        <h3>Maritime Logistics & Chokepoint Security Overview</h3>
+        <p>Published: August 2026 | Lead Desk: Maritime Tracking</p>
+        <p>Preliminary open-source assessment of commercial maritime shipping flows and operational security indicators across key transit straits.</p>
+        <a href="#" class="link">View Full PDF Document →</a>
       </div>
+
       <div class="card">
         <span class="tag">OSINT Methodologies</span>
         <h3>Standard Verification Protocols for Public Satellite Imagery</h3>
-        <div class="meta">Published: August 2026 | Author: CNEI Geospatial Unit</div>
-        <p>Technical overview of geolocation, shadow estimation, and verification frameworks applied to publicly accessible geospatial data.</p>
-        <a href="#">Read Technical Paper →</a>
+        <p>Published: July 2026 | Lead Desk: GEOINT Frameworks</p>
+        <p>Technical overview of geolocation, shadow analysis, and verification frameworks applied to publicly accessible geospatial data.</p>
+        <a href="#" class="link">View Full PDF Document →</a>
       </div>
     </div>
 
@@ -86,10 +53,17 @@
   </main>
 
   <footer>
-    <p><strong>Centre of National and External Intelligence (CNEI)</strong><br>Unincorporated Student Research Collective | United Kingdom</p>
-    <p style="margin: 1rem 0;">Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service.</p>
-    <p>© 2026 Centre of National and External Intelligence. All rights reserved.</p>
+    <div class="footer-container">
+      <div>&copy; 2026 Centre of National and External Intelligence. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="reports.html">Research</a> | <a href="contact.html">Contact</a> | <a href="login.html" class="staff-link">Staff Login</a>
+      </div>
+    </div>
   </footer>
 
+  <div id="lockdown-overlay">
+    <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
