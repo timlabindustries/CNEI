@@ -1,73 +1,55 @@
-// Synchronized Global State & Lockdown Engine
-(function () {
-  const channel = new BroadcastChannel('cnei_system_channel');
-  let audioContext = null;
-  let BEEP_INTERVAL = null;
+// Load Firebase Libraries
+const script1 = document.createElement('script');
+script1.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js";
+document.head.appendChild(script1);
 
-  // Synthesis of Emergency Beeping Sound (No external audio file needed)
-  function playEmergencyBeep() {
-    try {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioContext.state === 'suspended') {
-        audioContext.resume();
-      }
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(880, audioContext.currentTime); // High pitch alert
-      gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      osc.start();
-      osc.stop(audioContext.currentTime + 0.15);
-    } catch (e) {
-      console.warn("Audio context restricted until user interaction.");
-    }
-  }
+const script2 = document.createElement('script');
+script2.src = "https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js";
+document.head.appendChild(script2);
 
-  function triggerLockdownUI(active, message) {
-    const overlay = document.getElementById('lockdown-overlay');
-    const msgElement = document.getElementById('lockdown-custom-msg');
-    const leds = document.querySelectorAll('.status-led');
-
-    if (active) {
-      if (overlay) overlay.classList.add('active');
-      if (msgElement) msgElement.innerText = message || "CONDITION RED: All public operations suspended by Director mandate.";
-      leds.forEach(led => led.classList.add('lockdown'));
-
-      if (!BEEP_INTERVAL) {
-        playEmergencyBeep();
-        BEEP_INTERVAL = setInterval(playEmergencyBeep, 1200);
-      }
-    } else {
-      if (overlay) overlay.classList.remove('active');
-      leds.forEach(led => led.classList.remove('lockdown'));
-
-      if (BEEP_INTERVAL) {
-        clearInterval(BEEP_INTERVAL);
-        BEEP_INTERVAL = null;
-      }
-    }
-  }
-
-  function syncState() {
-    const isLockdown = localStorage.getItem('cnei_lockdown_active') === 'true';
-    const msg = localStorage.getItem('cnei_lockdown_message');
-    triggerLockdownUI(isLockdown, msg);
-  }
-
-  // Listen for real-time messages across browser tabs/windows
-  channel.onmessage = (event) => {
-    if (event.data && event.data.type === 'LOCKDOWN_STATE_CHANGE') {
-      syncState();
-    }
+script2.onload = function() {
+  // Your CNEI Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
+    authDomain: "cnei-system.firebaseapp.com",
+    databaseURL: "https://cnei-system-default-rtdb.firebaseio.com",
+    projectId: "cnei-system",
+    storageBucket: "cnei-system.firebasestorage.app",
+    messagingSenderId: "55065590531",
+    appId: "1:55065590531:web:75d3f071512507c2aa8736"
   };
 
-  window.addEventListener('storage', syncState);
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    syncState();
+  // Listen for lockdown signals worldwide
+  db.ref('system/lockdown').on('value', (snapshot) => {
+    const data = snapshot.val();
+    const isLockdown = data && data.active;
+    const message = (data && data.message) ? data.message : "System under temporary maintenance.";
+
+    let publicOverlay = document.getElementById('public-lockdown-screen');
+
+    if (isLockdown) {
+      if (!publicOverlay) {
+        publicOverlay = document.createElement('div');
+        publicOverlay.id = 'public-lockdown-screen';
+        publicOverlay.style.cssText = `
+          position: fixed; inset: 0; background: #FFFFFF; color: #000000;
+          z-index: 9999999; display: flex; flex-direction: column;
+          justify-content: center; align-items: center; text-align: center;
+          padding: 2rem; font-family: system-ui, -apple-system, sans-serif;
+        `;
+        document.body.appendChild(publicOverlay);
+      }
+      publicOverlay.innerHTML = `
+        <h1 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem;">System Maintenance</h1>
+        <p style="font-size: 1.1rem; color: #4B5563; max-width: 600px;">${message}</p>
+      `;
+      document.body.style.overflow = 'hidden';
+    } else if (publicOverlay) {
+      publicOverlay.remove();
+      document.body.style.overflow = '';
+    }
   });
-})();
+};
