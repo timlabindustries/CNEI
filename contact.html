@@ -3,120 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Verification | CNEI</title>
-  <style>
-    :root {
-      --bg-dark: #12161A;
-      --card-bg: #1E242B;
-      --text-main: #F8F9FA;
-      --text-muted: #A0AEC0;
-      --accent: #38BDF8;
-      --border-color: #2D3748;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
-    header { position: sticky; top: 0; background-color: rgba(18, 22, 26, 0.95); border-bottom: 1px solid var(--border-color); z-index: 1000; }
-    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-    .brand { font-weight: 700; font-size: 1.1rem; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: var(--text-main); font-size: 0.95rem; font-weight: 500; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
-    .page-title { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .page-subtitle { color: var(--accent); font-size: 1.1rem; margin-bottom: 3rem; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-    .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; }
-    .card h3 { color: var(--accent); font-size: 1.1rem; margin-bottom: 0.5rem; }
-    .card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
-    .card .email { font-family: monospace; color: var(--text-main); background: var(--bg-dark); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .contact-form { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-main); }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 0.75rem;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      border-radius: 4px;
-      font-family: inherit;
-    }
-    .form-group textarea { height: 120px; resize: vertical; }
-    .btn-submit { background-color: var(--accent); color: var(--bg-dark); font-weight: 600; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; }
-    .gdpr-notice { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; }
-    footer { background-color: #0B0E11; border-top: 1px solid var(--border-color); padding: 3rem 2rem 2rem; margin-top: 4rem; font-size: 0.875rem; color: var(--text-muted); text-align: center; }
-  </style>
+  <title>Contact & Administrative Verification | CNEI</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
     <div class="nav-container">
-      <div class="brand">CNEI | Centre of National and External Intelligence</div>
+      <a href="index.html" class="brand">
+        <span id="telemetry-led" class="status-led"></span>
+        CNEI | Centre of National & External Intelligence
+      </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About & Ethics</a></li>
         <li><a href="reports.html">Research</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="page-title">Contact & Administrative Verification</h1>
-    <div class="page-subtitle">Inquiries, Attribution Requests, and Official Communications</div>
+  <main>
+    <section class="hero">
+      <h1>CONTACT & ADMINISTRATIVE VERIFICATION</h1>
+      <div class="subtitle">Inquiries, Attribution Requests, and Official Communications</div>
+    </section>
 
-    <div class="grid-3">
-      <div class="card">
-        <h3>General Inquiries</h3>
-        <p>For public questions, analytical feedback, or media citations regarding CNEI research outputs.</p>
-        <span class="email">info@cnei.org.uk</span>
+    <div class="grid-2">
+      <div class="content-block">
+        <h2>Official Contact Channel</h2>
+        <p><strong>Primary Address:</strong> info@cnei.org.uk</p>
+        <p>All official inquiries regarding research attribution, ethical standards, or administrative verification should be directed to our official mailbox.</p>
       </div>
-      <div class="card">
-        <h3>Author Verification</h3>
-        <p>To verify the authenticity of a CNEI publication or confirm researcher affiliation.</p>
-        <span class="email">verification@cnei.org.uk</span>
-      </div>
-      <div class="card">
-        <h3>Operational & Governance</h3>
-        <p>For legal or administrative correspondence directed to CNEI Leadership Administrators.</p>
-        <span class="email">admin@cnei.org.uk</span>
+
+      <div class="content-block">
+        <h2>Send a Message</h2>
+        <form onsubmit="event.preventDefault(); alert('Message logged under UK GDPR Legitimate Interests framework.');">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Organization / Affiliation</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-control" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Inquiries</button>
+        </form>
       </div>
     </div>
 
-    <div class="contact-form">
-      <h2 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Send a Message</h2>
-      <form onsubmit="event.preventDefault(); alert('Message submitted successfully.');">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" required placeholder="Your Name">
-        </div>
-        <div class="form-group">
-          <label>Organization / Affiliation</label>
-          <input type="text" placeholder="Independent / Academic / Media">
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" required placeholder="name@example.com">
-        </div>
-        <div class="form-group">
-          <label>Subject</label>
-          <input type="text" required placeholder="Subject of inquiry">
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea required placeholder="Enter your message here..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Submit Message</button>
-        <p class="gdpr-notice">Notice: Communications sent through this portal are processed in accordance with our UK GDPR Legitimate Interests administrative framework.</p>
-      </form>
+    <div class="notice-box">
+      Notice: Communications sent through this portal are processed in accordance with our UK GDPR Legitimate Interests administrative framework.
     </div>
   </main>
 
   <footer>
-    <p><strong>Centre of National and External Intelligence (CNEI)</strong><br>Unincorporated Student Research Collective | United Kingdom</p>
-    <p style="margin: 1rem 0;">Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service.</p>
-    <p>© 2026 Centre of National and External Intelligence. All rights reserved.</p>
+    <div class="footer-container">
+      <div>&copy; 2026 Centre of National and External Intelligence. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a> | <a href="about.html">About</a> | <a href="reports.html">Research</a> | <a href="contact.html">Contact</a> | <a href="login.html" class="staff-link">Staff Login</a>
+      </div>
+    </div>
   </footer>
 
+  <div id="lockdown-overlay">
+    <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
+  </div>
+  <script src="app.js"></script>
 </body>
 </html>
