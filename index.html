@@ -3,105 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CNEI | Centre of National and External Intelligence</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css">
+  <title>CNEI — Centre of National and External Intelligence</title>
+  <style>
+    :root {
+      --bg-color: #FFFFFF;
+      --text-main: #000000;
+      --border-color: #E5E7EB;
+      --muted: #4B5563;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header, footer {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer { border-bottom: none; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--muted); }
+    .brand { font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; color: var(--text-main); }
+    nav a { margin-left: 1.5rem; text-decoration: none; color: var(--text-main); font-size: 0.9rem; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    main { flex: 1; max-width: 800px; margin: 0 auto; width: 100%; padding: 4rem 2rem; }
+    h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    p { font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem; }
+    .cta-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #000000;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <a href="index.html" class="brand" aria-label="CNEI Homepage">
-        <img src="logo.png" alt="CNEI Emblem" class="brand-logo" onerror="this.style.display='none'">
-        <span id="telemetry-led" class="status-led" title="Telemetry Operational"></span>
-        <span>CNEI | Centre of National & External Intelligence</span>
-      </a>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-          <li><a href="about.html">About & Ethics</a></li>
-          <li><a href="reports.html">Research</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<header>
+  <a href="index.html" class="brand">CNEI</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero">
-      <h1>CENTRE OF NATIONAL AND EXTERNAL INTELLIGENCE</h1>
-      <div class="subtitle">Empirical Open-Source Intelligence & Geopolitical Research</div>
-      <p>A non-partisan, student-led research collective dedicated to rigorous analysis of global security, defense, and international affairs using strictly unclassified and publicly accessible data.</p>
-      <div class="cta-group">
-        <a href="reports.html" class="btn btn-primary">Read Latest Reports</a>
-        <a href="about.html" class="btn btn-secondary">Our Ethics & Standards</a>
-      </div>
-    </section>
+<main>
+  <h1>Centre of National and External Intelligence</h1>
+  <p>A non-partisan open-source intelligence research collective dedicated to transparent analytical methodologies, verification, and digital security research.</p>
+  <a href="research.html" class="cta-btn">View Research Publications</a>
+</main>
 
-    <h2 class="section-title">Core Operational Pillars</h2>
-    <div class="grid-3">
-      <article class="card">
-        <span class="tag">Standard 01</span>
-        <h3>Empirical Analysis</h3>
-        <p>Grounded strictly in verifiable, publicly accessible data. Free from speculation, ideological bias, or partisan narrative.</p>
-      </article>
-      <article class="card">
-        <span class="tag">Standard 02</span>
-        <h3>Unclassified & Lawful</h3>
-        <p>Operating strictly within UK legal frameworks (Computer Misuse Act 1990, DPA 2018) and platform terms of service.</p>
-      </article>
-      <article class="card">
-        <span class="tag">Standard 03</span>
-        <h3>Independent Research</h3>
-        <p>Operated autonomously by student researchers committed to academic standards, open-source verification, and transparent methodology.</p>
-      </article>
-    </div>
+<footer>
+  <div>© CNEI Collective. Zero Cookies. WCAG 2.2 AA Compliant.</div>
+  <div><a href="login.html" style="color: var(--muted); text-decoration: none;">Staff Workspace</a></div>
+</footer>
 
-    <h2 class="section-title">Latest Analytical Reports</h2>
-    <div class="grid-2">
-      <article class="card">
-        <span class="tag">Security Briefing</span>
-        <h3>Maritime Logistics & Chokepoint Security Overview</h3>
-        <p>Preliminary open-source assessment of commercial maritime shipping flows and operational security indicators.</p>
-        <a href="reports.html" class="link">Read Full Brief →</a>
-      </article>
-      <article class="card">
-        <span class="tag">OSINT Methodology</span>
-        <h3>Standard Verification Protocols for Public Satellite Imagery</h3>
-        <p>Technical overview of geolocation and verification frameworks applied to publicly accessible geospatial data.</p>
-        <a href="reports.html" class="link">Read Methodology →</a>
-      </article>
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div class="footer-brand">
-        <img src="logo.png" alt="" class="brand-logo" onerror="this.style.display='none'">
-        <span>Centre of National and External Intelligence (CNEI)</span>
-      </div>
-      <p>Unincorporated Student Research Collective | United Kingdom<br>
-      Disclaimer: CNEI is an independent, student-led open-source intelligence research group. CNEI is not a government agency, law enforcement entity, or official intelligence service. All work is derived from unclassified, publicly available sources.</p>
-      <div class="footer-links">
-        <a href="index.html">Home</a> | 
-        <a href="about.html">About</a> | 
-        <a href="reports.html">Research</a> | 
-        <a href="contact.html">Contact</a> | 
-        <a href="login.html" class="staff-link">Staff Login</a>
-      </div>
-      <div>&copy; 2026 Centre of National and External Intelligence. All rights reserved.</div>
-    </div>
-  </footer>
-
-  <div id="lockdown-overlay" role="alert" aria-live="assertive">
-    <div class="lockdown-box">
-      <div class="lockdown-title">SYSTEM LOCKDOWN ACTIVE</div>
-      <div id="lockdown-custom-msg" class="lockdown-msg">CONDITION RED: All public operations suspended by Director mandate.</div>
-      <p style="font-size: 0.85rem; color: #A0AEC0;">Authorized directors may authenticate via the staff portal.</p>
-      <div style="margin-top: 1.5rem;"><a href="login.html" class="btn btn-secondary">Staff Terminal Access</a></div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
