@@ -1,4 +1,160 @@
-<!-- Load Firebase SDKs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNEI — Staff Command Workspace</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    :root {
+      --bg: #0F172A;
+      --panel-bg: #1E293B;
+      --border: #334155;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --accent: #3B82F6;
+      --danger: #EF4444;
+      --success: #22C55E;
+      --warning: #F59E0B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Sidebar Selectors */
+    aside {
+      width: 260px;
+      background-color: var(--panel-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-brand {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-brand img { width: 28px; height: 28px; object-fit: contain; }
+    .sidebar-brand span { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .selector-menu { padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .selector-btn {
+      width: 100%; padding: 0.75rem 1rem; background: transparent; border: none;
+      color: var(--muted); text-align: left; font-size: 0.9rem; font-weight: 600;
+      border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    }
+    .selector-btn:hover, .selector-btn.active { background-color: rgba(59, 130, 246, 0.1); color: var(--accent); }
+    .sidebar-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+
+    /* Main Workspace Panel */
+    .workspace-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+    header {
+      padding: 1.25rem 2rem; border-bottom: 1px solid var(--border);
+      background-color: var(--panel-bg); display: flex; justify-content: space-between; align-items: center;
+    }
+    .header-title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .content-area { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1400px; width: 100%; margin: 0 auto; }
+    .card { background-color: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
+    .card-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1rem; }
+    
+    /* Exactly 3 Status Lights Panel */
+    .telemetry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .light-box {
+      background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border);
+      padding: 1rem; border-radius: 6px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem;
+    }
+    .status-indicator {
+      width: 14px; height: 14px; border-radius: 50%; background-color: var(--success);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); transition: all 0.3s;
+    }
+    .status-indicator.warning { background-color: var(--warning); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+    .status-indicator.danger { background-color: var(--danger); box-shadow: 0 0 12px rgba(239, 68, 68, 0.6); animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+    .light-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
+
+    /* Lockdown Control & Inputs */
+    .input-field {
+      width: 100%; padding: 0.75rem; background: #0F172A; border: 1px solid var(--border);
+      color: var(--text); border-radius: 6px; margin-bottom: 1rem; font-family: inherit; font-size: 0.9rem;
+    }
+    .action-btn {
+      width: 100%; padding: 0.85rem; background-color: transparent; border: 1px solid var(--danger);
+      color: var(--danger); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+      border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    }
+    .action-btn:hover { background-color: var(--danger); color: #FFF; }
+
+    /* Audit Logs Feed */
+    .feed-box { background: #0F172A; border: 1px solid var(--border); border-radius: 6px; height: 260px; overflow-y: auto; padding: 1rem; font-family: monospace; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .feed-entry { color: #E2E8F0; border-bottom: 1px solid rgba(51, 65, 85, 0.4); padding-bottom: 0.35rem; }
+    .feed-timestamp { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<aside>
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="CNEI">
+    <span>CNEI Command</span>
+  </div>
+  <div class="selector-menu">
+    <button class="selector-btn active" onclick="switchTab(this)">Condition Red Control</button>
+    <button class="selector-btn" onclick="switchTab(this)">Network Telemetry</button>
+    <button class="selector-btn" onclick="switchTab(this)">Audit Log Archives</button>
+    <button class="selector-btn" onclick="switchTab(this)">Node Configuration</button>
+  </div>
+  <div class="sidebar-footer">Operator: <span id="opLabel">Admin</span></div>
+</aside>
+
+<main class="workspace-main">
+  <header>
+    <div class="header-title">Operational Director Workspace</div>
+    <div id="sys-clock" style="font-family: monospace; color: var(--muted); font-size: 0.9rem;">UTC 00:00:00</div>
+  </header>
+
+  <div class="content-area">
+    <!-- Card 1: 3 Status Lights & Global Lockdown Trigger -->
+    <div class="card">
+      <div class="card-title">System Telemetry & Lockdown State</div>
+      
+      <!-- Exactly 3 Status Lights -->
+      <div class="telemetry-grid">
+        <div class="light-box">
+          <div id="light-core" class="status-indicator"></div>
+          <span class="light-label">Core Relay</span>
+        </div>
+        <div class="light-box">
+          <div id="light-sync" class="status-indicator"></div>
+          <span class="light-label">Sync Mesh</span>
+        </div>
+        <div class="light-box">
+          <div id="light-lock" class="status-indicator"></div>
+          <span class="light-label">Condition Red</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--muted);">Lockdown Broadcast Message:</div>
+      <input type="text" id="broadcastMsg" class="input-field" value="CONDITION RED: Public operations suspended by Director mandate.">
+      <button id="lockdownBtn" class="action-btn" onclick="toggleGlobalLockdown()">INITIATE GLOBAL LOCKDOWN</button>
+    </div>
+
+    <!-- Card 2: Live Audit Log Feed -->
+    <div class="card" style="grid-column: span 1;">
+      <div class="card-title">Real-Time Audit Feed</div>
+      <div id="feedBox" class="feed-box">
+        <div class="feed-entry"><span class="feed-timestamp">[System]</span> Initializing secure WebSocket relay...</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -6,8 +162,8 @@
   if (sessionStorage.getItem('cnei_authenticated') !== 'true') {
     window.location.href = 'login.html';
   }
+  document.getElementById('opLabel').innerText = sessionStorage.getItem('cnei_operator_id') || 'cnei-admin';
 
-  // Your CNEI Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
     authDomain: "cnei-system.firebaseapp.com",
@@ -25,7 +181,7 @@
   let audioContext = null;
   let alertInterval = null;
 
-  function playStaffAlarm() {
+  function playAlarm() {
     try {
       if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
       if (audioContext.state === 'suspended') audioContext.resume();
@@ -33,42 +189,42 @@
       const gain = audioContext.createGain();
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(880, audioContext.currentTime);
-      gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+      gain.gain.setValueAtTime(0.1, audioContext.currentTime);
       osc.connect(gain);
       gain.connect(audioContext.destination);
       osc.start();
       osc.stop(audioContext.currentTime + 0.15);
-    } catch (e) {
-      console.warn("Audio waiting for user gesture.");
-    }
+    } catch (e) {}
   }
 
-  // Real-time synchronization for staff panel & warning LED/alarm
+  // Real-time synchronization for status lights & button state
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const active = data && data.active;
-    const led = document.getElementById('sys-led');
+    const lightCore = document.getElementById('light-core');
+    const lightSync = document.getElementById('light-sync');
+    const lightLock = document.getElementById('light-lock');
     const btn = document.getElementById('lockdownBtn');
 
     if (active) {
-      if (led) led.classList.add('lockdown');
-      if (btn) {
-        btn.innerText = 'TERMINATE GLOBAL LOCKDOWN';
-        btn.style.backgroundColor = 'var(--red-alert, #DC2626)';
-        btn.style.color = '#FFFFFF';
-      }
+      lightCore.className = 'status-indicator danger';
+      lightSync.className = 'status-indicator warning';
+      lightLock.className = 'status-indicator danger';
+      btn.innerText = 'TERMINATE GLOBAL LOCKDOWN';
+      btn.style.backgroundColor = 'var(--danger)';
+      btn.style.color = '#FFF';
 
       if (!alertInterval) {
-        playStaffAlarm();
-        alertInterval = setInterval(playStaffAlarm, 1200);
+        playAlarm();
+        alertInterval = setInterval(playAlarm, 1200);
       }
     } else {
-      if (led) led.classList.remove('lockdown');
-      if (btn) {
-        btn.innerText = 'INITIATE GLOBAL LOCKDOWN';
-        btn.style.backgroundColor = 'transparent';
-        btn.style.color = 'var(--red-alert, #DC2626)';
-      }
+      lightCore.className = 'status-indicator';
+      lightSync.className = 'status-indicator';
+      lightLock.className = 'status-indicator';
+      btn.innerText = 'INITIATE GLOBAL LOCKDOWN';
+      btn.style.backgroundColor = 'transparent';
+      btn.style.color = 'var(--danger)';
 
       if (alertInterval) {
         clearInterval(alertInterval);
@@ -77,8 +233,8 @@
     }
   });
 
-  // Real-time listener for central audit logs
-  db.ref('audit_logs').limitToLast(15).on('child_added', (snapshot) => {
+  // Real-time audit logs feed listener
+  db.ref('audit_logs').limitToLast(12).on('child_added', (snapshot) => {
     const log = snapshot.val();
     const feed = document.getElementById('feedBox');
     if (feed) {
@@ -89,32 +245,33 @@
     }
   });
 
-  // Global Lockdown toggle function triggered by the staff button
   function toggleGlobalLockdown() {
     db.ref('system/lockdown').once('value').then((snapshot) => {
       const data = snapshot.val();
       const currentState = data && data.active;
       const newState = !currentState;
-      const inputEl = document.getElementById('broadcastMsg');
-      const customMsg = (inputEl && inputEl.value) ? inputEl.value : "CONDITION RED: All public operations suspended by Director mandate.";
+      const msg = document.getElementById('broadcastMsg').value || "CONDITION RED: Operations suspended.";
       const timeStr = new Date().toISOString().replace('T', ' ').substr(0, 19);
 
-      // Send status to Firebase
       db.ref('system/lockdown').set({
         active: newState,
-        message: customMsg,
+        message: msg,
         triggeredBy: currentOperator,
         timestamp: timeStr
       });
 
-      // Write action to audit log tree
       db.ref('audit_logs').push({
         operator: currentOperator,
         action: newState ? "INITIATED_LOCKDOWN" : "TERMINATED_LOCKDOWN",
-        details: customMsg,
+        details: msg,
         timestamp: timeStr
       });
     });
+  }
+
+  function switchTab(btn) {
+    document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
   }
 
   function updateClock() {
@@ -124,3 +281,6 @@
   setInterval(updateClock, 1000);
   updateClock();
 </script>
+
+</body>
+</html>
