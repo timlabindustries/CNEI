@@ -1,339 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CNEI // Operational Control Center</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <style>
-    :root {
-      --bg-terminal: #07090C;
-      --panel-dark: #0D1117;
-      --border-stark: #30363D;
-      --text-main: #F0F6FC;
-      --text-muted: #8B949E;
-      --accent-blue: #38BDF8;
-      --red-alert: #DC2626;
-      --green-ok: #16A34A;
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+  if (sessionStorage.getItem('cnei_authenticated') !== 'true') {
+    window.location.href = 'login.html';
+  }
+
+  // Your CNEI Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
+    authDomain: "cnei-system.firebaseapp.com",
+    databaseURL: "https://cnei-system-default-rtdb.firebaseio.com",
+    projectId: "cnei-system",
+    storageBucket: "cnei-system.firebasestorage.app",
+    messagingSenderId: "55065590531",
+    appId: "1:55065590531:web:75d3f071512507c2aa8736"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const currentOperator = sessionStorage.getItem('cnei_operator_id') || 'cnei-admin';
+
+  let audioContext = null;
+  let alertInterval = null;
+
+  function playStaffAlarm() {
+    try {
+      if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioContext.state === 'suspended') audioContext.resume();
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(880, audioContext.currentTime);
+      gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start();
+      osc.stop(audioContext.currentTime + 0.15);
+    } catch (e) {
+      console.warn("Audio waiting for user interaction.");
     }
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace; }
+  // Listen for global state changes
+  db.ref('system/lockdown').on('value', (snapshot) => {
+    const data = snapshot.val();
+    const active = data && data.active;
+    const led = document.getElementById('sys-led');
+    const btn = document.getElementById('lockdownBtn');
 
-    body {
-      background-color: var(--bg-terminal);
-      color: var(--text-main);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .terminal-header {
-      background-color: var(--panel-dark);
-      border-bottom: 1px solid var(--border-stark);
-      padding: 0.85rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand-terminal {
-      font-weight: bold;
-      letter-spacing: 0.08em;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .status-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--green-ok);
-      box-shadow: 0 0 8px var(--green-ok);
-    }
-
-    .status-indicator.lockdown {
-      background-color: var(--red-alert);
-      box-shadow: 0 0 10px var(--red-alert);
-    }
-
-    .workspace-body {
-      display: flex;
-      flex: 1;
-      height: calc(100vh - 55px);
-    }
-
-    .sidebar {
-      width: 260px;
-      background-color: var(--panel-dark);
-      border-right: 1px solid var(--border-stark);
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .sidebar-title {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-    }
-
-    .nav-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      padding: 0.85rem 1rem;
-      text-align: left;
-      cursor: pointer;
-      font-family: monospace;
-      font-size: 0.85rem;
-      border-radius: 4px;
-    }
-
-    .nav-btn:hover, .nav-btn.active {
-      color: var(--accent-blue);
-      border-color: var(--border-stark);
-      background-color: rgba(56, 189, 248, 0.08);
-    }
-
-    .btn-logout {
-      margin-top: auto;
-      border-color: var(--border-stark);
-      color: var(--text-muted);
-    }
-
-    .btn-logout:hover {
-      color: var(--red-alert);
-      border-color: var(--red-alert);
-    }
-
-    .viewport {
-      flex: 1;
-      padding: 2rem;
-      overflow-y: auto;
-    }
-
-    .controls-panel {
-      border: 1px solid var(--border-stark);
-      background-color: var(--panel-dark);
-      padding: 1.5rem;
-      border-radius: 6px;
-      margin-bottom: 1.5rem;
-    }
-
-    .panel-title {
-      font-size: 0.9rem;
-      color: var(--accent-blue);
-      letter-spacing: 0.08em;
-      margin-bottom: 1.25rem;
-      font-weight: bold;
-    }
-
-    .controls-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .terminal-input {
-      width: 100%;
-      padding: 0.85rem;
-      background: var(--bg-terminal);
-      border: 1px solid var(--border-stark);
-      border-radius: 4px;
-      color: #FFFFFF;
-      font-family: monospace;
-      font-size: 0.9rem;
-    }
-
-    .action-btn {
-      padding: 0.85rem 1.25rem;
-      background: transparent;
-      border: 1px solid var(--border-stark);
-      border-radius: 4px;
-      color: var(--text-main);
-      font-family: monospace;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .action-btn:hover {
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-    }
-
-    .btn-lockdown {
-      border-color: var(--red-alert);
-      color: var(--red-alert);
-      width: 100%;
-    }
-
-    .btn-lockdown:hover {
-      background-color: var(--red-alert);
-      color: #FFFFFF;
-    }
-
-    .feed-box {
-      border: 1px solid var(--border-stark);
-      background: var(--bg-terminal);
-      padding: 1rem;
-      height: 280px;
-      overflow-y: auto;
-      font-size: 0.85rem;
-      border-radius: 4px;
-    }
-
-    .feed-entry {
-      margin-bottom: 0.6rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px dashed var(--border-stark);
-    }
-
-    .feed-timestamp {
-      color: var(--text-muted);
-      margin-right: 0.5rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="terminal-header">
-    <div class="brand-terminal">
-      <img src="logo.png" alt="" style="width: 20px; height: 20px; object-fit: contain;" onerror="this.style.display='none'">
-      <span id="sys-led" class="status-indicator"></span>
-      <span>CNEI // OPERATIONAL CONTROL CENTER</span>
-    </div>
-    <div id="sys-clock" style="color: var(--text-muted); font-size: 0.85rem;">UTC 00:00:00</div>
-  </div>
-
-  <div class="workspace-body">
-    <nav class="sidebar">
-      <div class="sidebar-title">DIRECTOR DESKS</div>
-      <button class="nav-btn active" onclick="showPanel('controls')">[01] COMMAND & LOCKDOWN</button>
-      <button class="nav-btn" onclick="showPanel('geoint')">[02] GEOINT TRACKING</button>
-      <button class="nav-btn" onclick="showPanel('maritime')">[03] MARITIME MONITORING</button>
-      <button class="nav-btn" onclick="showPanel('archival')">[04] RESEARCH ARCHIVES</button>
-      <button class="nav-btn btn-logout" onclick="logout()">[X] LOGOUT TERMINAL</button>
-    </nav>
-
-    <main class="viewport">
-      <div id="panel-controls">
-        <div class="controls-panel">
-          <div class="panel-title">// COMMAND CONTROLS & GLOBAL EMERGENCY OVERRIDE</div>
-          <div class="controls-grid">
-            <div>
-              <label for="broadcastMsg" style="display:block; color: var(--text-muted); font-size:0.8rem; margin-bottom:0.5rem;">GLOBAL LOCKDOWN REASON / BROADCAST MESSAGE</label>
-              <div style="display:flex; gap:0.5rem;">
-                <input type="text" id="broadcastMsg" class="terminal-input" placeholder="CONDITION RED: Emergency maintenance in progress...">
-              </div>
-            </div>
-            <div>
-              <label style="display:block; color: var(--text-muted); font-size:0.8rem; margin-bottom:0.5rem;">GLOBAL CONDITION RED OVERRIDE</label>
-              <button id="lockdownBtn" class="action-btn btn-lockdown" onclick="toggleGlobalLockdown()">INITIATE GLOBAL LOCKDOWN</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="controls-panel">
-          <div class="panel-title">// GLOBAL SYSTEM AUDIT LOG</div>
-          <div id="feedBox" class="feed-box">
-            <div class="feed-entry">
-              <span class="feed-timestamp">[SYSTEM INITIALIZE]</span> Operational Control Center online.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="panel-geoint" style="display:none;" class="controls-panel">
-        <div class="panel-title">// GEOINT & SATELLITE ANALYSIS DESK</div>
-        <p style="color: var(--text-muted);">Geospatial imagery verification pipeline and coordinate mapping workspace.</p>
-      </div>
-
-      <div id="panel-maritime" style="display:none;" class="controls-panel">
-        <div class="panel-title">// MARITIME AIS TRACKING DESK</div>
-        <p style="color: var(--text-muted);">Commercial vessel transponder logs and maritime traffic analytics.</p>
-      </div>
-
-      <div id="panel-archival" style="display:none;" class="controls-panel">
-        <div class="panel-title">// UNPUBLISHED BRIEFINGS & DRAFTS</div>
-        <p style="color: var(--text-muted);">Internal research drafts pending senior analyst verification.</p>
-      </div>
-    </main>
-  </div>
-
-  <script>
-    if (sessionStorage.getItem('cnei_authenticated') !== 'true') {
-      window.location.href = 'login.html';
-    }
-
-    const channel = new BroadcastChannel('cnei_system_channel');
-
-    function updateClock() {
-      document.getElementById('sys-clock').innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    function syncWorkspaceState() {
-      const active = localStorage.getItem('cnei_lockdown_active') === 'true';
-      const led = document.getElementById('sys-led');
-      const btn = document.getElementById('lockdownBtn');
-
-      if (active) {
-        led.classList.add('lockdown');
-        btn.innerText = 'TERMINATE LOCKDOWN';
-        btn.style.backgroundColor = 'var(--red-alert)';
+    if (active) {
+      if (led) led.classList.add('lockdown');
+      if (btn) {
+        btn.innerText = 'TERMINATE GLOBAL LOCKDOWN';
+        btn.style.backgroundColor = 'var(--red-alert, #DC2626)';
         btn.style.color = '#FFFFFF';
-      } else {
-        led.classList.remove('lockdown');
+      }
+
+      if (!alertInterval) {
+        playStaffAlarm();
+        alertInterval = setInterval(playStaffAlarm, 1200);
+      }
+    } else {
+      if (led) led.classList.remove('lockdown');
+      if (btn) {
         btn.innerText = 'INITIATE GLOBAL LOCKDOWN';
         btn.style.backgroundColor = 'transparent';
-        btn.style.color = 'var(--red-alert)';
+        btn.style.color = 'var(--red-alert, #DC2626)';
+      }
+
+      if (alertInterval) {
+        clearInterval(alertInterval);
+        alertInterval = null;
       }
     }
+  });
 
-    function toggleGlobalLockdown() {
-      const currentState = localStorage.getItem('cnei_lockdown_active') === 'true';
-      const newState = !currentState;
-      const customMsg = document.getElementById('broadcastMsg').value || "CONDITION RED: All public operations suspended by Director mandate.";
-
-      localStorage.setItem('cnei_lockdown_active', newState ? 'true' : 'false');
-      localStorage.setItem('cnei_lockdown_message', customMsg);
-
-      // Broadcast event to instantly trigger every open browser session globally
-      channel.postMessage({ type: 'LOCKDOWN_STATE_CHANGE', active: newState, message: customMsg });
-
-      logFeed(newState ? `[CONDITION RED] Global Lockdown Initiated: "${customMsg}"` : '[CONDITION GREEN] Global Lockdown Terminated.');
-      syncWorkspaceState();
-    }
-
-    function logFeed(message) {
-      const feed = document.getElementById('feedBox');
-      const time = new Date().toISOString().substr(11, 8);
+  // Listen for real-time audit logs
+  db.ref('audit_logs').limitToLast(15).on('child_added', (snapshot) => {
+    const log = snapshot.val();
+    const feed = document.getElementById('feedBox');
+    if (feed) {
       const entry = document.createElement('div');
       entry.className = 'feed-entry';
-      entry.innerHTML = `<span class="feed-timestamp">[${time}]</span> ${message}`;
+      entry.innerHTML = `<span class="feed-timestamp">[${log.timestamp}]</span> <strong>${log.operator}</strong>: ${log.action} ("${log.details}")`;
       feed.prepend(entry);
     }
+  });
 
-    function showPanel(panelName) {
-      ['controls', 'geoint', 'maritime', 'archival'].forEach(p => {
-        document.getElementById('panel-' + p).style.display = (p === panelName) ? 'block' : 'none';
+  function toggleGlobalLockdown() {
+    db.ref('system/lockdown').once('value').then((snapshot) => {
+      const data = snapshot.val();
+      const currentState = data && data.active;
+      const newState = !currentState;
+      const customMsg = document.getElementById('broadcastMsg').value || "CONDITION RED: All public operations suspended by Director mandate.";
+      const timeStr = new Date().toISOString().replace('T', ' ').substr(0, 19);
+
+      db.ref('system/lockdown').set({
+        active: newState,
+        message: customMsg,
+        triggeredBy: currentOperator,
+        timestamp: timeStr
       });
-      document.querySelectorAll('.sidebar .nav-btn:not(.btn-logout)').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-    }
 
-    function logout() {
-      sessionStorage.removeItem('cnei_authenticated');
-      window.location.href = 'login.html';
-    }
+      db.ref('audit_logs').push({
+        operator: currentOperator,
+        action: newState ? "INITIATED_LOCKDOWN" : "TERMINATED_LOCKDOWN",
+        details: customMsg,
+        timestamp: timeStr
+      });
+    });
+  }
 
-    document.addEventListener('DOMContentLoaded', syncWorkspaceState);
-  </script>
-
-</body>
-</html>
+  function updateClock() {
+    const clock = document.getElementById('sys-clock');
+    if (clock) clock.innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
