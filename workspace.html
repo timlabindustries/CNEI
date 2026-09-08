@@ -1,3 +1,4 @@
+<!-- Load Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -6,7 +7,7 @@
     window.location.href = 'login.html';
   }
 
-  // Your CNEI Firebase Configuration
+  // CNEI Firebase Configuration
   const firebaseConfig = {
     apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
     authDomain: "cnei-system.firebaseapp.com",
@@ -38,11 +39,11 @@
       osc.start();
       osc.stop(audioContext.currentTime + 0.15);
     } catch (e) {
-      console.warn("Audio waiting for user interaction.");
+      console.warn("Audio waiting for user gesture.");
     }
   }
 
-  // Listen for global state changes
+  // Real-time synchronization for staff panel & alarm
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const active = data && data.active;
@@ -76,7 +77,7 @@
     }
   });
 
-  // Listen for real-time audit logs
+  // Real-time sync for global audit log feed
   db.ref('audit_logs').limitToLast(15).on('child_added', (snapshot) => {
     const log = snapshot.val();
     const feed = document.getElementById('feedBox');
@@ -88,14 +89,17 @@
     }
   });
 
+  // Function called by lockdown button click
   function toggleGlobalLockdown() {
     db.ref('system/lockdown').once('value').then((snapshot) => {
       const data = snapshot.val();
       const currentState = data && data.active;
       const newState = !currentState;
-      const customMsg = document.getElementById('broadcastMsg').value || "CONDITION RED: All public operations suspended by Director mandate.";
+      const inputEl = document.getElementById('broadcastMsg');
+      const customMsg = (inputEl && inputEl.value) ? inputEl.value : "CONDITION RED: All public operations suspended by Director mandate.";
       const timeStr = new Date().toISOString().replace('T', ' ').substr(0, 19);
 
+      // 1. Send lockdown payload to Firebase
       db.ref('system/lockdown').set({
         active: newState,
         message: customMsg,
@@ -103,6 +107,7 @@
         timestamp: timeStr
       });
 
+      // 2. Append new log entry to audit log tree
       db.ref('audit_logs').push({
         operator: currentOperator,
         action: newState ? "INITIATED_LOCKDOWN" : "TERMINATED_LOCKDOWN",
