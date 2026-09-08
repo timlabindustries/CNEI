@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CNEI // OPERATIONAL WORKSPACE</title>
+  <title>CNEI // Operational Control Center</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root {
-      --bg-terminal: #050709;
-      --panel-dark: #0D1013;
-      --border-stark: #2D3748;
-      --text-main: #FFFFFF;
-      --text-muted: #8A99AD;
+      --bg-terminal: #07090C;
+      --panel-dark: #0D1117;
+      --border-stark: #30363D;
+      --text-main: #F0F6FC;
+      --text-muted: #8B949E;
       --accent-blue: #38BDF8;
-      --red-alert: #EF4444;
-      --green-ok: #22C55E;
+      --red-alert: #DC2626;
+      --green-ok: #16A34A;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: monospace; }
@@ -27,11 +28,10 @@
       overflow: hidden;
     }
 
-    /* Terminal Header */
     .terminal-header {
       background-color: var(--panel-dark);
       border-bottom: 1px solid var(--border-stark);
-      padding: 0.75rem 1.5rem;
+      padding: 0.85rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -39,7 +39,7 @@
 
     .brand-terminal {
       font-weight: bold;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -55,27 +55,20 @@
 
     .status-indicator.lockdown {
       background-color: var(--red-alert);
-      box-shadow: 0 0 8px var(--red-alert);
+      box-shadow: 0 0 10px var(--red-alert);
     }
 
-    .system-clock {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    /* Main Grid Layout */
     .workspace-body {
       display: flex;
       flex: 1;
-      height: calc(100vh - 50px);
+      height: calc(100vh - 55px);
     }
 
-    /* Sidebar Navigation */
     .sidebar {
-      width: 240px;
+      width: 260px;
       background-color: var(--panel-dark);
       border-right: 1px solid var(--border-stark);
-      padding: 1rem;
+      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -85,26 +78,25 @@
       font-size: 0.75rem;
       color: var(--text-muted);
       letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
+      margin-bottom: 0.75rem;
     }
 
     .nav-btn {
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1rem;
       text-align: left;
       cursor: pointer;
       font-family: monospace;
       font-size: 0.85rem;
-      transition: all 0.2s;
+      border-radius: 4px;
     }
 
     .nav-btn:hover, .nav-btn.active {
       color: var(--accent-blue);
       border-color: var(--border-stark);
-      background-color: rgba(56, 189, 248, 0.05);
+      background-color: rgba(56, 189, 248, 0.08);
     }
 
     .btn-logout {
@@ -118,53 +110,50 @@
       border-color: var(--red-alert);
     }
 
-    /* Main Terminal Workspace Area */
     .viewport {
       flex: 1;
-      padding: 1.5rem;
+      padding: 2rem;
       overflow-y: auto;
     }
 
     .controls-panel {
       border: 1px solid var(--border-stark);
       background-color: var(--panel-dark);
-      padding: 1.25rem;
+      padding: 1.5rem;
+      border-radius: 6px;
       margin-bottom: 1.5rem;
     }
 
     .panel-title {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--accent-blue);
-      letter-spacing: 0.1em;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+      font-weight: bold;
     }
 
     .controls-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     .terminal-input {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.85rem;
       background: var(--bg-terminal);
       border: 1px solid var(--border-stark);
+      border-radius: 4px;
       color: #FFFFFF;
       font-family: monospace;
-      font-size: 0.85rem;
-    }
-
-    .terminal-input:focus {
-      outline: none;
-      border-color: var(--accent-blue);
+      font-size: 0.9rem;
     }
 
     .action-btn {
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1.25rem;
       background: transparent;
       border: 1px solid var(--border-stark);
+      border-radius: 4px;
       color: var(--text-main);
       font-family: monospace;
       cursor: pointer;
@@ -191,15 +180,16 @@
       border: 1px solid var(--border-stark);
       background: var(--bg-terminal);
       padding: 1rem;
-      height: 250px;
+      height: 280px;
       overflow-y: auto;
       font-size: 0.85rem;
+      border-radius: 4px;
     }
 
     .feed-entry {
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px dashed #1E242B;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px dashed var(--border-stark);
     }
 
     .feed-timestamp {
@@ -212,56 +202,51 @@
 
   <div class="terminal-header">
     <div class="brand-terminal">
+      <img src="logo.png" alt="" style="width: 20px; height: 20px; object-fit: contain;" onerror="this.style.display='none'">
       <span id="sys-led" class="status-indicator"></span>
-      CNEI // GLOBAL OPERATIONS CENTER
+      <span>CNEI // OPERATIONAL CONTROL CENTER</span>
     </div>
-    <div id="sys-clock" class="system-clock">UTC 00:00:00</div>
+    <div id="sys-clock" style="color: var(--text-muted); font-size: 0.85rem;">UTC 00:00:00</div>
   </div>
 
   <div class="workspace-body">
-    <!-- Left Navigation Sidebar -->
-    <div class="sidebar">
-      <div class="sidebar-title">OPERATIONAL PANELS</div>
-      <button class="nav-btn active" onclick="showPanel('controls')">[01] CONTROLS & LOCKDOWN</button>
+    <nav class="sidebar">
+      <div class="sidebar-title">DIRECTOR DESKS</div>
+      <button class="nav-btn active" onclick="showPanel('controls')">[01] COMMAND & LOCKDOWN</button>
       <button class="nav-btn" onclick="showPanel('geoint')">[02] GEOINT TRACKING</button>
       <button class="nav-btn" onclick="showPanel('maritime')">[03] MARITIME MONITORING</button>
-      <button class="nav-btn" onclick="showPanel('archival')">[04] RESEARCH DRAFTS</button>
+      <button class="nav-btn" onclick="showPanel('archival')">[04] RESEARCH ARCHIVES</button>
       <button class="nav-btn btn-logout" onclick="logout()">[X] LOGOUT TERMINAL</button>
-    </div>
+    </nav>
 
-    <!-- Active Viewport -->
-    <div class="viewport">
-      
-      <!-- CONTROLS & LOCKDOWN PANEL -->
+    <main class="viewport">
       <div id="panel-controls">
         <div class="controls-panel">
-          <div class="panel-title">// COMMAND CONTROLS & EMERGENCY OVERRIDE</div>
+          <div class="panel-title">// COMMAND CONTROLS & GLOBAL EMERGENCY OVERRIDE</div>
           <div class="controls-grid">
             <div>
-              <label style="display:block; color: var(--text-muted); font-size:0.75rem; margin-bottom:0.4rem;">DISPATCH BROADCAST TO ACTIVE TERMINALS</label>
+              <label for="broadcastMsg" style="display:block; color: var(--text-muted); font-size:0.8rem; margin-bottom:0.5rem;">GLOBAL LOCKDOWN REASON / BROADCAST MESSAGE</label>
               <div style="display:flex; gap:0.5rem;">
-                <input type="text" id="broadcastMsg" class="terminal-input" placeholder="Enter broadcast statement...">
-                <button class="action-btn" onclick="sendBroadcast()">TRANSMIT</button>
+                <input type="text" id="broadcastMsg" class="terminal-input" placeholder="CONDITION RED: Emergency maintenance in progress...">
               </div>
             </div>
             <div>
-              <label style="display:block; color: var(--text-muted); font-size:0.75rem; margin-bottom:0.4rem;">CONDITION RED SYSTEM OVERRIDE</label>
-              <button id="lockdownBtn" class="action-btn btn-lockdown" onclick="toggleLockdown()">INITIATE LOCKDOWN</button>
+              <label style="display:block; color: var(--text-muted); font-size:0.8rem; margin-bottom:0.5rem;">GLOBAL CONDITION RED OVERRIDE</label>
+              <button id="lockdownBtn" class="action-btn btn-lockdown" onclick="toggleGlobalLockdown()">INITIATE GLOBAL LOCKDOWN</button>
             </div>
           </div>
         </div>
 
         <div class="controls-panel">
-          <div class="panel-title">// TERMINAL BROADCAST LOG</div>
+          <div class="panel-title">// GLOBAL SYSTEM AUDIT LOG</div>
           <div id="feedBox" class="feed-box">
             <div class="feed-entry">
-              <span class="feed-timestamp">[SYS INITIALIZE]</span> Terminal connected. Status: Normal Operations.
+              <span class="feed-timestamp">[SYSTEM INITIALIZE]</span> Operational Control Center online.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PLACEHOLDER STAFF PANELS (Can be built out as needed) -->
       <div id="panel-geoint" style="display:none;" class="controls-panel">
         <div class="panel-title">// GEOINT & SATELLITE ANALYSIS DESK</div>
         <p style="color: var(--text-muted);">Geospatial imagery verification pipeline and coordinate mapping workspace.</p>
@@ -276,66 +261,53 @@
         <div class="panel-title">// UNPUBLISHED BRIEFINGS & DRAFTS</div>
         <p style="color: var(--text-muted);">Internal research drafts pending senior analyst verification.</p>
       </div>
-
-    </div>
+    </main>
   </div>
 
   <script>
-    // Authentication Check
     if (sessionStorage.getItem('cnei_authenticated') !== 'true') {
       window.location.href = 'login.html';
     }
 
-    let isLockdown = false;
+    const channel = new BroadcastChannel('cnei_system_channel');
 
-    // Clock
     function updateClock() {
-      const now = new Date();
-      document.getElementById('sys-clock').innerText = 'UTC ' + now.toISOString().substr(11, 8);
+      document.getElementById('sys-clock').innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Tab Switcher
-    function showPanel(panelName) {
-      const panels = ['controls', 'geoint', 'maritime', 'archival'];
-      panels.forEach(p => {
-        document.getElementById('panel-' + p).style.display = (p === panelName) ? 'block' : 'none';
-      });
-
-      const buttons = document.querySelectorAll('.sidebar .nav-btn:not(.btn-logout)');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-    }
-
-    // Lockdown Override Toggle
-    function toggleLockdown() {
-      isLockdown = !isLockdown;
+    function syncWorkspaceState() {
+      const active = localStorage.getItem('cnei_lockdown_active') === 'true';
       const led = document.getElementById('sys-led');
       const btn = document.getElementById('lockdownBtn');
 
-      if (isLockdown) {
+      if (active) {
         led.classList.add('lockdown');
-        btn.innerText = 'END LOCKDOWN';
+        btn.innerText = 'TERMINATE LOCKDOWN';
         btn.style.backgroundColor = 'var(--red-alert)';
         btn.style.color = '#FFFFFF';
-        logFeed('[CONDITION RED] System Lockdown Initiated. Public Portal Disconnected.');
       } else {
         led.classList.remove('lockdown');
-        btn.innerText = 'INITIATE LOCKDOWN';
+        btn.innerText = 'INITIATE GLOBAL LOCKDOWN';
         btn.style.backgroundColor = 'transparent';
         btn.style.color = 'var(--red-alert)';
-        logFeed('[CONDITION GREEN] System Lockdown Terminated. Public Portal Restored.');
       }
     }
 
-    // Broadcast Logger
-    function sendBroadcast() {
-      const input = document.getElementById('broadcastMsg');
-      if (input.value.trim() !== '') {
-        logFeed('[BROADCAST] ' + input.value);
-        input.value = '';
-      }
+    function toggleGlobalLockdown() {
+      const currentState = localStorage.getItem('cnei_lockdown_active') === 'true';
+      const newState = !currentState;
+      const customMsg = document.getElementById('broadcastMsg').value || "CONDITION RED: All public operations suspended by Director mandate.";
+
+      localStorage.setItem('cnei_lockdown_active', newState ? 'true' : 'false');
+      localStorage.setItem('cnei_lockdown_message', customMsg);
+
+      // Broadcast event to instantly trigger every open browser session globally
+      channel.postMessage({ type: 'LOCKDOWN_STATE_CHANGE', active: newState, message: customMsg });
+
+      logFeed(newState ? `[CONDITION RED] Global Lockdown Initiated: "${customMsg}"` : '[CONDITION GREEN] Global Lockdown Terminated.');
+      syncWorkspaceState();
     }
 
     function logFeed(message) {
@@ -347,10 +319,20 @@
       feed.prepend(entry);
     }
 
+    function showPanel(panelName) {
+      ['controls', 'geoint', 'maritime', 'archival'].forEach(p => {
+        document.getElementById('panel-' + p).style.display = (p === panelName) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.sidebar .nav-btn:not(.btn-logout)').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
     function logout() {
       sessionStorage.removeItem('cnei_authenticated');
       window.location.href = 'login.html';
     }
+
+    document.addEventListener('DOMContentLoaded', syncWorkspaceState);
   </script>
 
 </body>
