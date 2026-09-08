@@ -1,37 +1,73 @@
-// Silent background polling system (Zero-cookie / Non-disruptive)
+// Synchronized Global State & Lockdown Engine
 (function () {
-  const POLL_INTERVAL = 3000;
+  const channel = new BroadcastChannel('cnei_system_channel');
+  let audioContext = null;
+  let BEEP_INTERVAL = null;
 
-  function checkSystemStatus() {
-    // Fetches live status JSON without disrupting scrolling or view state
-    fetch('status.json', { cache: 'no-store' })
-      .then(response => response.json())
-      .then(data => {
-        const led = document.getElementById('telemetry-led');
-        if (led) {
-          led.style.backgroundColor = 'var(--led-green)';
-          led.style.boxShadow = '0 0 8px var(--led-green)';
-        }
-
-        const overlay = document.getElementById('lockdown-overlay');
-        if (data.lockdown && overlay) {
-          overlay.classList.add('active');
-        } else if (overlay) {
-          overlay.classList.remove('active');
-        }
-      })
-      .catch(() => {
-        // Red LED indicates network connection fail or background sync lost
-        const led = document.getElementById('telemetry-led');
-        if (led) {
-          led.style.backgroundColor = 'var(--led-red)';
-          led.style.boxShadow = '0 0 8px var(--led-red)';
-        }
-      });
+  // Synthesis of Emergency Beeping Sound (No external audio file needed)
+  function playEmergencyBeep() {
+    try {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(880, audioContext.currentTime); // High pitch alert
+      gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start();
+      osc.stop(audioContext.currentTime + 0.15);
+    } catch (e) {
+      console.warn("Audio context restricted until user interaction.");
+    }
   }
 
+  function triggerLockdownUI(active, message) {
+    const overlay = document.getElementById('lockdown-overlay');
+    const msgElement = document.getElementById('lockdown-custom-msg');
+    const leds = document.querySelectorAll('.status-led');
+
+    if (active) {
+      if (overlay) overlay.classList.add('active');
+      if (msgElement) msgElement.innerText = message || "CONDITION RED: All public operations suspended by Director mandate.";
+      leds.forEach(led => led.classList.add('lockdown'));
+
+      if (!BEEP_INTERVAL) {
+        playEmergencyBeep();
+        BEEP_INTERVAL = setInterval(playEmergencyBeep, 1200);
+      }
+    } else {
+      if (overlay) overlay.classList.remove('active');
+      leds.forEach(led => led.classList.remove('lockdown'));
+
+      if (BEEP_INTERVAL) {
+        clearInterval(BEEP_INTERVAL);
+        BEEP_INTERVAL = null;
+      }
+    }
+  }
+
+  function syncState() {
+    const isLockdown = localStorage.getItem('cnei_lockdown_active') === 'true';
+    const msg = localStorage.getItem('cnei_lockdown_message');
+    triggerLockdownUI(isLockdown, msg);
+  }
+
+  // Listen for real-time messages across browser tabs/windows
+  channel.onmessage = (event) => {
+    if (event.data && event.data.type === 'LOCKDOWN_STATE_CHANGE') {
+      syncState();
+    }
+  };
+
+  window.addEventListener('storage', syncState);
+
   document.addEventListener('DOMContentLoaded', () => {
-    checkSystemStatus();
-    setInterval(checkSystemStatus, POLL_INTERVAL);
+    syncState();
   });
 })();
