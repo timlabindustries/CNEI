@@ -38,7 +38,6 @@
     .header-title { font-weight: 700; text-transform: uppercase; font-size: 0.95rem; }
     .header-right { display: flex; align-items: center; gap: 1rem; }
     
-    /* Red Lockdown Badge top right */
     #lockdown-badge { display: none; background: var(--danger); color: #FFF; padding: 0.25rem 0.75rem; font-weight: 800; font-size: 0.75rem; border-radius: 4px; animation: pulse 1s infinite; }
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
@@ -50,12 +49,10 @@
     .card { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; max-width: 800px; }
     .card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
     
-    /* Lockdown Button Styling */
     .btn-lockdown { width: 100%; padding: 1rem; background: var(--accent); color: #FFF; border: none; font-size: 1rem; font-weight: 800; text-transform: uppercase; border-radius: 6px; cursor: pointer; letter-spacing: 0.05em; transition: background 0.2s; }
     .btn-lockdown.active-state { background: var(--danger); }
     .input-field { width: 100%; padding: 0.75rem; background: #0F172A; border: 1px solid var(--border); color: #FFF; border-radius: 6px; margin-bottom: 1rem; }
 
-    /* Chat & Logs */
     .chat-box { height: 350px; background: #0F172A; border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
     .chat-msg { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem; }
     .chat-msg span { color: var(--accent); font-weight: 700; }
@@ -163,7 +160,6 @@
   }
   const db = firebase.database();
 
-  // Audio setup for alarm.mp3
   const alarmAudio = new Audio('alarm.mp3');
   alarmAudio.loop = true;
 
@@ -179,15 +175,12 @@
     document.getElementById('active-tab-title').innerText = btn.innerText.trim();
   }
 
-  // Clock with UTC+1
   function updateClock() {
     const now = new Date();
-    // UTC+1 calculation
     const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
     const targetTime = new Date(utcTime + (3600000 * 1));
     document.getElementById('sys-clock').innerText = 'UTC+1 ' + targetTime.toTimeString().split(' ')[0];
 
-    // Update world timezones list
     const zones = [
       { name: "London / UTC+1 (BST)", offset: 1 },
       { name: "New York / UTC-4 (EDT)", offset: -4 },
@@ -206,7 +199,6 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // Lockdown sync & 5-second dashboard flash popup
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const active = data && data.active;
@@ -219,7 +211,6 @@
       badge.style.display = 'block';
       alarmAudio.play().catch(e => console.log("Audio autoplay prevented"));
 
-      // 5-second flashing popup banner across dashboard
       let popup = document.getElementById('flash-popup');
       if (!popup) {
         popup = document.createElement('div');
@@ -238,15 +229,15 @@
     }
   });
 
-  // Toggle Lockdown function (any staff can activate/deactivate)
   function toggleGlobalLockdown() {
     db.ref('system/lockdown').once('value').then((snapshot) => {
-      const currentState = snapshot.val() && snapshot.val().active;
+      const data = snapshot.val() || {};
+      const currentState = data.active || false;
       const newState = !currentState;
       const msg = document.getElementById('broadcastMsg').value || "CONDITION RED: Operations suspended.";
       const timeStr = new Date().toISOString().replace('T', ' ').substr(0, 19);
 
-      db.ref('system/lockdown').set({
+      db.ref('system/lockdown').update({
         active: newState,
         message: msg,
         triggeredBy: currentOperator,
@@ -259,10 +250,11 @@
         details: msg,
         timestamp: timeStr
       });
+    }).catch(err => {
+      console.error("Lockdown error:", err);
     });
   }
 
-  // Chat logic
   function sendChatMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
@@ -288,7 +280,6 @@
     }
   });
 
-  // Audit Logs feed
   db.ref('audit_logs').limitToLast(30).on('child_added', (snapshot) => {
     const log = snapshot.val();
     const box = document.getElementById('logsBox');
