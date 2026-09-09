@@ -1,4 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CNEI — Contact</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    :root { --bg: #0B0F17; --card-bg: #1E293B; --text: #F8FAFC; --muted: #94A3B8; --border: rgba(255,255,255,0.1); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-bottom: 1px solid var(--border); background: #0B0F17; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #FFF; font-weight: 800; text-transform: uppercase; }
+    .brand img { width: 32px; height: 32px; }
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    nav a:hover { color: #FFF; }
+    main { flex: 1; max-width: 800px; margin: 0 auto; width: 100%; padding: 6rem 2rem; }
+    h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; }
+    p { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 8px; font-family: monospace; }
+    .card a { color: #3B82F6; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
+    footer { background: #07090E; border-top: 1px solid var(--border); padding: 3rem; text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: auto; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="brand"><img src="logo.png" alt=""> CNEI</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="research.html">Research</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
 <main>
-  <h1>Institutional Contact</h1>
-  <p class="lead">For peer review inquiries or security disclosures, reach our editorial desk at secure correspondence channels.</p>
+  <h1>Institutional Correspondence</h1>
+  <p>For verified research disclosures or institutional correspondence, contact the central operations team directly.</p>
+  <div class="card">
+    EMAIL: info@cnei.org.uk<br><br>
+    DIRECT LINE / WHATSAPP: <a href="https://wa.me/447879150075" target="_blank">+44 7879 150075</a><br><br>
+    REGION: United Kingdom / North Wales
+  </div>
 </main>
+<footer>
+  <p>© 2026 CNEI Collective. All rights reserved.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
