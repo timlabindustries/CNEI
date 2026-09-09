@@ -76,7 +76,7 @@ script2.onload = function() {
         document.body.appendChild(publicOverlay);
       }
       publicOverlay.innerHTML = `
-        <div style="background: #DC2626; color: #FFF; padding: 0.5rem 1.5rem; font-weight: 800; font-size: 1.25rem; border-radius: 4px; margin-bottom: 1.5rem; animation: pulseFlash 1s infinite;">
+        <div style="background: #DC2626; color: #FFF; padding: 0.5rem 1.5rem; font-weight: 800; font-size: 1.25rem; border-radius: 4px; margin-bottom: 1.5rem;">
           ⚠️ ${t.lockdownHeader} — ACTIVE SECURITY PROTOCOL
         </div>
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; color: #111827;">System Lockdown Engaged</h1>
@@ -88,10 +88,5 @@ script2.onload = function() {
       publicOverlay.remove();
       document.body.style.overflow = '';
     }
-  });
-
-  // Global 5-second popup listener for staff dashboards
-  db.ref('system/lockdown').on('child_changed', (snapshot) => {
-    // handled globally via value event if needed
   });
 };
