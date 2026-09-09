@@ -15,142 +15,125 @@
       --accent: #3B82F6;
       --danger: #EF4444;
       --success: #22C55E;
-      --warning: #F59E0B;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
-    /* Sidebar Selectors */
-    aside {
-      width: 260px;
-      background-color: var(--panel-bg);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-    }
-    .sidebar-brand {
-      padding: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar-brand img { width: 28px; height: 28px; object-fit: contain; }
-    .sidebar-brand span { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; }
-    .selector-menu { padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
-    .selector-btn {
-      width: 100%; padding: 0.75rem 1rem; background: transparent; border: none;
-      color: var(--muted); text-align: left; font-size: 0.9rem; font-weight: 600;
-      border-radius: 6px; cursor: pointer; transition: all 0.2s;
-    }
-    .selector-btn:hover, .selector-btn.active { background-color: rgba(59, 130, 246, 0.1); color: var(--accent); }
-    .sidebar-footer { padding: 1rem 1.5rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
-
-    /* Main Workspace Panel */
-    .workspace-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
-    header {
-      padding: 1.25rem 2rem; border-bottom: 1px solid var(--border);
-      background-color: var(--panel-bg); display: flex; justify-content: space-between; align-items: center;
-    }
-    .header-title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-    .content-area { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1400px; width: 100%; margin: 0 auto; }
-    .card { background-color: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
-    .card-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 1rem; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
     
-    /* Exactly 3 Status Lights Panel */
-    .telemetry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-    .light-box {
-      background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border);
-      padding: 1rem; border-radius: 6px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem;
-    }
-    .status-indicator {
-      width: 14px; height: 14px; border-radius: 50%; background-color: var(--success);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); transition: all 0.3s;
-    }
-    .status-indicator.warning { background-color: var(--warning); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
-    .status-indicator.danger { background-color: var(--danger); box-shadow: 0 0 12px rgba(239, 68, 68, 0.6); animation: pulse 1.2s infinite; }
+    /* Collapsible Sidebar */
+    aside { width: 260px; background: var(--panel-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; transition: width 0.3s; }
+    aside.collapsed { width: 70px; }
+    aside.collapsed .brand-text, aside.collapsed .selector-btn span, aside.collapsed .sidebar-footer { display: none; }
+    .sidebar-brand { padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid var(--border); }
+    .sidebar-brand img { width: 28px; height: 28px; }
+    .sidebar-brand span { font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
+    .collapse-toggle { background: transparent; border: none; color: var(--muted); cursor: pointer; padding: 0.5rem; margin-left: auto; }
+    .selector-menu { padding: 1rem 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .selector-btn { width: 100%; padding: 0.75rem 1rem; background: transparent; border: none; color: var(--muted); text-align: left; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; }
+    .selector-btn:hover, .selector-btn.active { background: rgba(59, 130, 246, 0.1); color: var(--accent); }
+    .sidebar-footer { padding: 1rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted); }
+
+    /* Main Area */
+    .workspace-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+    header { padding: 1rem 2rem; border-bottom: 1px solid var(--border); background: var(--panel-bg); display: flex; justify-content: space-between; align-items: center; }
+    .header-title { font-weight: 700; text-transform: uppercase; font-size: 0.95rem; }
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+    
+    /* Red Lockdown Badge top right */
+    #lockdown-badge { display: none; background: var(--danger); color: #FFF; padding: 0.25rem 0.75rem; font-weight: 800; font-size: 0.75rem; border-radius: 4px; animation: pulse 1s infinite; }
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-    .light-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
 
-    /* Lockdown Control & Inputs */
-    .input-field {
-      width: 100%; padding: 0.75rem; background: #0F172A; border: 1px solid var(--border);
-      color: var(--text); border-radius: 6px; margin-bottom: 1rem; font-family: inherit; font-size: 0.9rem;
-    }
-    .action-btn {
-      width: 100%; padding: 0.85rem; background-color: transparent; border: 1px solid var(--danger);
-      color: var(--danger); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-      border-radius: 6px; cursor: pointer; transition: all 0.2s;
-    }
-    .action-btn:hover { background-color: var(--danger); color: #FFF; }
+    .content-area { padding: 2rem; flex: 1; overflow-y: auto; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Audit Logs Feed */
-    .feed-box { background: #0F172A; border: 1px solid var(--border); border-radius: 6px; height: 260px; overflow-y: auto; padding: 1rem; font-family: monospace; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .feed-entry { color: #E2E8F0; border-bottom: 1px solid rgba(51, 65, 85, 0.4); padding-bottom: 0.35rem; }
-    .feed-timestamp { color: var(--muted); }
+    .card { background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; max-width: 800px; }
+    .card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+    
+    /* Lockdown Button Styling */
+    .btn-lockdown { width: 100%; padding: 1rem; background: var(--accent); color: #FFF; border: none; font-size: 1rem; font-weight: 800; text-transform: uppercase; border-radius: 6px; cursor: pointer; letter-spacing: 0.05em; transition: background 0.2s; }
+    .btn-lockdown.active-state { background: var(--danger); }
+    .input-field { width: 100%; padding: 0.75rem; background: #0F172A; border: 1px solid var(--border); color: #FFF; border-radius: 6px; margin-bottom: 1rem; }
+
+    /* Chat & Logs */
+    .chat-box { height: 350px; background: #0F172A; border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.9rem; }
+    .chat-msg { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.25rem; }
+    .chat-msg span { color: var(--accent); font-weight: 700; }
+    .logs-box { height: 400px; background: #0F172A; border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-y: auto; font-family: monospace; font-size: 0.85rem; }
+    .log-item { border-bottom: 1px solid rgba(51, 65, 85, 0.4); padding-bottom: 0.35rem; margin-bottom: 0.35rem; }
   </style>
 </head>
 <body>
 
-<aside>
+<aside id="sidebar">
   <div class="sidebar-brand">
-    <img src="logo.png" alt="CNEI">
-    <span>CNEI Command</span>
+    <img src="logo.png" alt="">
+    <span class="brand-text">CNEI Command</span>
+    <button class="collapse-toggle" onclick="toggleSidebar()">☰</button>
   </div>
   <div class="selector-menu">
-    <button class="selector-btn active" onclick="switchTab(this)">Condition Red Control</button>
-    <button class="selector-btn" onclick="switchTab(this)">Network Telemetry</button>
-    <button class="selector-btn" onclick="switchTab(this)">Audit Log Archives</button>
-    <button class="selector-btn" onclick="switchTab(this)">Node Configuration</button>
+    <button class="selector-btn active" onclick="switchTab('gioc', this)">⚙️ <span>GIOC Controls</span></button>
+    <button class="selector-btn" onclick="switchTab('timezone', this)">🌍 <span>Timezones (UTC+1)</span></button>
+    <button class="selector-btn" onclick="switchTab('chat', this)">💬 <span>Staff Chat</span></button>
+    <button class="selector-btn" onclick="switchTab('logs', this)">📋 <span>Audit Logs</span></button>
   </div>
-  <div class="sidebar-footer">Operator: <span id="opLabel">Admin</span></div>
+  <div class="sidebar-footer">Staff ID: <span id="opLabel">Operator</span></div>
 </aside>
 
 <main class="workspace-main">
   <header>
-    <div class="header-title">Operational Director Workspace</div>
-    <div id="sys-clock" style="font-family: monospace; color: var(--muted); font-size: 0.9rem;">UTC 00:00:00</div>
+    <div class="header-title" id="active-tab-title">Global Infrastructure and Operations Controls</div>
+    <div class="header-right">
+      <div id="lockdown-badge">LOCKDOWN ENGAGED</div>
+      <div id="sys-clock" style="font-family: monospace; color: var(--muted); font-size: 0.9rem;">UTC+1 00:00:00</div>
+    </div>
   </header>
 
   <div class="content-area">
-    <!-- Card 1: 3 Status Lights & Global Lockdown Trigger -->
-    <div class="card">
-      <div class="card-title">System Telemetry & Lockdown State</div>
-      
-      <!-- Exactly 3 Status Lights -->
-      <div class="telemetry-grid">
-        <div class="light-box">
-          <div id="light-core" class="status-indicator"></div>
-          <span class="light-label">Core Relay</span>
-        </div>
-        <div class="light-box">
-          <div id="light-sync" class="status-indicator"></div>
-          <span class="light-label">Sync Mesh</span>
-        </div>
-        <div class="light-box">
-          <div id="light-lock" class="status-indicator"></div>
-          <span class="light-label">Condition Red</span>
-        </div>
-      </div>
-
-      <div style="margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--muted);">Lockdown Broadcast Message:</div>
-      <input type="text" id="broadcastMsg" class="input-field" value="CONDITION RED: Public operations suspended by Director mandate.">
-      <button id="lockdownBtn" class="action-btn" onclick="toggleGlobalLockdown()">INITIATE GLOBAL LOCKDOWN</button>
-    </div>
-
-    <!-- Card 2: Live Audit Log Feed -->
-    <div class="card" style="grid-column: span 1;">
-      <div class="card-title">Real-Time Audit Feed</div>
-      <div id="feedBox" class="feed-box">
-        <div class="feed-entry"><span class="feed-timestamp">[System]</span> Initializing secure WebSocket relay...</div>
+    
+    <!-- TAB 1: GIOC -->
+    <div id="tab-gioc" class="tab-pane active">
+      <div class="card">
+        <div class="card-title">Global Infrastructure and Operations Controls (GIOC)</div>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem;">Initiating lockdown suspends all public portals and activates global security protocols across all staff nodes. Any authenticated staff member can deactivate this protocol.</p>
+        <div style="margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--muted);">Custom Broadcast Message:</div>
+        <input type="text" id="broadcastMsg" class="input-field" value="CONDITION RED: Public operations suspended by staff mandate.">
+        <button id="lockdownBtn" class="btn-lockdown" onclick="toggleGlobalLockdown()">LOCKDOWN</button>
       </div>
     </div>
+
+    <!-- TAB 2: Timezone (UTC+1 & World) -->
+    <div id="tab-timezone" class="tab-pane">
+      <div class="card">
+        <div class="card-title">Global Timezone Registry (UTC+1 Base)</div>
+        <div id="world-timezones" style="font-family: monospace; font-size: 0.9rem; line-height: 1.8; color: var(--muted);">
+          Loading global clocks...
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Staff Chat -->
+    <div id="tab-chat" class="tab-pane">
+      <div class="card" style="max-width: 900px;">
+        <div class="card-title">Secure Staff Communications Channel</div>
+        <div id="chatBox" class="chat-box"></div>
+        <div style="display: flex; gap: 0.75rem;">
+          <input type="text" id="chatInput" class="input-field" placeholder="Type secure message..." style="margin-bottom:0;" onkeypress="if(event.key==='Enter') sendChatMessage()">
+          <button onclick="sendChatMessage()" style="padding: 0 1.5rem; background: var(--accent); color: #FFF; border: none; font-weight: 700; border-radius: 6px; cursor: pointer;">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Logs -->
+    <div id="tab-logs" class="tab-pane">
+      <div class="card" style="max-width: 950px;">
+        <div class="card-title">System Audit Log Archives</div>
+        <div id="logsBox" class="logs-box">
+          <div class="log-item">[System] Initializing secure audit feed...</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -162,7 +145,8 @@
   if (sessionStorage.getItem('cnei_authenticated') !== 'true') {
     window.location.href = 'login.html';
   }
-  document.getElementById('opLabel').innerText = sessionStorage.getItem('cnei_operator_id') || 'cnei-admin';
+  const currentOperator = sessionStorage.getItem('cnei_operator_id') || 'staff-operator';
+  document.getElementById('opLabel').innerText = currentOperator;
 
   const firebaseConfig = {
     apiKey: "AIzaSyC3Pq29bAViHJOMq4CyxRx092u7vrJJLVk",
@@ -174,81 +158,90 @@
     appId: "1:55065590531:web:75d3f071512507c2aa8736"
   };
 
-  firebase.initializeApp(firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
   const db = firebase.database();
-  const currentOperator = sessionStorage.getItem('cnei_operator_id') || 'cnei-admin';
 
-  let audioContext = null;
-  let alertInterval = null;
+  // Audio setup for alarm.mp3
+  const alarmAudio = new Audio('alarm.mp3');
+  alarmAudio.loop = true;
 
-  function playAlarm() {
-    try {
-      if (!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioContext.state === 'suspended') audioContext.resume();
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(880, audioContext.currentTime);
-      gain.gain.setValueAtTime(0.1, audioContext.currentTime);
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      osc.start();
-      osc.stop(audioContext.currentTime + 0.15);
-    } catch (e) {}
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('collapsed');
   }
 
-  // Real-time synchronization for status lights & button state
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.selector-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+    document.getElementById('active-tab-title').innerText = btn.innerText.trim();
+  }
+
+  // Clock with UTC+1
+  function updateClock() {
+    const now = new Date();
+    // UTC+1 calculation
+    const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const targetTime = new Date(utcTime + (3600000 * 1));
+    document.getElementById('sys-clock').innerText = 'UTC+1 ' + targetTime.toTimeString().split(' ')[0];
+
+    // Update world timezones list
+    const zones = [
+      { name: "London / UTC+1 (BST)", offset: 1 },
+      { name: "New York / UTC-4 (EDT)", offset: -4 },
+      { name: "Tokyo / UTC+9 (JST)", offset: 9 },
+      { name: "Sydney / UTC+10 (AEST)", offset: 10 },
+      { name: "Berlin / UTC+2 (CEST)", offset: 2 }
+    ];
+    let html = "";
+    zones.forEach(z => {
+      const zTime = new Date(utcTime + (3600000 * z.offset));
+      html += `• ${z.name}: <strong>${zTime.toTimeString().split(' ')[0]}</strong><br>`;
+    });
+    const tzBox = document.getElementById('world-timezones');
+    if (tzBox) tzBox.innerHTML = html;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // Lockdown sync & 5-second dashboard flash popup
   db.ref('system/lockdown').on('value', (snapshot) => {
     const data = snapshot.val();
     const active = data && data.active;
-    const lightCore = document.getElementById('light-core');
-    const lightSync = document.getElementById('light-sync');
-    const lightLock = document.getElementById('light-lock');
     const btn = document.getElementById('lockdownBtn');
+    const badge = document.getElementById('lockdown-badge');
 
     if (active) {
-      lightCore.className = 'status-indicator danger';
-      lightSync.className = 'status-indicator warning';
-      lightLock.className = 'status-indicator danger';
-      btn.innerText = 'TERMINATE GLOBAL LOCKDOWN';
-      btn.style.backgroundColor = 'var(--danger)';
-      btn.style.color = '#FFF';
+      btn.innerText = 'TERMINATE LOCKDOWN';
+      btn.classList.add('active-state');
+      badge.style.display = 'block';
+      alarmAudio.play().catch(e => console.log("Audio autoplay prevented"));
 
-      if (!alertInterval) {
-        playAlarm();
-        alertInterval = setInterval(playAlarm, 1200);
+      // 5-second flashing popup banner across dashboard
+      let popup = document.getElementById('flash-popup');
+      if (!popup) {
+        popup = document.createElement('div');
+        popup.id = 'flash-popup';
+        popup.style.cssText = "position:fixed; top:20px; right:20px; background:#EF4444; color:#FFF; padding:1rem 1.5rem; font-weight:800; border-radius:6px; z-index:99999; box-shadow:0 4px 12px rgba(0,0,0,0.3);";
+        popup.innerHTML = `🚨 GLOBAL LOCKDOWN INITIATED BY ${data.triggeredBy || 'Staff'}`;
+        document.body.appendChild(popup);
+        setTimeout(() => { popup.remove(); }, 5000);
       }
     } else {
-      lightCore.className = 'status-indicator';
-      lightSync.className = 'status-indicator';
-      lightLock.className = 'status-indicator';
-      btn.innerText = 'INITIATE GLOBAL LOCKDOWN';
-      btn.style.backgroundColor = 'transparent';
-      btn.style.color = 'var(--danger)';
-
-      if (alertInterval) {
-        clearInterval(alertInterval);
-        alertInterval = null;
-      }
+      btn.innerText = 'LOCKDOWN';
+      btn.classList.remove('active-state');
+      badge.style.display = 'none';
+      alarmAudio.pause();
+      alarmAudio.currentTime = 0;
     }
   });
 
-  // Real-time audit logs feed listener
-  db.ref('audit_logs').limitToLast(12).on('child_added', (snapshot) => {
-    const log = snapshot.val();
-    const feed = document.getElementById('feedBox');
-    if (feed) {
-      const entry = document.createElement('div');
-      entry.className = 'feed-entry';
-      entry.innerHTML = `<span class="feed-timestamp">[${log.timestamp}]</span> <strong>${log.operator}</strong>: ${log.action} ("${log.details}")`;
-      feed.prepend(entry);
-    }
-  });
-
+  // Toggle Lockdown function (any staff can activate/deactivate)
   function toggleGlobalLockdown() {
     db.ref('system/lockdown').once('value').then((snapshot) => {
-      const data = snapshot.val();
-      const currentState = data && data.active;
+      const currentState = snapshot.val() && snapshot.val().active;
       const newState = !currentState;
       const msg = document.getElementById('broadcastMsg').value || "CONDITION RED: Operations suspended.";
       const timeStr = new Date().toISOString().replace('T', ' ').substr(0, 19);
@@ -269,18 +262,43 @@
     });
   }
 
-  function switchTab(btn) {
-    document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  // Chat logic
+  function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const timeStr = new Date().toTimeString().split(' ')[0];
+    db.ref('chat').push({
+      sender: currentOperator,
+      message: text,
+      timestamp: timeStr
+    });
+    input.value = '';
   }
 
-  function updateClock() {
-    const clock = document.getElementById('sys-clock');
-    if (clock) clock.innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
+  db.ref('chat').limitToLast(50).on('child_added', (snapshot) => {
+    const msg = snapshot.val();
+    const box = document.getElementById('chatBox');
+    if (box) {
+      const div = document.createElement('div');
+      div.className = 'chat-msg';
+      div.innerHTML = `<span style="color:var(--muted)">[${msg.timestamp}]</span> <span>${msg.sender}:</span> ${msg.message}`;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+  });
+
+  // Audit Logs feed
+  db.ref('audit_logs').limitToLast(30).on('child_added', (snapshot) => {
+    const log = snapshot.val();
+    const box = document.getElementById('logsBox');
+    if (box) {
+      const div = document.createElement('div');
+      div.className = 'log-item';
+      div.innerHTML = `<span style="color:var(--muted)">[${log.timestamp}]</span> <strong>${log.operator}</strong> — ${log.action}: "${log.details}"`;
+      box.prepend(div);
+    }
+  });
 </script>
-
 </body>
 </html>
