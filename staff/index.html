@@ -3,22 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Staff Portal | CNEI Operations</title>
+  <title>Staff Workspace | CNEI GIOC</title>
   <link rel="icon" type="image/png" href="../logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0b132b] text-gray-100 font-sans min-h-screen flex flex-col md:flex-row overflow-x-hidden selection:bg-[#5bc0be] selection:text-[#0b132b]">
 
-  <!-- LOGIN CONTAINER -->
-  <div id="login-screen" class="fixed inset-0 z-50 bg-[#0b132b] flex items-center justify-center p-6">
+  <!-- LOCAL PANIC SECURITY OVERLAY -->
+  <div id="panic-overlay" class="hidden fixed inset-0 z-50 bg-black/95 flex flex-col items-center justify-center p-6 text-center backdrop-blur-xl">
+    <div class="max-w-md w-full bg-[#1c2541] border border-amber-600/80 rounded-2xl p-8 space-y-6 shadow-2xl">
+      <div class="inline-block bg-amber-500/20 text-amber-400 border border-amber-500/40 text-xs px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider">
+        Local Terminal Locked
+      </div>
+      <h2 class="text-2xl font-bold text-white">Emergency Panic Switch Engaged</h2>
+      <p class="text-xs text-gray-400">Re-enter your credentials to unlock this local station console.</p>
+      <form id="panic-unlock-form" class="space-y-4">
+        <input type="password" id="panic-password" placeholder="Operator Password" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5bc0be]">
+        <button type="submit" class="w-full bg-[#5bc0be] text-[#0b132b] font-bold py-2.5 text-xs rounded-lg hover:bg-teal-400 transition">
+          Unlock Console
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="fixed inset-0 z-40 bg-[#0b132b] flex items-center justify-center p-6">
     <div class="max-w-md w-full bg-[#1c2541] border border-gray-800 p-8 rounded-2xl shadow-2xl space-y-6">
       <div class="text-center">
         <img src="../logo.png" alt="CNEI Logo" class="h-16 mx-auto mb-4" onerror="this.src='https://via.placeholder.com/64?text=CNEI'">
         <h1 class="text-2xl font-bold text-white">Staff Portal Access</h1>
-        <p class="text-xs text-gray-400 mt-1">Authorized CNEI Personnel Only</p>
+        <p class="text-xs text-gray-400 mt-1">Authorized Operations Personnel Only</p>
       </div>
 
-      <!-- UK LEGAL WARNING -->
+      <!-- UK COMPUTER MISUSE ACT LEGAL WARNING -->
       <div class="bg-amber-950/40 border border-amber-800/80 p-3.5 rounded-xl text-[11px] text-amber-200/90 leading-relaxed font-mono">
         <strong class="block text-amber-400 font-sans mb-1 uppercase tracking-wider">UK Computer Misuse Act 1990 Notice</strong>
         UNAUTHORISED ACCESS TO THIS SYSTEM IS STRICTLY PROHIBITED. Unauthorized access attempts or misuse of this system constitute a criminal offence under Section 1, 2, or 3 of the Computer Misuse Act 1990. All activities are monitored and logged.
@@ -26,32 +43,32 @@
 
       <form id="login-form" class="space-y-4">
         <div id="login-error" class="hidden bg-red-900/50 border border-red-500 text-red-200 text-xs p-3 rounded-lg text-center">
-          Invalid username or password.
+          Invalid Operator ID or password.
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Username</label>
-          <input type="text" id="username" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#5bc0be]">
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Operator ID</label>
+          <input type="text" id="username" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5bc0be]">
         </div>
         <div>
           <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Password</label>
-          <input type="password" id="password" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#5bc0be]">
+          <input type="password" id="password" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-[#5bc0be]">
         </div>
         <button type="submit" class="w-full bg-[#5bc0be] text-[#0b132b] font-bold py-3 rounded-lg hover:bg-teal-400 transition">
-          Authenticate
+          Authenticate Session
         </button>
       </form>
     </div>
   </div>
 
-  <!-- DASHBOARD WRAPPER -->
+  <!-- MAIN DASHBOARD -->
   <div id="dashboard-screen" class="hidden w-full flex flex-col md:flex-row min-h-screen">
     
-    <!-- COLLAPSIBLE SIDEBAR -->
+    <!-- SIDEBAR NAVIGATION -->
     <aside id="sidebar" class="w-full md:w-64 bg-[#1c2541] border-r border-gray-800 flex flex-col justify-between shrink-0 transition-all duration-300">
       <div>
         <div class="p-6 border-b border-gray-800 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <img src="../logo.png" alt="CNEI" class="h-8" onerror="this.src='https://via.placeholder.com/32?text=CNEI'">
+            <img src="../logo.png" alt="CNEI Logo" class="h-8" onerror="this.src='https://via.placeholder.com/32?text=CNEI'">
             <span class="font-bold text-white text-sm tracking-wider">CNEI GIOC</span>
           </div>
           <button id="toggle-sidebar" class="text-gray-400 hover:text-white md:hidden text-xs border border-gray-700 px-2 py-1 rounded">
@@ -59,7 +76,6 @@
           </button>
         </div>
 
-        <!-- NAVIGATION LINKS -->
         <nav class="p-4 space-y-1 text-xs font-medium" id="nav-links">
           <button data-target="mod-home" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl bg-[#5bc0be]/10 text-[#5bc0be] font-bold">Home</button>
           <button data-target="mod-gioc" class="nav-item w-full text-left px-3.5 py-2.5 rounded-xl text-gray-300 hover:bg-gray-800 transition">GIOC Controls</button>
@@ -74,10 +90,14 @@
         </nav>
       </div>
 
+      <!-- SIDEBAR FOOTER -->
       <div class="p-4 border-t border-gray-800 space-y-3">
-        <div class="text-[11px] text-gray-400">
-          <span class="block text-white font-semibold" id="user-display">Operator</span>
-          <span id="lockdown-status-badge" class="inline-block mt-1 px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono text-[10px]">SYSTEM ONLINE</span>
+        <div class="flex items-center gap-3">
+          <img src="../logo.png" alt="Logo" class="h-6" onerror="this.src='https://via.placeholder.com/24?text=CNEI'">
+          <div class="text-[11px] text-gray-400">
+            <span class="block text-white font-semibold" id="active-operator-display">Operator: ID-8802</span>
+            <span id="lockdown-status-badge" class="inline-block mt-0.5 px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono text-[10px]">SYSTEM ONLINE</span>
+          </div>
         </div>
         <button id="logout-btn" class="w-full bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 py-2 rounded-lg border border-gray-700 transition">
           Sign Out
@@ -85,145 +105,155 @@
       </div>
     </aside>
 
-    <!-- MAIN VIEWPORT -->
-    <main class="flex-grow p-6 md:p-10 overflow-y-auto space-y-6">
+    <!-- CONTENT VIEWPORT -->
+    <main class="flex-grow flex flex-col min-h-screen">
+      
+      <!-- TOP HEADER BAR -->
+      <header class="bg-[#1c2541] border-b border-gray-800 px-6 py-3.5 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <img src="../logo.png" alt="CNEI" class="h-8 md:hidden">
+          <div class="font-mono text-xs text-[#5bc0be]" id="live-utc-clock">UTC 00:00:00</div>
+        </div>
+        <button id="panic-btn" class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition border border-amber-500 shadow-md flex items-center gap-2">
+          <span>PANIC LOCK</span>
+        </button>
+      </header>
 
-      <!-- 1. HOME -->
-      <section id="mod-home" class="module-view space-y-6">
-        <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+      <div class="p-6 md:p-10 flex-grow space-y-6 overflow-y-auto">
+        
+        <!-- 1. HOME -->
+        <section id="mod-home" class="module-view space-y-6">
+          <div class="border-b border-gray-800 pb-4">
+            <h1 class="text-2xl font-bold text-white">Administrative Overview</h1>
+            <p class="text-xs text-gray-400 mt-1">CNEI Global Infrastructure and Operations Controls Console</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
+              <span class="text-xs text-gray-400 uppercase font-mono">System Health</span>
+              <div class="text-2xl font-bold text-emerald-400 mt-2">100% Operational</div>
+            </div>
+            <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
+              <span class="text-xs text-gray-400 uppercase font-mono">Real-time Telemetry</span>
+              <div class="text-2xl font-bold text-[#5bc0be] mt-2">7 Active Feeds</div>
+            </div>
+            <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
+              <span class="text-xs text-gray-400 uppercase font-mono">Clearance Level</span>
+              <div class="text-2xl font-bold text-amber-400 mt-2">Level 4 Administrator</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. GIOC CONTROLS -->
+        <section id="mod-gioc" class="module-view hidden space-y-6">
           <div>
-            <h1 class="text-2xl font-bold text-white">Dashboard Overview</h1>
-            <p class="text-xs text-gray-400 mt-1">CNEI Global Intelligence & Operational Center</p>
-          </div>
-          <div class="text-right font-mono text-xs text-[#5bc0be]" id="utc-clock">UTC 00:00:00</div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
-            <span class="text-xs text-gray-400 uppercase font-mono">System Health</span>
-            <div class="text-2xl font-bold text-emerald-400 mt-2">100% Operational</div>
-          </div>
-          <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
-            <span class="text-xs text-gray-400 uppercase font-mono">Active Monitoring</span>
-            <div class="text-2xl font-bold text-[#5bc0be] mt-2">7 Intelligence Feeds</div>
-          </div>
-          <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800">
-            <span class="text-xs text-gray-400 uppercase font-mono">Security Clearance</span>
-            <div class="text-2xl font-bold text-amber-400 mt-2">Level 4 Admin</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. GIOC LOCKDOWN CONTROLS -->
-      <section id="mod-gioc" class="module-view hidden space-y-6">
-        <div>
-          <h1 class="text-2xl font-bold text-white">GIOC Global Emergency Controls</h1>
-          <p class="text-xs text-gray-400 mt-1">Manage network-wide access overrides and system broadcasts.</p>
-        </div>
-
-        <div class="bg-red-950/40 border-2 border-red-800/80 rounded-2xl p-6 space-y-6">
-          <div class="space-y-2">
-            <label class="block text-xs font-semibold text-red-300 uppercase">Custom Broadcast Message</label>
-            <input type="text" id="lockdown-msg-input" placeholder="Global intelligence operations lockdown initiated. All public routes suspended." class="w-full bg-[#0b132b] border border-red-900/60 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-red-500">
+            <h1 class="text-2xl font-bold text-white">GIOC Administrative Controls</h1>
+            <p class="text-xs text-gray-400 mt-1">Trigger system-wide Lockdown and configure custom broadcast messages.</p>
           </div>
 
-          <!-- COUNTDOWN DISPLAY PANEL -->
-          <div id="countdown-panel" class="hidden bg-black/80 border border-red-600 rounded-xl p-6 text-center space-y-3 animate-pulse">
-            <span class="text-xs font-mono text-red-400 uppercase tracking-widest">Arming Sequence Initiated</span>
-            <div id="countdown-timer" class="text-6xl font-extrabold text-red-500 font-mono">09</div>
-            <p class="text-xs text-gray-300">Lockdown sequence will trigger automatically unless aborted.</p>
-            <button id="cancel-lockdown-btn" class="bg-red-600 hover:bg-red-700 text-white font-extrabold text-sm px-8 py-3 rounded-xl transition shadow-xl border border-red-400">
-              ABORT LOCKDOWN SEQUENCE
-            </button>
+          <div class="bg-red-950/40 border-2 border-red-800/80 rounded-2xl p-6 space-y-6">
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold text-red-300 uppercase">Broadcast Message</label>
+              <input type="text" id="lockdown-msg-input" placeholder="Global intelligence operations lockdown initiated. All public routes suspended." class="w-full bg-[#0b132b] border border-red-900/60 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-red-500">
+            </div>
+
+            <div id="countdown-panel" class="hidden bg-black/80 border border-red-600 rounded-xl p-6 text-center space-y-3 animate-pulse">
+              <span class="text-xs font-mono text-red-400 uppercase tracking-widest">Arming Sequence Initiated</span>
+              <div id="countdown-timer" class="text-6xl font-extrabold text-red-500 font-mono">09</div>
+              <p class="text-xs text-gray-300">Lockdown signal will execute across all routes unless aborted.</p>
+              <button id="cancel-lockdown-btn" class="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs px-8 py-3 rounded-xl transition shadow-xl border border-red-400">
+                CANCEL LOCKDOWN
+              </button>
+            </div>
+
+            <div class="flex gap-4">
+              <button id="initiate-lockdown-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg">
+                Initiate Lockdown
+              </button>
+              <button id="lift-lockdown-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg hidden">
+                Lift Lockdown
+              </button>
+            </div>
           </div>
+        </section>
 
-          <div class="flex gap-4">
-            <button id="initiate-lockdown-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg">
-              Initiate Emergency Lockdown
-            </button>
-            <button id="lift-lockdown-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-8 py-3 rounded-xl transition shadow-lg hidden">
-              Lift Active Lockdown
-            </button>
+        <!-- 3. WORLD TIMEZONES -->
+        <section id="mod-timezones" class="module-view hidden space-y-6">
+          <h1 class="text-2xl font-bold text-white">Global Time Offset Telemetry</h1>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="timezone-grid"></div>
+        </section>
+
+        <!-- 4. WORLD MAP -->
+        <section id="mod-map" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">Embedded World Map</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.openstreetmap.org/export/embed.html?bbox=-180%2C-85%2C180%2C85&amp;layer=mapnik"></iframe>
+        </section>
+
+        <!-- 5. SATELLITE TRACKING -->
+        <section id="mod-sat" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">3D Interactive Satellite Tracker</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://stuffin.space/"></iframe>
+        </section>
+
+        <!-- 6. WEATHER SATELLITES -->
+        <section id="mod-weather" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">Near-Real-Time Weather Satellite Feed</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://zoom.earth/"></iframe>
+        </section>
+
+        <!-- 7. FLIGHT RADAR -->
+        <section id="mod-flight" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">Air Traffic Radar Feed</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.flightradar24.com"></iframe>
+        </section>
+
+        <!-- 8. MARITIME RADAR -->
+        <section id="mod-maritime" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">Maritime Vessel Radar Feed</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.marinetraffic.com"></iframe>
+        </section>
+
+        <!-- 9. NASA FIRMS -->
+        <section id="mod-firms" class="module-view hidden space-y-4 h-[75vh]">
+          <h1 class="text-2xl font-bold text-white">NASA FIRMS Thermal Mapping</h1>
+          <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://firms.modaps.eosdis.nasa.gov/map/"></iframe>
+        </section>
+
+        <!-- 10. SETTINGS -->
+        <section id="mod-settings" class="module-view hidden space-y-6">
+          <h1 class="text-2xl font-bold text-white">Staff Interface Preferences</h1>
+          <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800 space-y-4 max-w-xl">
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Timezone Display Format</label>
+              <select class="w-full bg-[#0b132b] border border-gray-700 rounded-lg p-2.5 text-xs text-white">
+                <option>UTC (Coordinated Universal Time)</option>
+                <option>BST (British Summer Time)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Session Security Mode</label>
+              <select class="w-full bg-[#0b132b] border border-gray-700 rounded-lg p-2.5 text-xs text-white">
+                <option>Strict (Auto-Logout on Tab Close)</option>
+              </select>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 3. WORLD TIMEZONES -->
-      <section id="mod-timezones" class="module-view hidden space-y-6">
-        <h1 class="text-2xl font-bold text-white">Global Timezone Telemetry</h1>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="timezone-grid">
-          <!-- Populated by JS -->
-        </div>
-      </section>
-
-      <!-- 4. WORLD MAP -->
-      <section id="mod-map" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">World Map (OpenStreetMap)</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.openstreetmap.org/export/embed.html?bbox=-180%2C-85%2C180%2C85&amp;layer=mapnik"></iframe>
-      </section>
-
-      <!-- 5. SATELLITE TRACKING -->
-      <section id="mod-sat" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">3D Orbital Satellite Tracker</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://stuffin.space/"></iframe>
-      </section>
-
-      <!-- 6. WEATHER SATELLITES -->
-      <section id="mod-weather" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">Atmospheric Telemetry (Zoom Earth)</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://zoom.earth/"></iframe>
-      </section>
-
-      <!-- 7. FLIGHT RADAR -->
-      <section id="mod-flight" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">Global Air Traffic Tracking</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.flightradar24.com"></iframe>
-      </section>
-
-      <!-- 8. MARITIME RADAR -->
-      <section id="mod-maritime" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">Maritime Vessel Traffic</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://www.marinetraffic.com"></iframe>
-      </section>
-
-      <!-- 9. NASA FIRMS -->
-      <section id="mod-firms" class="module-view hidden space-y-4 h-[75vh]">
-        <h1 class="text-2xl font-bold text-white">NASA FIRMS Thermal Imaging</h1>
-        <iframe class="w-full h-full rounded-2xl border border-gray-800" src="https://firms.modaps.eosdis.nasa.gov/map/"></iframe>
-      </section>
-
-      <!-- 10. SETTINGS -->
-      <section id="mod-settings" class="module-view hidden space-y-6">
-        <h1 class="text-2xl font-bold text-white">Staff Preferences & Security</h1>
-        <div class="bg-[#1c2541]/80 p-6 rounded-2xl border border-gray-800 space-y-4 max-w-xl">
-          <div>
-            <label class="block text-xs text-gray-400 mb-1">UI Theme Override</label>
-            <select class="w-full bg-[#0b132b] border border-gray-700 rounded-lg p-2.5 text-xs text-white">
-              <option>Dark Operational Mode (Default)</option>
-              <option>High Contrast Tactical</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs text-gray-400 mb-1">Session Timeout</label>
-            <select class="w-full bg-[#0b132b] border border-gray-700 rounded-lg p-2.5 text-xs text-white">
-              <option>15 Minutes</option>
-              <option>30 Minutes</option>
-              <option>1 Hour</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
+      </div>
     </main>
   </div>
 
   <audio id="alarm-sound" src="../alarm.mp3" preload="auto" loop></audio>
 
-  <!-- MODULE ROUTING & LOCKDOWN SCRIPT -->
   <script type="module">
     import { staffAccounts } from "../staffAccounts.js";
     import { lockdownRef, set, onValue } from "../firebase-config.js";
 
-    // Navigation
+    // AUTO-LOGOUT ON BROWSER TAB CLOSE
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.clear();
+    });
+
+    // NAVIGATION
     const navButtons = document.querySelectorAll('.nav-item');
     const modules = document.querySelectorAll('.module-view');
 
@@ -240,12 +270,13 @@
       });
     });
 
-    // Auth
+    // AUTH
     const loginForm = document.getElementById('login-form');
     const loginScreen = document.getElementById('login-screen');
     const dashboardScreen = document.getElementById('dashboard-screen');
-    const userDisplay = document.getElementById('user-display');
+    const operatorDisplay = document.getElementById('active-operator-display');
     const loginError = document.getElementById('login-error');
+    let currentAccount = null;
 
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -254,25 +285,48 @@
       const user = staffAccounts.find(acc => acc.username === u && acc.password === p);
 
       if (user) {
+        currentAccount = user;
+        sessionStorage.setItem('cnei_session', 'active');
         loginScreen.classList.add('hidden');
         dashboardScreen.classList.remove('hidden');
-        userDisplay.innerText = `${user.name} (${user.role})`;
+        operatorDisplay.innerText = `Operator: ${user.name}`;
       } else {
         loginError.classList.remove('hidden');
       }
     });
 
     document.getElementById('logout-btn').addEventListener('click', () => {
+      sessionStorage.clear();
       dashboardScreen.classList.add('hidden');
       loginScreen.classList.remove('hidden');
     });
 
-    // UTC Clock
+    // PANIC LOCK
+    const panicBtn = document.getElementById('panic-btn');
+    const panicOverlay = document.getElementById('panic-overlay');
+    const panicUnlockForm = document.getElementById('panic-unlock-form');
+
+    panicBtn.addEventListener('click', () => {
+      panicOverlay.classList.remove('hidden');
+    });
+
+    panicUnlockForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const pwd = document.getElementById('panic-password').value;
+      if (currentAccount && pwd === currentAccount.password) {
+        panicOverlay.classList.add('hidden');
+        document.getElementById('panic-password').value = '';
+      } else {
+        alert("Authentication failed.");
+      }
+    });
+
+    // UTC CLOCK
     setInterval(() => {
-      document.getElementById('utc-clock').innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
+      document.getElementById('live-utc-clock').innerText = 'UTC ' + new Date().toISOString().substr(11, 8);
     }, 1000);
 
-    // Timezone Grid
+    // TIMEZONE GRID
     const tzGrid = document.getElementById('timezone-grid');
     const cities = [
       { name: 'London', tz: 'Europe/London' },
@@ -292,7 +346,7 @@
     setInterval(updateTimezones, 1000);
     updateTimezones();
 
-    // 9-Second Lockdown Arming Workflow
+    // 9-SECOND LOCKDOWN COUNTDOWN WORKFLOW
     let countdownTimer = null;
     let secondsLeft = 9;
     const alarm = document.getElementById('alarm-sound');
@@ -346,12 +400,12 @@
       const state = snapshot.val();
       if (state && state.isLocked) {
         badge.innerText = "LOCKDOWN ACTIVE";
-        badge.className = "inline-block mt-1 px-2 py-0.5 bg-red-950 text-red-400 border border-red-800 rounded font-mono text-[10px] animate-pulse";
+        badge.className = "inline-block mt-0.5 px-2 py-0.5 bg-red-950 text-red-400 border border-red-800 rounded font-mono text-[10px] animate-pulse";
         initBtn.classList.add('hidden');
         liftBtn.classList.remove('hidden');
       } else {
         badge.innerText = "SYSTEM ONLINE";
-        badge.className = "inline-block mt-1 px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono text-[10px]";
+        badge.className = "inline-block mt-0.5 px-2 py-0.5 bg-emerald-950 text-emerald-400 border border-emerald-800 rounded font-mono text-[10px]";
         initBtn.classList.remove('hidden');
         liftBtn.classList.add('hidden');
       }
