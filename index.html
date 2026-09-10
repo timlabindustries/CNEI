@@ -4,125 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CNEI | Centre of National and External Intelligence</title>
-  <link rel="icon" type="image/png" href="logo.png">
+  <meta name="description" content="Official Portal of the Centre of National and External Intelligence (CNEI). Strategic intelligence, critical national infrastructure monitoring, and national security oversight.">
+  <meta property="og:title" content="CNEI | Centre of National and External Intelligence">
+  <meta property="og:description" content="Official Crown Strategic Portal for national intelligence, security, and infrastructure updates.">
+  <meta name="robots" content="index, follow">
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  
+  <style>
+    body {
+      background: url('CNEIBG.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
 </head>
-<body class="bg-[#0b132b] text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-[#5bc0be] selection:text-[#0b132b]">
+<body class="bg-slate-950 text-slate-100 min-h-screen relative font-sans">
 
-  <!-- GLOBAL REAL-TIME LOCKDOWN OVERLAY -->
-  <div id="lockdown-overlay" class="hidden fixed inset-0 z-50 bg-[#0b132b] flex flex-col items-center justify-center p-6 text-center" role="alert" aria-live="assertive">
-    <div class="max-w-2xl w-full bg-red-950/80 border-2 border-red-600 rounded-2xl p-8 space-y-6 shadow-2xl backdrop-blur-md">
-      <div class="inline-block bg-red-600 text-white font-mono font-bold text-xs px-4 py-1.5 rounded-full animate-pulse uppercase tracking-wider">
-        EMERGENCY SYSTEM BROADCAST
-      </div>
-      <h1 class="text-4xl md:text-5xl font-black text-red-400 tracking-tight">LOCKDOWN</h1>
-      <p id="lockdown-message" class="text-sm text-gray-200 leading-relaxed font-mono bg-black/50 p-4 rounded-xl border border-red-900/60">
-        Global intelligence operations lockdown initiated. All public routes suspended until further notice.
-      </p>
-      <div class="pt-4 border-t border-red-900/60 flex justify-center">
-        <a href="staff/index.html" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-8 py-3.5 rounded-xl transition shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400">
-          Staff Sign-In
-        </a>
-      </div>
+  <!-- EMERGENCY LOCKDOWN OVERLAY -->
+  <div id="lockdown-overlay" class="hidden fixed inset-0 z-50 bg-red-950/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-6 border-8 border-red-600">
+    <div class="animate-pulse flex flex-col items-center">
+      <svg class="w-24 h-24 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+      </svg>
+      <h1 class="text-4xl md:text-6xl font-black text-red-500 tracking-wider mb-2">SYSTEM LOCKDOWN</h1>
+      <p class="text-xl md:text-2xl text-red-200 font-bold max-w-2xl mb-6" id="lockdown-msg">ALL PUBLIC SERVICES SUSPENDED BY CNEI DIRECTORATE</p>
+      <span class="inline-block bg-red-900 text-red-100 text-xs font-mono px-4 py-2 rounded-full uppercase tracking-widest border border-red-500">Security Clearance Level 5 Activated</span>
     </div>
   </div>
 
-  <!-- HEADER -->
-  <header class="bg-[#1c2541] border-b border-gray-800 sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#5bc0be] rounded-lg p-1">
-        <img src="logo.png" alt="CNEI Logo" class="h-10" onerror="this.src='https://via.placeholder.com/40?text=CNEI'">
-        <span class="font-bold text-lg text-white tracking-wide">CNEI</span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-gray-300 uppercase tracking-wider" aria-label="Main Navigation">
-        <a href="index.html" class="text-[#5bc0be]" data-i18n="home">Home</a>
-        <a href="about.html" class="hover:text-white transition" data-i18n="about">About Us</a>
-        <a href="publications.html" class="hover:text-white transition" data-i18n="publications">Publications</a>
-        <a href="contact.html" class="hover:text-white transition" data-i18n="contact">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <label for="lang-select" class="sr-only">Select Language</label>
-        <select id="lang-select" data-lang-selector class="bg-[#0b132b] border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-[#5bc0be]">
-          <option value="en">English (UK)</option>
-          <option value="cy">Cymraeg (Welsh)</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-        </select>
+  <!-- PUBLIC CONTENT CONTAINER -->
+  <div class="relative z-10 min-h-screen flex flex-col bg-slate-950/80 backdrop-blur-sm">
+    <header class="border-b border-slate-800 p-6 flex justify-between items-center max-w-7xl mx-auto w-full">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-red-800 rounded-lg flex items-center justify-center font-bold text-xl tracking-tighter">CNEI</div>
+        <div>
+          <h1 class="font-bold text-lg leading-none">Centre of National & External Intelligence</h1>
+          <p class="text-xs text-slate-400 mt-1">Cabinet Office Strategic Operations</p>
+        </div>
       </div>
-    </div>
-  </header>
+      <a href="https://staff.cnei.org.uk" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded border border-slate-700 transition">Staff Portal</a>
+    </header>
 
-  <!-- HERO SECTION -->
-  <main class="flex-grow max-w-7xl mx-auto px-6 py-16 flex flex-col justify-center">
-    <div class="max-w-3xl space-y-6">
-      <div class="inline-block bg-[#5bc0be]/10 text-[#5bc0be] border border-[#5bc0be]/30 px-3.5 py-1 rounded-full text-xs font-mono">
-        Strategic Infrastructure Directive
-      </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" data-i18n="heroTitle">
-        Securing National Interests Through Strategic Intelligence
-      </h1>
-      <p class="text-base text-gray-400 leading-relaxed" data-i18n="heroDesc">
-        The Centre of National and External Intelligence delivers critical analysis, defense monitoring, and counter-threat coordination to safeguard national critical assets.
-      </p>
-      <div class="flex flex-wrap gap-4 pt-4">
-        <a href="publications.html" class="bg-[#5bc0be] text-[#0b132b] font-bold text-xs px-6 py-3.5 rounded-xl hover:bg-teal-400 transition focus:outline-none focus:ring-2 focus:ring-[#5bc0be]" data-i18n="reportsBtn">
-          View Publications
-        </a>
-        <a href="about.html" class="bg-[#1c2541] text-gray-200 border border-gray-700 font-bold text-xs px-6 py-3.5 rounded-xl hover:bg-gray-800 transition focus:outline-none focus:ring-2 focus:ring-gray-400" data-i18n="learnBtn">
-          About Mission
-        </a>
-      </div>
-    </div>
-  </main>
+    <main class="flex-1 max-w-7xl mx-auto w-full p-6 space-y-8">
+      <section class="bg-slate-900/60 border border-slate-800 rounded-xl p-8">
+        <h2 class="text-2xl font-bold mb-4">Official Public Notice</h2>
+        <p class="text-slate-300 leading-relaxed max-w-3xl">
+          The Centre of National and External Intelligence coordinates strategic intelligence analysis and defense monitoring across critical national infrastructure. All operations strictly adhere to statutory oversight frameworks.
+        </p>
+      </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-[#1c2541] border-t border-gray-800 py-8">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-      <div>
-        <p>&copy; 2026 Centre of National and External Intelligence (CNEI). All rights reserved.</p>
-        <p class="mt-1 text-[11px] text-gray-600">Official Crown Strategic Portal | Protected under UK Security Framework</p>
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="contact.html" class="hover:text-gray-300">Contact Official</a>
-        <a href="staff/index.html" class="bg-[#0b132b] hover:bg-gray-800 text-gray-300 px-3.5 py-1.5 rounded-lg border border-gray-700 transition" data-i18n="staff">
-          Staff Portal
-        </a>
-      </div>
-    </div>
-  </footer>
+      <section class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+          <h3 class="font-bold text-lg mb-2 text-slate-200">Public Bulletins</h3>
+          <p class="text-slate-400 text-sm">Threat Level: SUBSTANTIAL. Standard operational protocols remain in effect across all domestic monitoring sectors.</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+          <h3 class="font-bold text-lg mb-2 text-slate-200">System Status</h3>
+          <p class="text-emerald-400 text-sm flex items-center">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block mr-2 animate-ping"></span>
+            Realtime Global Synchronization Active
+          </p>
+        </div>
+      </section>
+    </main>
 
-  <script type="module">
-    import { lockdownRef, onValue } from "./firebase-config.js";
+    <footer class="border-t border-slate-800 p-6 text-center text-xs text-slate-500">
+      &copy; Crown Copyright | Centre of National and External Intelligence
+    </footer>
+  </div>
 
-    onValue(lockdownRef, (snapshot) => {
-      const state = snapshot.val();
+  <script>
+    const firebaseConfig = {
+      databaseURL: "https://cnei-default-rtdb.firebaseio.com" // Update with your Firebase Realtime DB URL
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Listen for lockdown status changes in real-time
+    db.ref('system/lockdown').on('value', (snapshot) => {
+      const data = snapshot.val();
       const overlay = document.getElementById('lockdown-overlay');
-      const msg = document.getElementById('lockdown-message');
+      const msg = document.getElementById('lockdown-msg');
 
-      if (state && state.isLocked) {
-        msg.innerText = state.message || "Global intelligence operations lockdown initiated. All public routes suspended until further notice.";
+      if (data && data.isLocked) {
+        msg.textContent = data.message || "ALL PUBLIC SERVICES SUSPENDED BY CNEI DIRECTORATE";
         overlay.classList.remove('hidden');
       } else {
         overlay.classList.add('hidden');
       }
-    });
-
-    const translations = {
-      en: { home: "Home", about: "About Us", publications: "Publications", contact: "Contact", staff: "Staff Portal", heroTitle: "Securing National Interests Through Strategic Intelligence", heroDesc: "The Centre of National and External Intelligence delivers critical analysis, defense monitoring, and counter-threat coordination.", learnBtn: "About Mission", reportsBtn: "View Publications" },
-      cy: { home: "Hafan", about: "Amdanom Ni", publications: "Cyhoeddiadau", contact: "Cysylltu", staff: "Porth Staff", heroTitle: "Diogelu Buddiannau Cenedlaethol Trwy Gwybodaeth Strategaethol", heroDesc: "Mae Cyngor Gwybodaeth Cenedlaethol ac Allanol yn darparu dadansoddiadau critigol a monitro amddiffyn.", learnBtn: "Amdanom Ni", reportsBtn: "Gweld Cyhoeddiadau" },
-      fr: { home: "Accueil", about: "À Propos", publications: "Publications", contact: "Contact", staff: "Portail du Personnel", heroTitle: "Garantir les Intérêts Nationaux par la Renseignement Stratégique", heroDesc: "Le Centre de Renseignement National et Externe fournit des analyses critiques et une surveillance de défense.", learnBtn: "À Propos", reportsBtn: "Voir les Publications" },
-      es: { home: "Inicio", about: "Sobre Nosotros", publications: "Publicaciones", contact: "Contacto", staff: "Portal del Personal", heroTitle: "Garantizando los Intereses Nacionales Mediante Inteligencia Estratégica", heroDesc: "El Centro de Inteligencia Nacional y Externa proporciona análisis críticos y monitoreo de defensa.", learnBtn: "Sobre Nosotros", reportsBtn: "Ver Publicaciones" }
-    };
-
-    document.querySelector('select[data-lang-selector]').addEventListener('change', (e) => {
-      const lang = e.target.value;
-      const t = translations[lang] || translations.en;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) el.innerText = t[key];
-      });
     });
   </script>
 </body>
