@@ -1,113 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centre of National and External Intelligence (CNEI)</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#0b132b] text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-[#5bc0be] selection:text-[#0b132b]">
+<!-- Insert this script inside index.html, about.html, publications.html, and contact.html -->
+<script>
+  const translations = {
+    en: {
+      home: "Home", about: "About Us", publications: "Publications", contact: "Contact", staff: "Staff Portal",
+      heroTitle: "Securing National Interests Through Strategic Intelligence",
+      heroDesc: "The Centre of National and External Intelligence delivers critical analysis, defense monitoring, and counter-threat coordination.",
+      learnBtn: "Learn About CNEI", reportsBtn: "View Public Reports"
+    },
+    cy: {
+      home: "Hafan", about: "Amdanom Ni", publications: "Cyhoeddiadau", contact: "Cysylltu", staff: "Porth Staff",
+      heroTitle: "Diogelu Buddiannau Cenedlaethol Trwy Gwybodaeth Strategaethol",
+      heroDesc: "Mae Cyngor Gwybodaeth Cenedlaethol ac Allanol yn darparu dadansoddiadau critigol a monitro amddiffyn.",
+      learnBtn: "Dysgu am CNEI", reportsBtn: "Gweld Adroddiadau Cyhoeddus"
+    },
+    fr: {
+      home: "Accueil", about: "À Propos", publications: "Publications", contact: "Contact", staff: "Portail du Personnel",
+      heroTitle: "Garantir les Intérêts Nationaux par la Renseignement Stratégique",
+      heroDesc: "Le Centre de Renseignement National et Externe fournit des analyses critiques et une surveillance de défense.",
+      learnBtn: "En savoir plus sur le CNEI", reportsBtn: "Voir les Rapports Publics"
+    },
+    es: {
+      home: "Inicio", about: "Sobre Nosotros", publications: "Publicaciones", contact: "Contacto", staff: "Portal del Personal",
+      heroTitle: "Garantizando los Intereses Nacionales Mediante Inteligencia Estratégica",
+      heroDesc: "El Centro de Inteligencia Nacional y Externa proporciona análisis críticos y monitoreo de defensa.",
+      learnBtn: "Aprender sobre CNEI", reportsBtn: "Ver Informes Públicos"
+    }
+  };
 
-  <!-- LOCKDOWN OVERLAY -->
-  <div id="lockdown-overlay" class="hidden fixed inset-0 z-[99999] bg-red-950/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center text-white">
-    <div class="max-w-3xl w-full border-4 border-red-600 bg-black/90 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-      <div class="inline-flex items-center gap-3 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-lg tracking-widest uppercase mb-6 animate-pulse">
-        SYSTEM LOCKDOWN IN EFFECT
-      </div>
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-red-500 mb-4">CRITICAL ACCESS RESTRICTION</h1>
-      <p id="lockdown-message" class="text-lg text-gray-200 mb-8 border-y border-red-800/60 py-6 font-mono">
-        Global intelligence operations lockdown initiated. All public routes suspended until further notice.
-      </p>
-      <a href="staff/index.html" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-xl transition shadow-lg">
-        Authorized Staff Sign-In
-      </a>
-    </div>
-  </div>
-
-  <!-- HEADER NAVIGATION -->
-  <header class="bg-[#1c2541] border-b border-gray-800 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-4">
-        <img src="logo.png" alt="CNEI Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/48?text=CNEI'">
-        <div>
-          <span class="text-xl font-bold tracking-wider text-white block">CNEI</span>
-          <span class="text-[10px] text-[#5bc0be] font-medium tracking-widest hidden sm:block">CENTRE OF NATIONAL & EXTERNAL INTELLIGENCE</span>
-        </div>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="index.html" class="text-[#5bc0be] font-bold">Home</a>
-        <a href="about.html" class="text-gray-300 hover:text-[#5bc0be] transition">About Us</a>
-        <a href="publications.html" class="text-gray-300 hover:text-[#5bc0be] transition">Publications</a>
-        <a href="contact.html" class="text-gray-300 hover:text-[#5bc0be] transition">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-4">
-        <select class="bg-[#0b132b] border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-[#5bc0be]">
-          <option value="en">English (UK)</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-        </select>
-        <a href="staff/index.html" class="bg-[#3a506b] hover:bg-[#5bc0be] hover:text-[#0b132b] text-white text-xs font-semibold px-4 py-2 rounded-lg transition border border-[#5bc0be]/30 flex items-center gap-2">
-          Staff Portal
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
-  <main class="flex-grow max-w-7xl mx-auto px-6 py-16 w-full flex flex-col items-center justify-center text-center">
-    <span class="px-4 py-1.5 bg-[#3a506b]/40 text-[#5bc0be] border border-[#5bc0be]/30 rounded-full text-xs font-mono font-semibold tracking-wider uppercase mb-6">
-      Official UK Strategic Intelligence Portal
-    </span>
-    <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight max-w-4xl leading-tight">
-      Securing National Interests Through Strategic Intelligence
-    </h1>
-    <p class="text-gray-400 text-base md:text-lg max-w-2xl mt-6">
-      The Centre of National and External Intelligence delivers critical analysis, defense monitoring, and counter-threat coordination to protect state security.
-    </p>
-
-    <div class="mt-10 flex flex-wrap gap-4 justify-center">
-      <a href="about.html" class="bg-[#5bc0be] text-[#0b132b] font-bold px-8 py-3.5 rounded-xl hover:bg-teal-400 transition shadow-lg">
-        Learn About CNEI
-      </a>
-      <a href="publications.html" class="bg-[#1c2541] border border-gray-700 text-white font-medium px-8 py-3.5 rounded-xl hover:border-[#5bc0be] transition">
-        View Public Reports
-      </a>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-[#1c2541] border-t border-gray-800 py-10 px-6">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-400">
-      <div class="flex items-center gap-3">
-        <img src="logo.png" alt="CNEI Logo" class="h-8 opacity-80" onerror="this.src='https://via.placeholder.com/32?text=CNEI'">
-        <span>© 2026 CNEI • Centre of National and External Intelligence • cnei.org.uk</span>
-      </div>
-      <div class="flex items-center gap-6 font-mono text-[11px] text-gray-400">
-        <span class="text-[#5bc0be] bg-[#0b132b] px-3 py-1 rounded border border-gray-800">Cookie-Free Service</span>
-        <a href="staff/index.html" class="hover:text-white underline">Staff Portal</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- REALTIME LOCKDOWN LISTENER -->
-  <script type="module">
-    import { lockdownRef, onValue } from "./firebase-config.js";
-
-    onValue(lockdownRef, (snapshot) => {
-      const state = snapshot.val();
-      const overlay = document.getElementById('lockdown-overlay');
-      const msgEl = document.getElementById('lockdown-message');
-      
-      if (state && state.isLocked) {
-        overlay.classList.remove('hidden');
-        if (state.message) msgEl.innerText = state.message;
-      } else {
-        overlay.classList.add('hidden');
-      }
+  document.querySelectorAll('select[data-lang-selector]').forEach(select => {
+    select.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      const t = translations[lang] || translations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.innerText = t[key];
+      });
     });
-  </script>
-</body>
-</html>
+  });
+</script>
