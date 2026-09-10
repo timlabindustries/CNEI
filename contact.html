@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Centre of National and External Intelligence</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0b132b] text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-[#5bc0be] selection:text-[#0b132b]">
+
+  <!-- LOCKDOWN OVERLAY -->
+  <div id="lockdown-overlay" class="hidden fixed inset-0 z-[99999] bg-red-950/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center text-white">
+    <div class="max-w-3xl w-full border-4 border-red-600 bg-black/90 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+      <div class="inline-flex items-center gap-3 bg-red-600 text-white px-6 py-2 rounded-full font-bold text-lg tracking-widest uppercase mb-6 animate-pulse">
+        SYSTEM LOCKDOWN IN EFFECT
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-red-500 mb-4">CRITICAL ACCESS RESTRICTION</h1>
+      <p id="lockdown-message" class="text-lg text-gray-200 mb-8 border-y border-red-800/60 py-6 font-mono">
+        Global intelligence operations lockdown initiated. All public routes suspended until further notice.
+      </p>
+      <a href="staff/index.html" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3.5 rounded-xl transition shadow-lg">
+        Authorized Staff Sign-In
+      </a>
+    </div>
+  </div>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="bg-[#1c2541] border-b border-gray-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-4">
+        <img src="logo.png" alt="CNEI Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/48?text=CNEI'">
+        <div>
+          <span class="text-xl font-bold tracking-wider text-white block">CNEI</span>
+          <span class="text-[10px] text-[#5bc0be] font-medium tracking-widest hidden sm:block">CENTRE OF NATIONAL & EXTERNAL INTELLIGENCE</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="index.html" class="text-gray-300 hover:text-[#5bc0be] transition">Home</a>
+        <a href="about.html" class="text-gray-300 hover:text-[#5bc0be] transition">About Us</a>
+        <a href="publications.html" class="text-gray-300 hover:text-[#5bc0be] transition">Publications</a>
+        <a href="contact.html" class="text-[#5bc0be] font-bold">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <select class="bg-[#0b132b] border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-[#5bc0be]">
+          <option value="en">English (UK)</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+        </select>
+        <a href="staff/index.html" class="bg-[#3a506b] hover:bg-[#5bc0be] hover:text-[#0b132b] text-white text-xs font-semibold px-4 py-2 rounded-lg transition border border-[#5bc0be]/30 flex items-center gap-2">
+          Staff Portal
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow max-w-4xl mx-auto px-6 py-16 w-full space-y-8">
+    <div>
+      <span class="text-xs font-mono text-[#5bc0be] uppercase tracking-widest">Official Enquiries</span>
+      <h1 class="text-3xl font-extrabold text-white mt-1">Contact CNEI</h1>
+      <p class="text-gray-400 text-sm mt-2">Direct channels for public, inter-agency, and official communications.</p>
+    </div>
+
+    <div class="bg-[#1c2541]/80 p-8 rounded-2xl border border-gray-800 space-y-6">
+      <form onsubmit="event.preventDefault(); alert('Enquiry received.');" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Full Name / Organization</label>
+          <input type="text" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#5bc0be]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Contact Email</label>
+          <input type="email" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#5bc0be]">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Message</label>
+          <textarea rows="4" required class="w-full bg-[#0b132b] border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:border-[#5bc0be]"></textarea>
+        </div>
+        <button type="submit" class="bg-[#5bc0be] text-[#0b132b] font-bold px-8 py-3 rounded-lg hover:bg-teal-400 transition">
+          Submit Enquiry
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- COOKIE-FREE FOOTER -->
+  <footer class="bg-[#1c2541] border-t border-gray-800 py-10 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-400">
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="CNEI Logo" class="h-8 opacity-80" onerror="this.src='https://via.placeholder.com/32?text=CNEI'">
+        <span>© 2026 CNEI • Centre of National and External Intelligence • cnei.org.uk</span>
+      </div>
+      <div class="flex items-center gap-6 font-mono text-[11px] text-gray-400">
+        <span class="text-[#5bc0be] bg-[#0b132b] px-3 py-1 rounded border border-gray-800">Cookie-Free Service</span>
+        <a href="staff/index.html" class="hover:text-white underline">Staff Portal</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- REALTIME LOCKDOWN LISTENER -->
+  <script type="module">
+    import { lockdownRef, onValue } from "./firebase-config.js";
+
+    onValue(lockdownRef, (snapshot) => {
+      const state = snapshot.val();
+      const overlay = document.getElementById('lockdown-overlay');
+      const msgEl = document.getElementById('lockdown-message');
+      
+      if (state && state.isLocked) {
+        overlay.classList.remove('hidden');
+        if (state.message) msgEl.innerText = state.message;
+      } else {
+        overlay.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
