@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,116 +8,64 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header class="site-header">
         <div class="container nav-container">
             <a href="index.html" class="brand">
                 <img src="logonobg.png" alt="CNEI Logo" class="brand-logo">
                 <span class="brand-text">CNEI</span>
             </a>
-            <nav>
+            <nav style="display: flex; align-items: center; gap: 1.5rem;">
                 <ul class="nav-links">
                     <li><a href="about.html">About</a></li>
                     <li><a href="publications.html" class="active">Publications</a></li>
                     <li><a href="methodology.html">Methodology</a></li>
                 </ul>
+                <div class="lang-selector" style="font-family: var(--font-mono); font-size: 0.8rem; border-left: 1px solid var(--border-color); padding-left: 1rem;">
+                    <span class="lang-option active" style="font-weight: bold; cursor: pointer;">EN</span> | 
+                    <a href="cy/publications.html" style="color: var(--text-muted); text-decoration: none;">CY</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Page Header -->
     <section class="section" style="background-color: var(--bg-surface);">
         <div class="container">
-            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Research Repository</span>
-            <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-top: 0.5rem;">Publications Archive</h1>
+            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Research Archive</span>
+            <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-top: 0.5rem;">Publications & Intelligence Briefs</h1>
             <p style="color: var(--text-secondary); max-width: 700px; margin-top: 0.5rem;">
-                Chronological index of unclassified analytical reports, spatial cross-verifications, and open data reviews.
+                Public access repository of open-source intelligence reports, geostrategic assessments, and analytical briefs.
             </p>
         </div>
     </section>
 
-    <!-- Main Body Content -->
     <main class="container">
         <section class="section" style="border-bottom: none;">
-            <div class="recent-list">
-
-                <!-- Publication Item 1 -->
-                <article class="featured-card" style="margin-bottom: 2rem;">
-                    <div class="meta-bar">
-                        <span>11 SEP 2026</span>
-                        <span>&bull;</span>
-                        <span>VOL. 01 / ISSUE 04</span>
-                        <span>&bull;</span>
-                        <span style="color: var(--accent-tag);">[ UNCLASSIFIED OPEN DATA ]</span>
-                    </div>
-                    <h2 class="featured-title">
-                        <a href="#">Cross-Verification of Open Commercial Telemetry Feeds</a>
-                    </h2>
-                    <p style="margin-bottom: 1rem;">
-                        A rigorous examination of spatial dataset anomalies using multi-angle satellite imagery and publicly available AIS telemetry. Stripping away speculation to present verifiable, ground-level evidence.
-                    </p>
-                    <a href="#" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; text-decoration: none;">READ FULL DISPATCH &rarr;</a>
-                </article>
-
-                <!-- Publication Item 2 -->
-                <article class="recent-item">
-                    <div class="recent-info">
-                        <div class="meta-bar" style="margin-bottom: 0.25rem;">
-                            <span>VOL. 01 / ISSUE 03</span>
-                        </div>
-                        <h3><a href="#">Spatial Analysis of Regional Maritime Traffic Patterns</a></h3>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Verification of unclassified spatial telemetry across primary shipping channels.</p>
-                    </div>
-                    <span class="recent-date">28 AUG 2026</span>
-                </article>
-
-                <!-- Publication Item 3 -->
-                <article class="recent-item">
-                    <div class="recent-info">
-                        <div class="meta-bar" style="margin-bottom: 0.25rem;">
-                            <span>VOL. 01 / ISSUE 02</span>
-                        </div>
-                        <h3><a href="#">Open-Source Audit of Infrastructure Expansion</a></h3>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Cross-referencing commercial satellite outputs with public environmental filings.</p>
-                    </div>
-                    <span class="recent-date">14 AUG 2026</span>
-                </article>
-
-                <!-- Publication Item 4 -->
-                <article class="recent-item">
-                    <div class="recent-info">
-                        <div class="meta-bar" style="margin-bottom: 0.25rem;">
-                            <span>VOL. 01 / ISSUE 01</span>
-                        </div>
-                        <h3><a href="#">Methodological Review: Handling Signal Noise in Public Feeds</a></h3>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Establishing baseline rules for bias scrubbing and primary source verification.</p>
-                    </div>
-                    <span class="recent-date">02 JUL 2026</span>
-                </article>
-
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 1rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">[ ARCHIVE STATUS: PENDING INITIAL RELEASE ]</div>
+                <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1rem;">No Public Publications Available</h2>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+                    Our initial research briefs are undergoing our standard 4-phase audit framework. All forthcoming public reports will be indexed here with complete source documentation and confidence metrics.
+                </p>
             </div>
         </section>
     </main>
 
-    <!-- Global Institutional Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-notice">
                 <strong>Information Provenance & Operational Notice</strong>
-                All analytical outputs and materials published by CNEI are derived strictly from publicly available, unclassified, and lawfully accessible open sources. CNEI does not handle, store, or process classified government documents, leaked materials, or non-consensual personal data. CNEI is an independent, unincorporated, voluntary research collective operated by student researchers across the United Kingdom and is not affiliated with, endorsed by, or connected to any government body, military authority, or official intelligence agency.
+                All analytical outputs published by CNEI are derived exclusively from publicly accessible, lawful open sources. CNEI does not handle or process classified government documents or non-consensual personal data. CNEI is an independent, un-incorporated voluntary student-led research collective and is not affiliated with any official government body or intelligence agency.
             </div>
-
             <div class="footer-nav">
-                <a href="legal.html" class="btn-legal">Legal Centre</a>
+                <a href="legal.html" class="btn-legal">Legal Center</a>
                 <ul class="policy-links">
                     <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="cookies.html">Cookie Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
                     <li><a href="accessibility.html">Accessibility Statement</a></li>
                 </ul>
             </div>
-
-            <p class="copyright">&copy; Centre of National and External Intelligence (CNEI). All rights reserved.</p>
+            <p class="copyright">&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
         </div>
     </footer>
 
