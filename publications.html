@@ -3,71 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications — CNEI</title>
+    <title>Publications — Centre of National and External Intelligence (CNEI)</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-main: #0a0c10;
+            --bg-card: #12161f;
+            --border-color: #212631;
+            --text-main: #e0e6ed;
+            --text-muted: #8b949e;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .site-header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+        }
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: white; font-weight: bold; }
+        .brand-logo { height: 38px; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .nav-links a:hover { color: white; }
+        .btn-portal {
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            color: white !important;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1 { color: #fff; font-size: 2.2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+        
+        .pub-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .pub-item h3 { margin: 0 0 0.5rem 0; color: #fff; }
+        .pub-date { font-family: monospace; font-size: 0.8rem; color: #8b949e; margin-bottom: 0.5rem; }
+
+        .site-footer {
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); }
+    </style>
 </head>
 <body>
 
     <header class="site-header">
-        <div class="container nav-container">
+        <div class="nav-container">
             <a href="index.html" class="brand">
-                <img src="logonobg.png" alt="CNEI Logo" class="brand-logo">
-                <span class="brand-text">CNEI</span>
+                <img src="logonobg.png" alt="CNEI Seal" class="brand-logo">
+                <span>CNEI</span>
             </a>
-            <nav style="display: flex; align-items: center; gap: 1.5rem;">
-                <ul class="nav-links">
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="publications.html" class="active">Publications</a></li>
-                    <li><a href="methodology.html">Methodology</a></li>
-                </ul>
-                <div class="lang-selector" style="font-family: var(--font-mono); font-size: 0.8rem; border-left: 1px solid var(--border-color); padding-left: 1rem;">
-                    <span class="lang-option active" style="font-weight: bold; cursor: pointer;">EN</span> | 
-                    <a href="cy/publications.html" style="color: var(--text-muted); text-decoration: none;">CY</a>
-                </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="staff/index.html" class="btn-portal">Staff Gateway</a>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="background-color: var(--bg-surface);">
-        <div class="container">
-            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Research Archive</span>
-            <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-top: 0.5rem;">Publications & Intelligence Briefs</h1>
-            <p style="color: var(--text-secondary); max-width: 700px; margin-top: 0.5rem;">
-                Public access repository of open-source intelligence reports, geostrategic assessments, and analytical briefs.
-            </p>
-        </div>
-    </section>
-
     <main class="container">
-        <section class="section" style="border-bottom: none;">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 1rem;">
-                <div style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">[ ARCHIVE STATUS: PENDING INITIAL RELEASE ]</div>
-                <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1rem;">No Public Publications Available</h2>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
-                    Our initial research briefs are undergoing our standard 4-phase audit framework. All forthcoming public reports will be indexed here with complete source documentation and confidence metrics.
-                </p>
-            </div>
-        </section>
+        <h1>Analytical Publications</h1>
+        <div class="pub-item">
+            <div class="pub-date">REF: CNEI-PUB-2026-01 // PUBLIC RELEASE</div>
+            <h3>Open Source Intelligence Methodology Handbook</h3>
+            <p style="color: var(--text-muted); margin: 0;">Standardized verification procedures for public domain satellite, flight, and AIS data processing.</p>
+        </div>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-notice">
-                <strong>Information Provenance & Operational Notice</strong>
-                All analytical outputs published by CNEI are derived exclusively from publicly accessible, lawful open sources. CNEI does not handle or process classified government documents or non-consensual personal data. CNEI is an independent, un-incorporated voluntary student-led research collective and is not affiliated with any official government body or intelligence agency.
-            </div>
-            <div class="footer-nav">
-                <a href="legal.html" class="btn-legal">Legal Center</a>
-                <ul class="policy-links">
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="cookies.html">Cookie Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                    <li><a href="accessibility.html">Accessibility Statement</a></li>
-                </ul>
-            </div>
-            <p class="copyright">&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+        <div class="container footer-content">
+            <div>&copy; Centre of National and External Intelligence (CNEI). All rights reserved.</div>
+            <div style="font-family: monospace;">UK RESTRICTED INFRASTRUCTURE</div>
         </div>
     </footer>
 
+    <!-- EBS Listener -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+          apiKey: "AIzaSyCssuItXk64_a1jWZmnl9NI5U0LxTsF8Rg",
+          authDomain: "cnei-system-d2991.firebaseapp.com",
+          databaseURL: "https://cnei-system-d2991-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "cnei-system-d2991",
+          storageBucket: "cnei-system-d2991.firebasestorage.app",
+          messagingSenderId: "822620912306",
+          appId: "1:822620912306:web:32ac8116dccfc3a5e1e7ab"
+      };
+      firebase.initializeApp(firebaseConfig);
+      
+      firebase.database().ref('ebs').on('value', (snapshot) => {
+          const data = snapshot.val();
+          if (data && data.active) {
+              document.body.innerHTML = `
+                  <div style="background:#0f1115; color:#ffffff; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                      <img src="logonobg.png" alt="CNEI Logo" style="height:80px; margin-bottom:2rem;">
+                      <div style="font-family:monospace; color:#d93025; letter-spacing:2px; font-size:0.9rem; margin-bottom:0.5rem;">STATUS: CRITICAL</div>
+                      <h1 style="color:#ffffff; font-size:2.5rem; letter-spacing:1px; margin-top:0; margin-bottom:1.5rem; border-bottom:2px solid #d93025; padding-bottom:0.5rem;">SYSTEM LOCKDOWN IN EFFECT</h1>
+                      <div style="max-width:600px; font-size:1.1rem; line-height:1.6; border:1px solid #2a2e39; padding:2rem; background:#161920; border-left:4px solid #d93025; text-align:left;">
+                          ${data.message}
+                      </div>
+                      <p style="color:#80868b; font-size:0.8rem; margin-top:2.5rem; font-family:monospace;">Centre of National and External Intelligence (CNEI) // Official Operations</p>
+                  </div>
+              `;
+          }
+      });
+    </script>
 </body>
 </html>
