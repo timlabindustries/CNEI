@@ -15,146 +15,37 @@
             --text-main: #e0e6ed;
             --text-muted: #8b949e;
         }
-
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
-
-        /* Institutional Header */
-        .site-header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-        }
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-        .brand-logo {
-            height: 38px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover {
-            color: white;
-        }
-        .btn-portal {
-            border: 1px solid var(--border-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            color: white !important;
-            font-size: 0.85rem !important;
-            background: rgba(255,255,255,0.03);
-        }
-        .btn-portal:hover {
-            border-color: var(--text-muted);
-            background: rgba(255,255,255,0.08);
-        }
-
-        /* Hero & Content Layout */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
-        }
-        .hero {
-            margin-bottom: 3.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 2.5rem;
-        }
-        .status-badge {
-            display: inline-block;
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #27c93f;
-            background: rgba(39, 201, 63, 0.1);
-            border: 1px solid rgba(39, 201, 63, 0.2);
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-            margin-bottom: 1rem;
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin: 0 0 1rem 0;
-            font-weight: 600;
-            color: #ffffff;
-        }
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            max-width: 750px;
-            margin: 0;
-        }
-
-        /* Feature Cards Grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 1.75rem;
-            border-radius: 4px;
-        }
-        .card h3 {
-            margin-top: 0;
-            font-size: 1.2rem;
-            color: white;
-        }
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 0;
-        }
-
-        /* Institutional Footer */
-        .site-footer {
-            border-top: 1px solid var(--border-color);
-            background-color: var(--bg-card);
-            padding: 2rem 0;
-            margin-top: 4rem;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        .site-header { background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: white; font-weight: bold; }
+        .brand-logo { height: 38px; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .nav-links a:hover { color: white; }
+        .btn-portal { border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 4px; color: white !important; background: rgba(255,255,255,0.03); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .hero { margin-bottom: 3.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 2.5rem; }
+        .status-badge { display: inline-block; font-family: monospace; font-size: 0.75rem; color: #27c93f; background: rgba(39, 201, 63, 0.1); border: 1px solid rgba(39, 201, 63, 0.2); padding: 0.2rem 0.6rem; border-radius: 3px; margin-bottom: 1rem; }
+        .hero h1 { font-size: 2.5rem; margin: 0 0 1rem 0; color: #ffffff; }
+        .hero p { color: var(--text-muted); font-size: 1.15rem; max-width: 750px; margin: 0; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background-color: var(--bg-card); border: 1px solid var(--border-color); padding: 1.75rem; border-radius: 4px; }
+        .card h3 { margin-top: 0; font-size: 1.2rem; color: white; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; }
+        .site-footer { border-top: 1px solid var(--border-color); background-color: var(--bg-card); padding: 2rem 0; margin-top: 4rem; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
-    <!-- Main Navigation Header -->
     <header class="site-header">
         <div class="nav-container">
             <a href="index.html" class="brand">
@@ -162,45 +53,38 @@
                 <span>CNEI</span>
             </a>
             <nav class="nav-links">
+                <a href="about.html">Amdanom ni</a>
+                <a href="methodology.html">Methodoleg</a>
+                <a href="publications.html">Cyhoeddiadau</a>
                 <a href="../index.html">English</a>
-                <a href="#about">Amdanom ni</a>
-                <a href="#charter">Siarter Sefydliadol</a>
                 <a href="../staff/index.html" class="btn-portal">Porth Staff</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Portal Body -->
     <main class="container">
-        
         <section class="hero">
             <div class="status-badge">● SYSTEM YN GWEITHREDU</div>
             <h1>Y Ganolfan Cudd-wybodaeth Gwladol ac Allanol</h1>
-            <p>
-                Darparu dadansoddiad cudd-wybodaeth strategol annibynnol, asesiad risg ffynhonnell agored, a monitro geofodol ffynhonnell agored ar gyfer sefydlogrwydd byd-eang ac asesiad polisi.
-            </p>
+            <p>Darparu dadansoddiadudd-wybodaeth strategol annibynnol, asesiad risg ffynhonnell agored, a monitro geofodol ffynhonnell agored ar gyfer sefydlogrwydd byd-eang ac asesiad polisi.</p>
         </section>
 
         <section class="card-grid">
             <div class="card">
                 <h3>Cudd-wybodaeth Ffynhonnell Agored (OSINT)</h3>
-                <p>Asesiad systematig o ddata cudd-wybodaeth y gellir ei ddilysu'n gyhoeddus, porthiant lloeren, a choridorau hedfan/môr rhyngwladol.</p>
+                <p>Asesiad systematig o ddataudd-wybodaeth y gellir ei ddilysu'n gyhoeddus, porthiant lloeren, a choridorau hedfan/môr rhyngwladol.</p>
             </div>
-
             <div class="card">
                 <h3>Dadansoddiad Geopolitaidd</h3>
                 <p>Gwerthusiad annibynnol o ddatblygiadau diogelwch strwythurol parhaus a materion rhyngwladol strategol.</p>
             </div>
-
             <div class="card">
                 <h3>Integrity Gwybodaeth</h3>
                 <p>Gweithdrefnau dilysu trwyadl sy'n cynnal fframwaith gweithredu ddi-duedd, heb dracio, ac sy'n gwbl gyhoeddus.</p>
             </div>
         </section>
-
     </main>
 
-    <!-- Site Footer -->
     <footer class="site-footer">
         <div class="container footer-content">
             <div>&copy; Y Ganolfan Cudd-wybodaeth Gwladol ac Allanol (CNEI). Cedwir pob hawl.</div>
