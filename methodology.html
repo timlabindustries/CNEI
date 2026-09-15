@@ -3,103 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Methodology — CNEI</title>
+    <title>Methodology — Centre of National and External Intelligence (CNEI)</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-main: #0a0c10;
+            --bg-card: #12161f;
+            --border-color: #212631;
+            --text-main: #e0e6ed;
+            --text-muted: #8b949e;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .site-header { background-color: var(--bg-card); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; }
+        .nav-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: white; font-weight: bold; }
+        .brand-logo { height: 38px; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .nav-links a:hover { color: white; }
+        .btn-portal { border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 4px; color: white !important; background: rgba(255,255,255,0.03); }
+        .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+        h1 { color: #fff; font-size: 2.2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+        h3 { color: #fff; margin-top: 2rem; }
+        p { color: var(--text-muted); font-size: 1.05rem; }
+        .site-footer { border-top: 1px solid var(--border-color); background-color: var(--bg-card); padding: 2rem 0; margin-top: 4rem; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); }
+    </style>
 </head>
 <body>
 
     <header class="site-header">
-        <div class="container nav-container">
+        <div class="nav-container">
             <a href="index.html" class="brand">
-                <img src="logonobg.png" alt="CNEI Logo" class="brand-logo">
-                <span class="brand-text">CNEI</span>
+                <img src="logonobg.png" alt="CNEI Seal" class="brand-logo">
+                <span>CNEI</span>
             </a>
-            <nav style="display: flex; align-items: center; gap: 1.5rem;">
-                <ul class="nav-links">
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="publications.html">Publications</a></li>
-                    <li><a href="methodology.html" class="active">Methodology</a></li>
-                </ul>
-                <div class="lang-selector" style="font-family: var(--font-mono); font-size: 0.8rem; border-left: 1px solid var(--border-color); padding-left: 1rem;">
-                    <span class="lang-option active" style="font-weight: bold; cursor: pointer;">EN</span> | 
-                    <a href="cy/methodology.html" style="color: var(--text-muted); text-decoration: none;">CY</a>
-                </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="publications.html">Publications</a>
+                <a href="cy/methodology.html">Cymraeg</a>
+                <a href="staff/index.html" class="btn-portal">Staff Gateway</a>
             </nav>
         </div>
     </header>
 
-    <section class="section" style="background-color: var(--bg-surface);">
-        <div class="container">
-            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Analytical Standards</span>
-            <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-top: 0.5rem;">Research Methodology</h1>
-            <p style="color: var(--text-secondary); max-width: 700px; margin-top: 0.5rem;">
-                The 4-phase structured verification framework applied to all intelligence briefs published by CNEI.
-            </p>
-        </div>
-    </section>
-
     <main class="container">
-        <section class="section" style="border-bottom: none;">
-            <div style="max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.05rem;">
+        <h1>Analytical Methodology</h1>
+        
+        <h3>1. Public Domain Verification</h3>
+        <p>All intelligence assessments published by CNEI rely exclusively on publicly accessible, unclassified raw data sources—including optical/radar satellite imagery, ADS-B flight telemetry, and AIS maritime tracking.</p>
 
-                <!-- Phase 1 -->
-                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 2rem; margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">PHASE 01 // DATA COLLECTION</div>
-                    <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Public Identification & Ingestion</h2>
-                    <p>
-                        CNEI ingests data exclusively from lawful, unclassified open sources. Primary streams include commercial satellite imagery, maritime AIS telemetry, ADS-B flight-tracking data, and official public regulatory filings.
-                    </p>
-                </div>
+        <h3>2. Multi-Source Triangulation</h3>
+        <p>No single data point is considered actionable without independent secondary verification across distinct digital corridors to prevent misattribution or algorithmic distortion.</p>
 
-                <!-- Phase 2 -->
-                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 2rem; margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">PHASE 02 // VERIFICATION</div>
-                    <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Telemetry & Geospatial Cross-Referencing</h2>
-                    <p>
-                        No single data point is accepted as factual truth. Every data stream undergoes multi-angle cross-verification, matching satellite imagery against RF signals, flight paths, and geographical terrain features.
-                    </p>
-                </div>
-
-                <!-- Phase 3 -->
-                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 2rem; margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">PHASE 03 // AUDITING</div>
-                    <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Noise Reduction & Bias Elimination</h2>
-                    <p>
-                        Analytical outputs must remain strictly objective and free from editorial speculation. Researchers scrub reports of subjective commentary, ensuring conclusions rest solely on empirical data points.
-                    </p>
-                </div>
-
-                <!-- Phase 4 -->
-                <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 2rem; margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">PHASE 04 // PUBLICATION</div>
-                    <h2 style="font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem;">Transparent Citation & Confidence Scoring</h2>
-                    <p>
-                        Every published intelligence brief includes clear source references and confidence markers, enabling readers to independently audit and verify our underlying datasets line by line.
-                    </p>
-                </div>
-
-            </div>
-        </section>
+        <h3>3. Zero-Tracking Integrity</h3>
+        <p>In accordance with CNEI operational standards, research assets and public intelligence feeds are hosted on strict privacy-preserving infrastructure with zero user tracking.</p>
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-notice">
-                <strong>Information Provenance & Operational Notice</strong>
-                All analytical outputs published by CNEI are derived exclusively from publicly accessible, lawful open sources. CNEI does not handle or process classified government documents or non-consensual personal data. CNEI is an independent, un-incorporated voluntary student-led research collective and is not affiliated with any official government body or intelligence agency.
-            </div>
-            <div class="footer-nav">
-                <a href="legal.html" class="btn-legal">Legal Center</a>
-                <ul class="policy-links">
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="cookies.html">Cookie Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                    <li><a href="accessibility.html">Accessibility Statement</a></li>
-                </ul>
-            </div>
-            <p class="copyright">&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+        <div class="container footer-content">
+            <div>&copy; Centre of National and External Intelligence (CNEI). All rights reserved.</div>
+            <div style="font-family: monospace;">UK RESTRICTED INFRASTRUCTURE</div>
         </div>
     </footer>
 
+    <!-- EBS Listener -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+          apiKey: "AIzaSyCssuItXk64_a1jWZmnl9NI5U0LxTsF8Rg",
+          authDomain: "cnei-system-d2991.firebaseapp.com",
+          databaseURL: "https://cnei-system-d2991-default-rtdb.europe-west1.firebasedatabase.app",
+          projectId: "cnei-system-d2991",
+          storageBucket: "cnei-system-d2991.firebasestorage.app",
+          messagingSenderId: "822620912306",
+          appId: "1:822620912306:web:32ac8116dccfc3a5e1e7ab"
+      };
+      firebase.initializeApp(firebaseConfig);
+      
+      firebase.database().ref('ebs').on('value', (snapshot) => {
+          const data = snapshot.val();
+          if (data && data.active) {
+              document.body.innerHTML = `
+                  <div style="background:#0f1115; color:#ffffff; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                      <img src="logonobg.png" alt="CNEI Logo" style="height:80px; margin-bottom:2rem;">
+                      <div style="font-family:monospace; color:#d93025; letter-spacing:2px; font-size:0.9rem; margin-bottom:0.5rem;">STATUS: CRITICAL</div>
+                      <h1 style="color:#ffffff; font-size:2.5rem; letter-spacing:1px; margin-top:0; margin-bottom:1.5rem; border-bottom:2px solid #d93025; padding-bottom:0.5rem;">SYSTEM LOCKDOWN IN EFFECT</h1>
+                      <div style="max-width:600px; font-size:1.1rem; line-height:1.6; border:1px solid #2a2e39; padding:2rem; background:#161920; border-left:4px solid #d93025; text-align:left;">
+                          ${data.message}
+                      </div>
+                      <p style="color:#80868b; font-size:0.8rem; margin-top:2.5rem; font-family:monospace;">Centre of National and External Intelligence (CNEI) // Official Operations</p>
+                  </div>
+              `;
+          }
+      });
+    </script>
 </body>
 </html>
