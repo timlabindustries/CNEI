@@ -3,66 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNEI — Center for National & External Intelligence</title>
+    <title>CNEI — Simple Intelligence & Safety News</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('banner.png') center/cover no-repeat;
+            color: #ffffff;
+            padding: 4rem 1rem;
+        }
+    </style>
 </head>
 <body>
 
     <header class="site-header">
         <div class="container nav-container">
             <a href="index.html" class="brand">
-                <img src="logonobg.png" alt="CNEI Logo" class="brand-logo">
+                <img src="logonobg.png" alt="CNEI Logo" class="brand-logo" style="height: 40px;">
                 <span class="brand-text">CNEI</span>
             </a>
             <nav style="display: flex; align-items: center; gap: 1.5rem;">
                 <ul class="nav-links">
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="publications.html">Publications</a></li>
-                    <li><a href="methodology.html">Methodology</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="publications.html">Our Reports</a></li>
+                    <li><a href="methodology.html">How We Work</a></li>
                 </ul>
                 <div class="lang-selector" style="font-family: var(--font-mono); font-size: 0.8rem; border-left: 1px solid var(--border-color); padding-left: 1rem;">
-                    <span class="lang-option active" style="font-weight: bold; cursor: pointer;">EN</span> | 
+                    <span class="lang-option active" style="font-weight: bold;">EN</span> | 
                     <a href="cy/index.html" style="color: var(--text-muted); text-decoration: none;">CY</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="hero section">
+    <section class="hero-banner">
         <div class="container">
-            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Independent OSINT Research</span>
-            <h1 style="font-family: var(--font-serif); font-size: 3rem; margin-top: 0.5rem; line-height: 1.2;">Center for National & External Intelligence</h1>
-            <p style="color: var(--text-secondary); max-width: 700px; margin-top: 1rem; font-size: 1.1rem; line-height: 1.6;">
-                An independent, un-incorporated voluntary research collective providing rigorous open-source intelligence and strategic analysis on national security and geostrategic affairs.
+            <span style="font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; color: #ccc;">Easy to Understand Research</span>
+            <h1 style="font-family: var(--font-serif); font-size: 2.5rem; margin-top: 0.5rem; line-height: 1.2;">We Help You Understand World News</h1>
+            <p style="max-width: 650px; margin-top: 1rem; font-size: 1.1rem; line-height: 1.6; color: #eee;">
+                CNEI is a group of friendly researchers. We look at public facts, maps, and pictures to explain what is happening around the world in very simple words.
             </p>
             <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                <a href="publications.html" class="btn-legal" style="padding: 0.75rem 1.5rem;">View Publications</a>
-                <a href="about.html" style="padding: 0.75rem 1.5rem; color: var(--text-main); text-decoration: none; border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 0.85rem;">About CNEI</a>
+                <a href="publications.html" class="btn-legal" style="padding: 0.75rem 1.5rem; background: #ffffff; color: #000; text-decoration: none; font-weight: bold;">Read Our Reports</a>
+                <a href="about.html" style="padding: 0.75rem 1.5rem; color: #ffffff; text-decoration: none; border: 1px solid #ffffff; font-family: var(--font-mono); font-size: 0.85rem;">Learn About Us</a>
             </div>
         </div>
     </section>
 
     <main class="container">
         <section class="section">
-            <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1.5rem;">Analytical Pillars</h2>
+            <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1.5rem;">What We Do</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                 
                 <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 1.5rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">01 // OSINT VERIFICATION</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Open-Source Analysis</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Rigorous cross-referencing of publicly available satellite imagery, maritime AIS, and ADS-B flight telemetry.</p>
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">01 // FIND FACTS</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Public Pictures & Maps</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">We look at pictures taken from space and map tracking to see where planes and ships go.</p>
                 </div>
 
                 <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 1.5rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">02 // STRATEGIC ASSESSMENTS</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Geostrategic Research</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Objective evaluation of geopolitical shifts, defense posture, and critical infrastructure vulnerabilities.</p>
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">02 // KEEP IT SIMPLE</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Easy Explanations</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">We explain big world events so anyone can understand them without using confusing words.</p>
                 </div>
 
                 <div style="background-color: var(--bg-surface); border: 1px solid var(--border-color); padding: 1.5rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">03 // METHODOLOGICAL RIGOUR</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Structured Auditing</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem;">Four-phase verification pipeline engineered to eliminate narrative bias and speculative reporting.</p>
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">03 // TRIPLE CHECK</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.5rem;">Always Honest</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem;">We check our facts three times to make sure we only share true information.</p>
                 </div>
 
             </div>
@@ -72,9 +80,14 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-notice">
-                <strong>Information Provenance & Operational Notice</strong>
-                All analytical outputs published by CNEI are derived exclusively from publicly accessible, lawful open sources. CNEI does not handle or process classified government documents or non-consensual personal data. CNEI is an independent, un-incorporated voluntary student-led research collective and is not affiliated with any official government body or intelligence agency.
+                <strong>Who We Are</strong><br>
+                CNEI is a free, independent group of students and researchers. We only use information that anyone can see on the internet. We do not work for the government or military.
             </div>
+            
+            <div style="margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem;">
+                <strong>Contact Us:</strong> <a href="mailto:info@cnei.org.uk" style="color: var(--text-main);">info@cnei.org.uk</a>
+            </div>
+
             <div class="footer-nav">
                 <a href="legal.html" class="btn-legal">Legal Center</a>
                 <ul class="policy-links">
