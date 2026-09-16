@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: timlabindustries/CNEI.github.io
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "publications"
+    label: "Publications"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title (English)", name: "title_en", widget: "string" }
+      - { label: "Title (Welsh)", name: "title_cy", widget: "string", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "CNEI Research Team" }
+      - { label: "Category", name: "category", widget: "select", options: ["OSINT Briefing", "Geostrategic Assessment", "Special Report"] }
+      - { label: "Summary (English)", name: "summary_en", widget: "text" }
+      - { label: "Summary (Welsh)", name: "summary_cy", widget: "text", required: false }
+      - { label: "Full Content (English)", name: "body_en", widget: "markdown" }
+      - { label: "Full Content (Welsh)", name: "body_cy", widget: "markdown", required: false }
