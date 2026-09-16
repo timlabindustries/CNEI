@@ -3,36 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — CNEI</title>
+  <title>Contact & Legal — CNEI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Keyboard navigation link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header with Left Logo & Consistent Navigation -->
   <header>
-    <a href="index.html" class="logo"><img src="logonobg.png" alt="CNEI Logo"></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="publications.html">Publications</a>
-      <a href="contact.html" class="active">Contact</a>
+    <a href="index.html" class="logo" aria-label="CNEI Home">
+      <img src="logonobg.png" alt="CNEI Logo">
+    </a>
+    <nav aria-label="Main Navigation">
+      <a href="index.html">
+        <span class="lang-en">Home</span><span class="lang-cy" style="display:none;">Hafan</span>
+      </a>
+      <a href="about.html">
+        <span class="lang-en">About Us</span><span class="lang-cy" style="display:none;">Amdanom Ni</span>
+      </a>
+      <a href="publications.html">
+        <span class="lang-en">Publications</span><span class="lang-cy" style="display:none;">Cyhoeddiadau</span>
+      </a>
+      <a href="contact.html" class="active" aria-current="page">
+        <span class="lang-en">Contact</span><span class="lang-cy" style="display:none;">Cysylltu</span>
+      </a>
+      <button class="lang-btn" onclick="toggleLanguage()" aria-label="Switch language to Welsh / Newid iaith i'r Gymraeg">
+        <span class="lang-en">Cymraeg</span><span class="lang-cy" style="display:none;">English</span>
+      </button>
     </nav>
   </header>
 
-  <main class="container">
-    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary-blue);">Contact Us</h2>
+  <main id="main-content" class="container">
+    <h1 style="color: var(--primary-blue); font-size: 2.25rem; margin-bottom: 1.5rem;">
+      <span class="lang-en">Contact & Legal</span>
+      <span class="lang-cy" style="display:none;">Cyswllt a Chyfreithiol</span>
+    </h1>
 
-    <div class="card">
-      <h3>General Enquiries</h3>
-      <p style="margin-top: 0.5rem;"><a href="mailto:Info@cnei.org.uk" style="color: var(--accent-blue);">Info@cnei.org.uk</a></p>
-    </div>
+    <!-- Direct Contact Routes -->
+    <section aria-labelledby="enquiries-heading" style="margin-bottom: 3rem;">
+      <h2 id="enquiries-heading" style="color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 1rem;">
+        <span class="lang-en">Direct Contact Routes</span>
+        <span class="lang-cy" style="display:none;">Lwybrau Cyswllt Uniongyrchol</span>
+      </h2>
 
-    <div class="card">
-      <h3>Legal Enquiries</h3>
-      <p style="margin-top: 0.5rem;"><a href="mailto:Legal@cnei.org.uk" style="color: var(--accent-blue);">Legal@cnei.org.uk</a></p>
-    </div>
+      <div class="card">
+        <h3><span class="lang-en">General Enquiries</span><span class="lang-cy" style="display:none;">Ymholiadau Cyffredinol</span></h3>
+        <p style="margin-top: 0.5rem;"><a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></p>
+      </div>
+
+      <div class="card">
+        <h3><span class="lang-en">Legal & Compliance Enquiries</span><span class="lang-cy" style="display:none;">Ymholiadau Cyfreithiol</span></h3>
+        <p style="margin-top: 0.5rem;"><a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></p>
+      </div>
+    </section>
+
+    <!-- Comprehensive Legal Section -->
+    <section aria-labelledby="legal-heading">
+      <h2 id="legal-heading" style="color: var(--primary-blue); font-size: 1.75rem; margin-bottom: 1.5rem;">
+        <span class="lang-en">Legal Notices & Policies</span>
+        <span class="lang-cy" style="display:none;">Hysbysiadau Cyfreithiol a Pholisïau</span>
+      </h2>
+
+      <div id="privacy" class="card">
+        <h3>
+          <span class="lang-en">Privacy Policy</span>
+          <span class="lang-cy" style="display:none;">Polisi Preifatrwydd</span>
+        </h3>
+        <p style="margin-top: 0.5rem;">
+          <span class="lang-en">CNEI operates with a privacy-first standard. We do not track personal identifying information, sell user data, or deploy invasive tracking cookies. Any contact emails submitted to us are processed solely for response purposes.</span>
+          <span class="lang-cy" style="display:none;">Mae CNEI yn gweithredu gyda safon preifatrwydd-yn gyntaf. Nid ydym yn olrhain gwybodaeth adnabod personol nac yn gwerthu data defnyddwyr.</span>
+        </p>
+      </div>
+
+      <div id="cookies" class="card">
+        <h3>
+          <span class="lang-en">Cookie Policy</span>
+          <span class="lang-cy" style="display:none;">Polisi Cwcis</span>
+        </h3>
+        <p style="margin-top: 0.5rem;">
+          <span class="lang-en">This website runs cleanly without third-party advertising or profiling cookies. Only essential browser cache mechanisms are used to render videos and layout styles smoothly.</span>
+          <span class="lang-cy" style="display:none;">Mae'r wefan hon yn rhedeg yn lân heb cwcis hysbysebu trydydd parti. Dim ond mecanweithiau gofynnol sy'n cael eu defnyddio.</span>
+        </p>
+      </div>
+
+      <div id="terms" class="card">
+        <h3>
+          <span class="lang-en">Terms of Use</span>
+          <span class="lang-cy" style="display:none;">Telerau Defnyddio</span>
+        </h3>
+        <p style="margin-top: 0.5rem;">
+          <span class="lang-en">All published materials are provided under public open-source verification principles. Re-use of analytical content is permitted with clear citation attribution to CNEI.</span>
+          <span class="lang-cy" style="display:none;">Rhoddir yr holl ddeunyddiau a gyhoeddir o dan egwyddorion dilysu ffynhonnell agored gyhoeddus. Argraffu a defnyddio gyda chydnabyddiaeth glir i CNEI.</span>
+        </p>
+      </div>
+
+      <div id="accessibility" class="card">
+        <h3>
+          <span class="lang-en">Accessibility Statement</span>
+          <span class="lang-cy" style="display:none;">Datganiad Hygyrchedd</span>
+        </h3>
+        <p style="margin-top: 0.5rem;">
+          <span class="lang-en">We strive to maintain WCAG 2.2 Level AA compliance, featuring high-contrast ratios, full keyboard navigation support, visible focus rings, and screen-reader accessible elements.</span>
+          <span class="lang-cy" style="display:none;">Rydym yn ymdrechu i gadw at gydymffurfiaeth WCAG 2.2 Lefel AA gyda chymhareb cyferbyniad uchel a llywio bysellfwrdd llawn.</span>
+        </p>
+      </div>
+    </section>
   </main>
 
+  <!-- Universal Footer -->
   <footer>
-    <p>&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Navigation</span>
+          <span class="lang-cy" style="display:none;">Llywio</span>
+        </h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Contact Details</span>
+          <span class="lang-cy" style="display:none;">Manylion Cyswllt</span>
+        </h3>
+        <ul>
+          <li>General: <a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></li>
+          <li>Legal: <a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Legal & Policies</span>
+          <span class="lang-cy" style="display:none;">Cyfreithiol a Pholisïau</span>
+        </h3>
+        <ul>
+          <li><a href="contact.html#privacy">Privacy Policy</a></li>
+          <li><a href="contact.html#cookies">Cookie Policy</a></li>
+          <li><a href="contact.html#terms">Terms of Use</a></li>
+          <li><a href="contact.html#accessibility">Accessibility Statement</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    function toggleLanguage() {
+      const enElems = document.querySelectorAll('.lang-en');
+      const cyElems = document.querySelectorAll('.lang-cy');
+      const isWelsh = enElems[0].style.display === 'none';
+
+      enElems.forEach(el => el.style.display = isWelsh ? 'inline-block' : 'none');
+      cyElems.forEach(el => el.style.display = isWelsh ? 'none' : 'inline-block');
+      
+      document.documentElement.lang = isWelsh ? 'en' : 'cy';
+    }
+  </script>
 </body>
 </html>
