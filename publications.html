@@ -7,28 +7,118 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Keyboard navigation link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header with Left Logo & Consistent Navigation -->
   <header>
-    <a href="index.html" class="logo"><img src="logonobg.png" alt="CNEI Logo"></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="publications.html" class="active">Publications</a>
-      <a href="contact.html">Contact</a>
+    <a href="index.html" class="logo" aria-label="CNEI Home">
+      <img src="logonobg.png" alt="CNEI Logo">
+    </a>
+    <nav aria-label="Main Navigation">
+      <a href="index.html">
+        <span class="lang-en">Home</span><span class="lang-cy" style="display:none;">Hafan</span>
+      </a>
+      <a href="about.html">
+        <span class="lang-en">About Us</span><span class="lang-cy" style="display:none;">Amdanom Ni</span>
+      </a>
+      <a href="publications.html" class="active" aria-current="page">
+        <span class="lang-en">Publications</span><span class="lang-cy" style="display:none;">Cyhoeddiadau</span>
+      </a>
+      <a href="contact.html">
+        <span class="lang-en">Contact</span><span class="lang-cy" style="display:none;">Cysylltu</span>
+      </a>
+      <button class="lang-btn" onclick="toggleLanguage()" aria-label="Switch language to Welsh / Newid iaith i'r Gymraeg">
+        <span class="lang-en">Cymraeg</span><span class="lang-cy" style="display:none;">English</span>
+      </button>
     </nav>
   </header>
 
-  <main class="container">
-    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--primary-blue);">Latest Publications</h2>
-    
-    <div class="card">
-      <small style="color: var(--text-muted);">September 2026 // OSINT Report</small>
-      <h3 style="margin: 0.5rem 0; color: var(--primary-blue);">Geostrategic Assessment & Open Source Monitoring</h3>
-      <p>Analysis of current maritime telemetry and regional security posture trends.</p>
-    </div>
+  <main id="main-content" class="container">
+    <h1 style="color: var(--primary-blue); font-size: 2.25rem; margin-bottom: 1.5rem;">
+      <span class="lang-en">Research & Publications</span>
+      <span class="lang-cy" style="display:none;">Ymchwil a Chyhoeddiadau</span>
+    </h1>
+
+    <p style="margin-bottom: 2rem;">
+      <span class="lang-en">Explore our latest open-source reports, briefings, and intelligence assessments.</span>
+      <span class="lang-cy" style="display:none;">Archwiliwch ein dadansoddiadau ac adroddiadau ffynhonnell agored diweddaraf.</span>
+    </p>
+
+    <!-- Publication Card Example -->
+    <article class="card">
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.25rem;">
+        <time datetime="2026-09-16">September 2026</time> // <span class="lang-en">OSINT Briefing</span><span class="lang-cy" style="display:none;">Briffio OSINT</span>
+      </p>
+      <h2 style="color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 0.75rem;">
+        <span class="lang-en">Geostrategic Monitoring & Telemetry Analysis</span>
+        <span class="lang-cy" style="display:none;">Monitro Geostrategol a Dadansoddiad Telemetreg</span>
+      </h2>
+      <p style="margin-bottom: 1rem;">
+        <span class="lang-en">A thorough examination of recent maritime movement patterns and satellite observation data verified through multi-source cross-referencing.</span>
+        <span class="lang-cy" style="display:none;">Archwiliad trwyadl o batrymau symud morol diweddar a data arsylwi lloeren wedi'i ddilysu trwy Groes-gyfeirio aml-ffynhonnell.</span>
+      </p>
+    </article>
   </main>
 
+  <!-- Universal Footer -->
   <footer>
-    <p>&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Navigation</span>
+          <span class="lang-cy" style="display:none;">Llywio</span>
+        </h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Contact Details</span>
+          <span class="lang-cy" style="display:none;">Manylion Cyswllt</span>
+        </h3>
+        <ul>
+          <li>General: <a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></li>
+          <li>Legal: <a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Legal & Policies</span>
+          <span class="lang-cy" style="display:none;">Cyfreithiol a Pholisïau</span>
+        </h3>
+        <ul>
+          <li><a href="contact.html#privacy">Privacy Policy</a></li>
+          <li><a href="contact.html#cookies">Cookie Policy</a></li>
+          <li><a href="contact.html#terms">Terms of Use</a></li>
+          <li><a href="contact.html#accessibility">Accessibility Statement</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    function toggleLanguage() {
+      const enElems = document.querySelectorAll('.lang-en');
+      const cyElems = document.querySelectorAll('.lang-cy');
+      const isWelsh = enElems[0].style.display === 'none';
+
+      enElems.forEach(el => el.style.display = isWelsh ? 'inline-block' : 'none');
+      cyElems.forEach(el => el.style.display = isWelsh ? 'none' : 'inline-block');
+      
+      document.documentElement.lang = isWelsh ? 'en' : 'cy';
+    }
+  </script>
 </body>
 </html>
