@@ -3,35 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — CNEI</title>
+  <title>About Us — CNEI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Keyboard navigation link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header with Left Logo & Consistent Navigation -->
   <header>
-    <a href="index.html" class="logo"><img src="logonobg.png" alt="CNEI Logo"></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html" class="active">About</a>
-      <a href="publications.html">Publications</a>
-      <a href="contact.html">Contact</a>
+    <a href="index.html" class="logo" aria-label="CNEI Home">
+      <img src="logonobg.png" alt="CNEI Logo">
+    </a>
+    <nav aria-label="Main Navigation">
+      <a href="index.html">
+        <span class="lang-en">Home</span><span class="lang-cy" style="display:none;">Hafan</span>
+      </a>
+      <a href="about.html" class="active" aria-current="page">
+        <span class="lang-en">About Us</span><span class="lang-cy" style="display:none;">Amdanom Ni</span>
+      </a>
+      <a href="publications.html">
+        <span class="lang-en">Publications</span><span class="lang-cy" style="display:none;">Cyhoeddiadau</span>
+      </a>
+      <a href="contact.html">
+        <span class="lang-en">Contact</span><span class="lang-cy" style="display:none;">Cysylltu</span>
+      </a>
+      <button class="lang-btn" onclick="toggleLanguage()" aria-label="Switch language to Welsh / Newid iaith i'r Gymraeg">
+        <span class="lang-en">Cymraeg</span><span class="lang-cy" style="display:none;">English</span>
+      </button>
     </nav>
   </header>
 
-  <main class="container">
+  <main id="main-content" class="container">
     <div class="grid-2">
       <div>
-        <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary-blue);">About CNEI</h2>
-        <p style="margin-bottom: 1rem;">The Center for National & External Intelligence is an independent, voluntary research collective focused on providing rigorous open-source intelligence (OSINT) and strategic analysis on geostrategic affairs and national security.</p>
-        <p>Our work leverages publicly available satellite imagery, maritime AIS data, flight telemetry, and structured verification methods to deliver clear, unbiased reporting.</p>
+        <h1 style="color: var(--primary-blue); font-size: 2.25rem; margin-bottom: 1.5rem;">
+          <span class="lang-en">About CNEI</span>
+          <span class="lang-cy" style="display:none;">Amdanom CNEI</span>
+        </h1>
+
+        <!-- Child-friendly, simple language explanation -->
+        <p class="lang-en" style="margin-bottom: 1rem;">
+          <strong>What is CNEI?</strong> Think of us like online detectives! We look at public clues—like satellite pictures of the Earth, map routes of ships at sea, and airplane movements in the sky.
+        </p>
+        <p class="lang-en" style="margin-bottom: 1rem;">
+          <strong>Why do we do it?</strong> We do this to help keep people safe and share truthful facts about what is happening in the world, without taking sides or guessing.
+        </p>
+        <p class="lang-en" style="margin-bottom: 1rem;">
+          We are an independent, voluntary group of researchers. We believe everybody deserves access to accurate, factual information based on real evidence.
+        </p>
+
+        <p class="lang-cy" style="display:none; margin-bottom: 1rem;">
+          <strong>Beth yw CNEI?</strong> Meddyliwch amdanom fel ditectifs ar-lein! Rydym yn edrych ar gliwiau cyhoeddus—fel lluniau lloeren o'r Ddaear, mapiau o ffyrdd llongau yn y môr, a symudiadau awyrennau yn y awyr.
+        </p>
+        <p class="lang-cy" style="display:none; margin-bottom: 1rem;">
+          <strong>Pam rydyn ni'n ei wneud?</strong> Rydym yn gwneud hyn i helpu i gadw pobl yn ddiogel ac i rannu ffeithiau cywir am yr hyn sy'n digwydd yn y byd.
+        </p>
+        <p class="lang-cy" style="display:none; margin-bottom: 1rem;">
+          Rydym yn grŵp ymchwil annibynnol, gwirfoddol. Rydym yn credu bod pawb yn haeddu mynediad at wybodaeth gywir ac ffeithiol.
+        </p>
       </div>
+
       <div>
-        <img src="diego_torres-london-947381.jpg" alt="London intelligence analysis overview" style="width: 100%; border-radius: 8px; border: 1px solid var(--border-color);">
+        <img src="diego_torres-london-947381.jpg" alt="View of London city architecture used for intelligence research" style="width: 100%; border-radius: 8px; border: 2px solid var(--border-color);">
       </div>
     </div>
   </main>
 
+  <!-- Universal Footer -->
   <footer>
-    <p>&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Navigation</span>
+          <span class="lang-cy" style="display:none;">Llywio</span>
+        </h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Contact Details</span>
+          <span class="lang-cy" style="display:none;">Manylion Cyswllt</span>
+        </h3>
+        <ul>
+          <li>General: <a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></li>
+          <li>Legal: <a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>
+          <span class="lang-en">Legal & Policies</span>
+          <span class="lang-cy" style="display:none;">Cyfreithiol a Pholisïau</span>
+        </h3>
+        <ul>
+          <li><a href="contact.html#privacy">Privacy Policy</a></li>
+          <li><a href="contact.html#cookies">Cookie Policy</a></li>
+          <li><a href="contact.html#terms">Terms of Use</a></li>
+          <li><a href="contact.html#accessibility">Accessibility Statement</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    function toggleLanguage() {
+      const enElems = document.querySelectorAll('.lang-en');
+      const cyElems = document.querySelectorAll('.lang-cy');
+      const isWelsh = enElems[0].style.display === 'none';
+
+      enElems.forEach(el => el.style.display = isWelsh ? 'inline-block' : 'none');
+      cyElems.forEach(el => el.style.display = isWelsh ? 'none' : 'inline-block');
+      
+      document.documentElement.lang = isWelsh ? 'en' : 'cy';
+    }
+  </script>
 </body>
 </html>
