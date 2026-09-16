@@ -7,30 +7,151 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Keyboard navigation link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header with Left Logo & Consistent Navigation -->
   <header>
-    <a href="index.html" class="logo"><img src="logonobg.png" alt="CNEI Logo"></a>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="publications.html">Publications</a>
-      <a href="contact.html">Contact</a>
+    <a href="index.html" class="logo" aria-label="CNEI Home">
+      <img src="logonobg.png" alt="CNEI Logo">
+    </a>
+    <nav aria-label="Main Navigation">
+      <a href="index.html" class="active" aria-current="page">
+        <span class="lang-en">Home</span><span class="lang-cy" style="display:none;">Hafan</span>
+      </a>
+      <a href="about.html">
+        <span class="lang-en">About Us</span><span class="lang-cy" style="display:none;">Amdanom Ni</span>
+      </a>
+      <a href="publications.html">
+        <span class="lang-en">Publications</span><span class="lang-cy" style="display:none;">Cyhoeddiadau</span>
+      </a>
+      <a href="contact.html">
+        <span class="lang-en">Contact</span><span class="lang-cy" style="display:none;">Cysylltu</span>
+      </a>
+      <button class="lang-btn" onclick="toggleLanguage()" aria-label="Switch language to Welsh / Newid iaith i'r Gymraeg">
+        <span class="lang-en">Cymraeg</span><span class="lang-cy" style="display:none;">English</span>
+      </button>
     </nav>
   </header>
 
-  <section class="hero">
-    <video autoplay loop muted playsinline>
-      <source src="banner.mp4.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Center for National & External Intelligence</h1>
-      <p>Independent open-source intelligence analysis and strategic assessments.</p>
-      <a href="publications.html" class="btn-primary">Publications</a>
-    </div>
-  </section>
+  <main id="main-content">
+    <!-- Video Hero Section -->
+    <section class="hero" aria-label="Introduction Banner">
+      <video autoplay loop muted playsinline aria-hidden="true">
+        <source src="banner.mp4.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>
+          <span class="lang-en">Center for National & External Intelligence</span>
+          <span class="lang-cy" style="display:none;">Canolfan Cudd-wybodaeth Genedlaethol ac Allanol</span>
+        </h1>
+        <p>
+          <span class="lang-en">Independent open-source intelligence analysis and geostrategic assessments.</span>
+          <span class="lang-cy" style="display:none;">Dadansoddiad cudd-wybodaeth ffynhonnell agored annibynnol ac asesiadau geostrategol.</span>
+        </p>
+        <a href="publications.html" class="btn-primary">
+          <span class="lang-en">Explore Publications</span>
+          <span class="lang-cy" style="display:none;">Archwilio Cyhoeddiadau</span>
+        </a>
+      </div>
+    </section>
 
+    <!-- Child-Friendly About Section -->
+    <section class="container" aria-labelledby="about-heading">
+      <div class="grid-2">
+        <div>
+          <h2 id="about-heading" style="color: var(--primary-blue); font-size: 2rem; margin-bottom: 1rem;">
+            <span class="lang-en">What We Do (In Simple Terms)</span>
+            <span class="lang-cy" style="display:none;">Beth Mynnwn Ei Wneud</span>
+          </h2>
+          <p class="lang-en" style="margin-bottom: 1rem;">
+            Think of us like online detectives! We look at public clues—like satellite pictures of the Earth, map routes of boats in the ocean, and airplane movements in the sky. 
+          </p>
+          <p class="lang-en" style="margin-bottom: 1rem;">
+            <strong>Why do we do it?</strong> We do this to help keep people safe and share truthful facts about what is happening in the world, without taking sides or guessing.
+          </p>
+
+          <p class="lang-cy" style="display:none; margin-bottom: 1rem;">
+            Meddyliwch amdanom fel ditectifs ar-lein! Rydym yn edrych ar gliwiau cyhoeddus—fel lluniau lloeren o'r Ddaear, mapiau o ffyrdd llongau yn y môr, a symudiadau awyrennau yn y awyr.
+          </p>
+          <p class="lang-cy" style="display:none; margin-bottom: 1rem;">
+            <strong>Pam rydyn ni'n ei wneud?</strong> Rydym yn gwneud hyn i helpu i gadw pobl yn ddiogel ac i rannu ffeithiau cywir am yr hyn sy'n digwydd yn y byd.
+          </p>
+        </div>
+        <div>
+          <img src="diego_torres-london-947381.jpg" alt="A photo of London buildings used for intelligence research" style="width: 100%; border-radius: 8px; border: 2px solid var(--border-color);">
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Contact Overview -->
+    <section class="container" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" style="color: var(--primary-blue); font-size: 2rem; margin-bottom: 1rem;">
+        <span class="lang-en">Get in Touch</span>
+        <span class="lang-cy" style="display:none;">Cysylltwch â Ni</span>
+      </h2>
+      <div class="card">
+        <h3><span class="lang-en">General Enquiries</span><span class="lang-cy" style="display:none;">Ymholiadau Cyffredinol</span></h3>
+        <p><a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></p>
+      </div>
+      <div class="card">
+        <h3><span class="lang-en">Legal & Compliance Enquiries</span><span class="lang-cy" style="display:none;">Ymholiadau Cyfreithiol</span></h3>
+        <p><a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Universal Footer -->
   <footer>
-    <p>&copy; Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contact Details</h3>
+        <ul>
+          <li>General: <a href="mailto:Info@cnei.org.uk">Info@cnei.org.uk</a></li>
+          <li>Legal: <a href="mailto:Legal@cnei.org.uk">Legal@cnei.org.uk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Legal & Policies</h3>
+        <ul>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#cookies">Cookie Policy</a></li>
+          <li><a href="#terms">Terms of Use</a></li>
+          <li><a href="#accessibility">Accessibility Statement</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Center for National & External Intelligence (CNEI). All rights reserved.</p>
+    </div>
   </footer>
+
+  <!-- Simple Language Switcher Script -->
+  <script>
+    function toggleLanguage() {
+      const enElems = document.querySelectorAll('.lang-en');
+      const cyElems = document.querySelectorAll('.lang-cy');
+      const isWelsh = enElems[0].style.display === 'none';
+
+      enElems.forEach(el => el.style.display = isWelsh ? 'inline-block' : 'none');
+      cyElems.forEach(el => el.style.display = isWelsh ? 'none' : 'inline-block');
+      
+      document.documentElement.lang = isWelsh ? 'en' : 'cy';
+    }
+  </script>
 </body>
 </html>
