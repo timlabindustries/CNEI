@@ -1,7 +1,6 @@
 backend:
-  name: github
-  repo: timlabindustries/CNEI.github.io
-  branch: main
+  name: git-gateway
+  branch: main # or master, depending on your default branch name
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
