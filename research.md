@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Research and Briefs | CNEI"
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
