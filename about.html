@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Coalition of Nuclear Energy Initiatives (CNEI)</title>
-    <meta name="description" content="Learn about CNEI's core principles, engineering-first clean energy strategy, grid reliability, and the case for advanced nuclear power baseloads.">
     <link rel="icon" type="image/jpeg" href="favicon.jpeg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -15,7 +14,12 @@
             <a href="index.html" class="logo-container">
                 <img src="logo.jpeg" alt="CNEI Logo">
             </a>
-            <nav>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav-menu">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html" class="active">About</a></li>
@@ -64,5 +68,12 @@
         </div>
     </footer>
 
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
