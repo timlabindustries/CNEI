@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | CNEI</title>
-    <meta name="description" content="Get in touch with the Coalition of Nuclear Energy Initiatives for inquiries, research questions, and press communications.">
     <link rel="icon" type="image/jpeg" href="favicon.jpeg">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         .form-group {
             margin-bottom: 1.5rem;
@@ -38,7 +37,12 @@
             <a href="index.html" class="logo-container">
                 <img src="logo.jpeg" alt="CNEI Logo">
             </a>
-            <nav>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav-menu">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -84,5 +88,12 @@
         </div>
     </footer>
 
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
