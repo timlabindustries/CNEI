@@ -1,6 +1,5 @@
 ---
 layout: none
-title: "Research and Briefs | CNEI"
 ---
 
 <!DOCTYPE html>
