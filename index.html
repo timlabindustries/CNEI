@@ -4,29 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CNEI | Coalition of Nuclear Energy Initiatives - Clean Energy & Grid Security</title>
-    <meta name="description" content="The Coalition of Nuclear Energy Initiatives (CNEI) advocates for an engineering-first strategy featuring advanced nuclear energy, reliability, and net-zero grid security.">
-    
-    <!-- Open Graph SEO Meta Tags for Social Media & Google Search Indexing -->
-    <meta property="og:title" content="Coalition of Nuclear Energy Initiatives (CNEI)">
-    <meta property="og:description" content="Advocating for a pragmatic, science-first approach to clean energy and grid security through advanced nuclear baseload power.">
-    <meta property="og:type" content="website">
-    
-    <!-- Custom Favicon -->
     <link rel="icon" type="image/jpeg" href="favicon.jpeg">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Schema.org Structured Data for Google Search ranking optimization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Coalition of Nuclear Energy Initiatives",
-      "alternateName": "CNEI",
-      "url": "https://cnei.org.uk",
-      "logo": "logo.jpeg",
-      "email": "info@cnei.org.uk"
-    }
-    </script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -35,7 +14,12 @@
             <a href="index.html" class="logo-container">
                 <img src="logo.jpeg" alt="CNEI Logo">
             </a>
-            <nav>
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="nav-menu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="about.html">About</a></li>
@@ -46,8 +30,8 @@
         </div>
     </header>
 
-    <!-- Hero Section with Nuclear Power Landscape Background -->
-    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1920&q=80');">
+    <!-- Hero Section with NuclearBanner.jpg -->
+    <section class="hero" style="background-image: url('NuclearBanner.jpg');">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Powering the Future with Clean Energy & Grid Security</h1>
@@ -76,5 +60,12 @@
         </div>
     </footer>
 
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
