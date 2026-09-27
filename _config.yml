@@ -1,0 +1,12 @@
+title: "Coalition of Nuclear Energy Initiatives"
+email: "info@cnei.org.uk"
+description: "Independent research and advocacy collective dedicated to promoting a pragmatic, science-first approach to clean energy and grid security."
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://cnei.org.uk" # the base hostname & protocol for your site
+
+collections:
+  reports:
+    output: true
+    permalink: /reports/:title/
+
+markdown: kramdown
